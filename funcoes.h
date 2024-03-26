@@ -1,10 +1,11 @@
 // Garante que, se o arquivo já foi incluído em algum lugar anteriormente, ele não será incluído novamente
 #ifndef FUNCOES_H
 #define FUNCOES_H
+#include <wchar.h>
 
 
-//Funcao que faz o dobro de um numero
-void dobro (int x);
+//Funcao teste para imprimir
+void imprimir ();
 
 // Esta linha fecha a diretiva #ifndef
 #endif

@@ -1,14 +1,12 @@
 #include <stdio.h>
-#include "funcoes.h"
-#include "cartas.c"
 #include <locale.h>
 #include <wchar.h>
+#include "funcoes.h"
+#include "cartas.h"
+
 
 int main () {
-    int n;
-    printf("Escolhe um numero:\n");
-    scanf("%d", &n);
-    dobro(n);
-
+    definirCartas();
+    imprimir();
     return 0;
 }
