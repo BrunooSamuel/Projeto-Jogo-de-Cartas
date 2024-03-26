@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "funcoes.h"
+#include "cartas.c"
+#include <locale.h>
+#include <wchar.h>
 
 int main () {
     int n;

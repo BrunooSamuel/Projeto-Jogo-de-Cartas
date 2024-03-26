@@ -2,6 +2,7 @@
 #ifndef FUNCOES_H
 #define FUNCOES_H
 
+
 //Funcao que faz o dobro de um numero
 void dobro (int x);
 
