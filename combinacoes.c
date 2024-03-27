@@ -4,9 +4,18 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-void imprimir () {
+void imprimir (int t, carta baralho[]) {
+
     setlocale(LC_CTYPE, "C.UTF-8");
-    wprintf(L"%lc\n", AsEspadas.codigo);
+
+    for (int i = 0; i < 56; i++)
+    {
+        if (baralho[i].numero==t) 
+        {
+            wprintf(L"%lc ", baralho[i].codigo);  
+        }
+    } 
+    printf("\n");  
 }
 
 

@@ -5,7 +5,7 @@
 
 
 //Funcao teste para imprimir
-void imprimir ();
+void imprimir (int t, carta baralho[]);
 
 // Esta linha fecha a diretiva #ifndef
 #endif
