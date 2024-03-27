@@ -36,6 +36,6 @@ void definirCartas(carta baralho[]) { //funcao para definir todas as cartas
             pos++;
         }
     }
-    wprintf(L"%lc\n", 0x2648); //SO SERVE PARA TESTAR, NAO CONSIGO IMPRIMIR ESTA LINHA :(
+    wprintf(L"%lc\n", 0x2648); // SO SERVE PARA TESTAR, NAO CONSIGO IMPRIMIR ESTA LINHA :(
     printf("Definiu Cartas Com Sucesso!\n");
 } 
