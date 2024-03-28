@@ -21,10 +21,15 @@ void imprimir(int t, carta baralho[]) { // AINDA NAO FUNCIONA
 }
 
 
-void lerDuplaSequencia (int quantidade, wchar_t array[]) {
-    
+void lerDuplaSequencia (wchar_t array[], int quantidade) {
+
 }
 
-void verificarCombinacao (wchar_t array[]) {
-
+void verificarCombinacao (wchar_t array[], int quantidade) {
+    printf("Numero de cartas: %d\n", quantidade);
+    for (int i = 0; i < quantidade; i++)
+    {
+        wprintf(L"%C\t",array[i]);
+    }
+    
 }
