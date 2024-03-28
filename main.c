@@ -1,19 +1,39 @@
 #include <stdio.h>
 #include <locale.h>
 #include <wchar.h>
+#include <stdlib.h>
 #include "funcoes.h"
 #include "cartas.h"
-#include "cartas.c"
-
 
 int main () {
-    carta baralho[56]; //array de todas as cartas, ordenadas por valor
-    int linhas; //numero de linhas
-    int teste;
-    printf("ISTO SÓ SERVE PARA TESTAR SE TEM ALGUMA FALHA\nIndica um numero de uma carta, imprime os 4 naipes dela.\n");
-    //scanf("%d", linhas);
-    scanf("%d", teste);
-    definirCartas(baralho);
-    imprimir(teste, baralho);
+    //Baralho de cartas, usado malloc para alocar a memória necessária para o baralho
+    carta *baralho = malloc(56 * sizeof(carta));
+
+    if (baralho == NULL) {
+        printf("Erro ao tentar alocar memória para o baralho.\n");
+        return 1;
+    }
+
+    // define o baralho
+    definirCartas();
+    
+    // lê o numero de linhas que recebe
+    int linhas;
+    scanf("%d", &linhas);
+    int e=1; //numero para ser usado no while embaixo
+
+    while (e<=linhas) 
+    {
+        wchar_t mao[10];
+        int pos=0;
+        while (wscanf(L"%lc", mao[pos]) != NULL) 
+        {
+            pos++;
+        }
+        verificarCombinacao(mao);
+    }
+
+    free(baralho); // Liberta o espaço na memória alocada para o baralho
+
     return 0;
 }

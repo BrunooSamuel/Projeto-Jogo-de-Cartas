@@ -4,18 +4,27 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-void imprimir (int t, carta baralho[]) {
+void imprimir(int t, carta baralho[]) { // AINDA NAO FUNCIONA
 
-    setlocale(LC_CTYPE, "C.UTF-8");
+    printf("Começa a imprimir as cartas com numero %d\n", t);
 
-    for (int i = 0; i < 56; i++)
-    {
-        if (baralho[i].numero==t) 
-        {
-            wprintf(L"%lc ", baralho[i].codigo);  
+
+    for (int i = 0; i < 56; i++) {
+        if (baralho[i].numero == t) {
+            setlocale(LC_CTYPE, "C.UTF-8");
+            wchar_t c = baralho[i].codigo;
+    	    wprintf(L"%C\n", c);
         }
     } 
-    printf("\n");  
+
+    printf("Acabou de Imprimir\n");  
 }
 
 
+void lerDuplaSequencia (int quantidade, wchar_t array[]) {
+    
+}
+
+void verificarCombinacao (wchar_t array[]) {
+
+}

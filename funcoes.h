@@ -2,6 +2,7 @@
 #ifndef FUNCOES_H
 #define FUNCOES_H
 #include <wchar.h>
+#include "cartas.h"
 
 
 //Funcao teste para imprimir
