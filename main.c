@@ -32,5 +32,7 @@ int main () {
 
 
     free(baralho); // Liberta o espaço na memória alocada para o baralho
+    
     return 0;
+
 }
