@@ -8,6 +8,9 @@
 //Funcao teste para imprimir
 void imprimir (int t, carta baralho[]);
 
+//Funcao que lê a mao que recebe
+void lerMao();
+
 //Funcao para Dupla Sequencias
 void lerDuplaSequencia (wchar_t array[], int quantidade);
 

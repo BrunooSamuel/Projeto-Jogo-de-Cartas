@@ -1,10 +1,10 @@
 CC = gcc
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -g
 
 all: jogoCartas
 
-jogoCartas: main.o combinacoes.o cartas.o
-	$(CC) $(CFLAGS) -o jogoCartas main.o combinacoes.o cartas.o
+jogoCartas: main.o combinacoes.o cartas.o testes.o
+	$(CC) $(CFLAGS) -o jogoCartas main.o combinacoes.o cartas.o testes.o
 
 main.o: main.c funcoes.h cartas.h
 	$(CC) $(CFLAGS) -c main.c
@@ -14,6 +14,9 @@ combinacoes.o: combinacoes.c funcoes.h cartas.h
 
 cartas.o: cartas.c funcoes.h cartas.h
 	$(CC) $(CFLAGS) -c cartas.c
+
+testes.o: testes.c funcoes.h cartas.h
+	$(CC) $(CFLAGS) -c testes.c
 
 run: jogoCartas
 	./jogoCartas

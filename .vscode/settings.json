@@ -2,6 +2,8 @@
     "files.associations": {
         "TESTE.C": "cpp",
         "stdio.h": "c",
-        "funcoes.h": "c"
+        "funcoes.h": "c",
+        "locale.h": "c",
+        "cartas.h": "c"
     }
 }

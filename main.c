@@ -15,34 +15,22 @@ int main () {
         return 1;
     }
 
-
     // define o baralho
     definirCartas();
-    
+
     // lê o numero de linhas que recebe
     int linhas=0;
     scanf("%d", &linhas);
-    int e=1; //numero para ser usado no while embaixo
-    int pos=0; //posicao no array da mao
-    wchar_t mao[10]; //array mao
 
-    wchar_t symbol[20]={0};
-    wprintf(L"Digite um símbolo UTF-8: ");
-    wscanf(L"%ls", &symbol);
-    wprintf(L"O símbolo digitado foi: %ls\n", symbol);
-
+    int e=1; // usado no loop embaixo
+    
     while (e<=linhas) 
-    {   
-        
-        /*mao[pos]=symbol;
-        pos++;
-        mao[pos]=L'\0'; //terminador
-        */
-        //verificarCombinacao(mao,pos);
+    {
+        lerMao();
         e++;
     }
 
-    free(baralho); // Liberta o espaço na memória alocada para o baralho
 
+    free(baralho); // Liberta o espaço na memória alocada para o baralho
     return 0;
 }
