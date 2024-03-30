@@ -29,6 +29,7 @@ int main () {
     // define o baralho
     definirCartas();
 
+<<<<<<< Updated upstream
     /*
     AQUI FUNCIONA
     wchar_t car;
@@ -41,15 +42,22 @@ int main () {
     // lê o numero de linhas que recebe
     int linhas=0;
     scanf("%d", &linhas);
+=======
+    setlocale(LC_CTYPE, "C.UTF-8");
+>>>>>>> Stashed changes
 
+    // lê o numero de linhas que recebe
+    int linhas;
+    wscanf(L"%d", &linhas);
+    
     int e=1; // usado no loop embaixo
 
     while (e<=linhas) 
-    {
+    {   
+        limpar();
         lerMao();
         e++;
     }
-
 
     free(baralho); // Liberta o espaço na memória alocada para o baralho
 >>>>>>> Stashed changes

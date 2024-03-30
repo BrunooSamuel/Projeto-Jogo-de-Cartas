@@ -7,5 +7,21 @@
 //Funcao teste para imprimir
 void imprimir (int t, carta baralho[]);
 
+<<<<<<< Updated upstream
+=======
+
+//Funcao de limpeza da entrada
+void limpar();
+
+//Funcao que lê a mao que recebe
+void lerMao();
+
+//Funcao para Dupla Sequencias
+void lerDuplaSequencia (wchar_t array[], int quantidade);
+
+//Funcao para ler que combinação é
+void verificarCombinacao (wchar_t array[], int quantidade);
+
+>>>>>>> Stashed changes
 // Esta linha fecha a diretiva #ifndef
 #endif
