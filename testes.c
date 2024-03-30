@@ -22,6 +22,7 @@ void imprimir(int t, carta baralho[]) { // AINDA NAO FUNCIONA
 /* 
     ESQUELETO DE WCHAR
 
+    setlocale(LC_CTYPE, "C.UTF-8");
     wchar_t symbol;
     wscanf(L"%C", &symbol);
     wprintf(L"O símbolo digitado foi: %C\n", symbol);
@@ -30,13 +31,19 @@ void imprimir(int t, carta baralho[]) { // AINDA NAO FUNCIONA
 */
 
 void lerMao() {
-    printf("Chegou a lerMao\n");
+    setlocale(LC_CTYPE, "C.UTF-8");
+    wprintf(L"Chegou a lerMao\n");
     wchar_t mao[14]={0};
-
+    wchar_t c;
     //funcao que coloca as cartas recebidas no array mao
-    fgetws(mao, sizeof(mao)/sizeof(wchar_t), stdin);
-    
+    //fgetws(mao, sizeof(mao)/sizeof(wchar_t), stdin);
+    wscanf(L"%C", &c);
+    wprintf(L"O símbolo digitado foi: %C\n", c);
+    wprintf(L"O Codigo é digitado foi: %x\n", c);
+
+    mao[0]=c;
+
     wprintf(L"Você digitou: %ls\n", mao);
 
-    printf("Saiu da lerMao\n");
+    wprintf(L"Saiu da lerMao\n");
 }
