@@ -19,6 +19,7 @@ int main () {
     definirCartas();
 
     setlocale(LC_CTYPE, "C.UTF-8");
+    
     // lê o numero de linhas que recebe
     int linhas;
     wscanf(L"%d", &linhas);
