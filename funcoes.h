@@ -8,6 +8,9 @@
 //Funcao teste para imprimir
 void imprimir (int t, carta baralho[]);
 
+//Funcao de limpeza da entrada
+void limpar();
+
 //Funcao que lê a mao que recebe
 void lerMao();
 

@@ -23,27 +23,33 @@ void imprimir(int t, carta baralho[]) { // AINDA NAO FUNCIONA
     ESQUELETO DE WCHAR
 
     setlocale(LC_CTYPE, "C.UTF-8");
-    wchar_t symbol;
-    wscanf(L"%C", &symbol);
-    wprintf(L"O símbolo digitado foi: %C\n", symbol);
-    wprintf(L"O Codigo é digitado foi: %x\n", symbol);
+    wchar_t s;
+    wscanf(L"%C", &s);
+    wprintf(L"O símbolo digitado foi: %C\n", s);
+    wprintf(L"O Codigo é digitado foi: %x\n", s);
     
 */
 
 void lerMao() {
     setlocale(LC_CTYPE, "C.UTF-8");
-    wprintf(L"Chegou a lerMao\n");
+
     wchar_t mao[14]={0};
-    wchar_t c;
+
     //funcao que coloca as cartas recebidas no array mao
-    //fgetws(mao, sizeof(mao)/sizeof(wchar_t), stdin);
-    wscanf(L"%C", &c);
-    wprintf(L"O símbolo digitado foi: %C\n", c);
-    wprintf(L"O Codigo é digitado foi: %x\n", c);
+    fgetws(mao, 14, stdin);
 
-    mao[0]=c;
+    wprintf(L"Está na mao: %ls\n", mao);
+    for (int i = 0; mao[i+1]!='\0'; i++)
+    {
+        wprintf(L"Os símbolos são: %x\t", mao[i]);
+    }
+    wprintf(L"\n");
+}
 
-    wprintf(L"Você digitou: %ls\n", mao);
 
-    wprintf(L"Saiu da lerMao\n");
+// FUNCAO DE LIMPEZA, N SEI PQ QUE FUNCIONA MAS FUNCIONA
+void limpar() {
+    setlocale(LC_CTYPE, "C.UTF-8");
+    wchar_t limpeza;
+    wscanf(L"%C", &limpeza);
 }
