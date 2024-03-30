@@ -6,6 +6,7 @@
 #include "cartas.h"
 
 int main () {
+
     //Baralho de cartas, usado malloc para alocar a memória necessária para o baralho
     carta *baralho = malloc(56 * sizeof(carta));
 
@@ -17,14 +18,16 @@ int main () {
     // define o baralho
     definirCartas();
 
+    setlocale(LC_CTYPE, "C.UTF-8");
     // lê o numero de linhas que recebe
-    int linhas=1;
-    //scanf("%d", &linhas);
+    int linhas;
+    wscanf(L"%d", &linhas);
 
     int e=1; // usado no loop embaixo
     
     while (e<=linhas) 
     {
+        limpar();
         lerMao();
         e++;
     }
