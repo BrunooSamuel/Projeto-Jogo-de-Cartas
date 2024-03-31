@@ -12,13 +12,24 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-void lerMao();
+void lerMao(carta baralho[]);
 
-//Funcao para Dupla Sequencias
-void lerDuplaSequencia (wchar_t array[], int quantidade);
+//Funcao que ordena um array de Ints
+void ordena(int array[], int tamanho);
 
 //Funcao para ler que combinação é
-void verificarCombinacao (wchar_t array[], int quantidade);
+void verificarCombinacao (wchar_t array[], int quantidade,carta baralho[]);
+
+//Funcao para ler Conjuntos
+void lerConjunto (wchar_t array[], int quantidade, carta baralho[]);
+
+//Funcao para ler Sequencias
+void lerSequencia (wchar_t array[], int quantidade, carta baralho[]);
+
+//Funcao para Dupla Sequencias
+void lerDuplaSequencia (wchar_t array[], int quantidade, carta baralho[]);
+
+
 
 // Esta linha fecha a diretiva #ifndef
 #endif
