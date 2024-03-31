@@ -44,7 +44,7 @@ void lerDuplaSequencia (wchar_t array[], int quantidade, carta baralho[], wchar_
 void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
     int j=0;
     int maoNum[quantidade];
-    bool combDescobrida =false; //Quando for enviada para a funçao da respetiva combinação, é colocada em true e salta as outras verificações
+    bool combDescoberta=false; //Quando for enviada para a funçao da respetiva combinação, é colocada em true e salta as outras verificações
 
     for (int i = 0; i < 56; i++)
     {
@@ -66,7 +66,7 @@ void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
     }
     if ((soma/quantidade)==(maoNum[0])) 
     {
-        combDescobrida=true;
+        combDescoberta=true;
         lerConjunto(array,quantidade,baralho,maoNum);
     }
 
@@ -78,7 +78,7 @@ void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
     }
     if (falhouSequencia==false) 
     {
-        combDescobrida=true;
+        combDescoberta=true;
         lerSequencia(array,quantidade,baralho,maoNum);
     }
 
@@ -91,12 +91,12 @@ void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
     }
     if (falhouDuplaSeq==false) 
     {
-        combDescobrida=true;
+        combDescoberta=true;
         lerDuplaSequencia(array,quantidade,baralho, maoNum);
     }
 
     // caso não tenha nenhuma combinacao
-    if (combDescobrida==false)
+    if (combDescoberta==false)
     {
         wprintf(L"Nada!\n");
     }
