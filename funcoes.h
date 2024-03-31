@@ -21,13 +21,13 @@ void ordena(int array[], int tamanho);
 void verificarCombinacao (wchar_t array[], int quantidade,carta baralho[]);
 
 //Funcao para ler Conjuntos
-void lerConjunto (wchar_t array[], int quantidade, carta baralho[]);
+void lerConjunto (wchar_t array[], int quantidade, carta baralho[],wchar_t ordenadoNum[]);
 
 //Funcao para ler Sequencias
-void lerSequencia (wchar_t array[], int quantidade, carta baralho[]);
+void lerSequencia (wchar_t array[], int quantidade, carta baralho[],wchar_t ordenadoNum[]);
 
 //Funcao para Dupla Sequencias
-void lerDuplaSequencia (wchar_t array[], int quantidade, carta baralho[]);
+void lerDuplaSequencia (wchar_t array[], int quantidade, carta baralho[],wchar_t ordenadoNum[]);
 
 
 

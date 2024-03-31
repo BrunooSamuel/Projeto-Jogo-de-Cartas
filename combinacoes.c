@@ -5,22 +5,39 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-void lerConjunto (wchar_t array[], int quantidade, carta baralho[]) {
+void lerConjunto (wchar_t array[], int quantidade, carta baralho[],wchar_t ordenadoNum[]) {
     wprintf(L"Veio para a lerConjunto\n");
     
 }
 
-void lerSequencia (wchar_t array[], int quantidade, carta baralho[]) {
+void lerSequencia (wchar_t array[], int quantidade, carta baralho[],wchar_t ordenadoNum[]) {
     wprintf(L"Veio para a lerSequencia\n");
 
 }
 
-void lerDuplaSequencia (wchar_t array[], int quantidade, carta baralho[], ) {
+void lerDuplaSequencia (wchar_t array[], int quantidade, carta baralho[], wchar_t ordenadoNum[]) {
+    int maisAlto=ordenadoNum[quantidade-1];
+    int j=(maisAlto*4)-1; //j é a posiçao no baralho da maior carta
+    int limj=(maisAlto*4)-4; //a posiçao da carta de menor naipe
+    wchar_t maior; //carta para ser impressa
+    bool encontrada=false;
 
+    //vai comparar as cartas todas da mao, com as quatro naipes da carta de maior numero, de forma decrescente até encontrar a igual
 
-
-
-    wprintf(L"dupla sequência com %d cartas onde a carta mais alta é %C\n", quantidade, );
+    for (int i = 0; i < quantidade && encontrada==false && j!=limj; i++)
+    { //array é a mao
+        if (array[i]==baralho[j].codigo) //caso o codigo da carta seja igual á carta do baralho
+        {   
+            maior=array[i];
+            encontrada=true;
+        }
+        if (i==quantidade-1) //se nenhuma das cartas for igual á carta do baralho, volta a zero, e compara com a proxima menor carta do baralho
+        {
+            i=0; 
+            j--;
+        }
+    }
+    wprintf(L"dupla sequência com %d cartas onde a carta mais alta é %C\n", (quantidade/2), maior);
 }
 
 // Funçao que receba a mão, e verifica se existe alguma combinação
@@ -50,7 +67,7 @@ void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
     if ((soma/quantidade)==(maoNum[0])) 
     {
         combDescobrida=true;
-        lerConjunto(array,quantidade,baralho);
+        lerConjunto(array,quantidade,baralho,maoNum);
     }
 
     //verifica se é sequencia
@@ -62,7 +79,7 @@ void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
     if (falhouSequencia==false) 
     {
         combDescobrida=true;
-        lerSequencia(array,quantidade,baralho);
+        lerSequencia(array,quantidade,baralho,maoNum);
     }
 
     //verifica se é dupla sequencia
@@ -75,7 +92,7 @@ void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
     if (falhouDuplaSeq==false) 
     {
         combDescobrida=true;
-        lerDuplaSequencia(array,quantidade,baralho);
+        lerDuplaSequencia(array,quantidade,baralho, maoNum);
     }
 
     // caso não tenha nenhuma combinacao
