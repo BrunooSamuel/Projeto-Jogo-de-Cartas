@@ -16,7 +16,13 @@ int main () {
     }
 
     // define o baralho
-    definirCartas();
+    carta *baralhoDef = definirCartas();
+
+    if (baralhoDef == NULL) {
+        printf("Erro ao tentar definir o baralho.\n");
+        free(baralho);
+        return 1;
+    }
 
     setlocale(LC_CTYPE, "C.UTF-8");
     
@@ -26,16 +32,17 @@ int main () {
 
     int e=1; // usado no loop embaixo
     
+    limpar();
     while (e<=linhas) 
     {
-        limpar();
-        lerMao();
+        //imprimir(1, baralhoDef);
+        lerMao(baralhoDef);
         e++;
     }
 
+    // Liberta o espaço na memória alocada para o baralho
+    free(baralho);
 
-    free(baralho); // Liberta o espaço na memória alocada para o baralho
-    
     return 0;
 
 }
