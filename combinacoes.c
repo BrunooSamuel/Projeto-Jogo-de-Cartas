@@ -90,12 +90,13 @@ void lerDuplaSequencia (wchar_t mao[], int quantidade, carta baralho[], wchar_t 
 }
 
 void verificaConjunto(int quantidade, int maoNum[], bool *combinacao) {
-    int soma=0;
+    float soma=0;
     for (int i = 0; i < quantidade && !(*combinacao); i++)
     {
         soma+=maoNum[i];
     }
-    if ((soma/quantidade)==(maoNum[0])) 
+    float calculo=soma/quantidade;
+    if ((calculo)==(maoNum[0])) 
     {
         *combinacao=true;
     }
