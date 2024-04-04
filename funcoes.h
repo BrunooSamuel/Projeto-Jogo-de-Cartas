@@ -12,7 +12,7 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-void lerMao(carta baralho[]);
+int lerMao(carta baralho[]);
 
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);

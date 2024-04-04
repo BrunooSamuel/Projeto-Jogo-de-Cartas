@@ -38,12 +38,12 @@ void lerSequencia (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordena
     int maisAlto=ordenadoNum[quantidade-1];
     int j=(maisAlto*4)-1; //j é a posiçao no baralho da maior carta
     int limj=(maisAlto*4)-4; //a posiçao da carta de menor naipe
-    wchar_t maior; //carta para ser impressa
+    wchar_t maior=0x1F0A1; //carta para ser impressa
     bool encontrada=false;
     //vai comparar as cartas todas da mao, com as quatro naipes da carta de maior numero, de forma decrescente até encontrar a igual
 
     int i=0;
-    while (encontrada==false && j!=limj)
+    while (encontrada==false && j>=limj)
     { 
         if (mao[i]==baralho[j].codigo) //caso o codigo da carta seja igual á carta do baralho
         {   

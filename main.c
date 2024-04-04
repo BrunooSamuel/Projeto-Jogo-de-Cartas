@@ -28,7 +28,10 @@ int main () {
 
     // lê o numero de linhas que recebe
     int linhas;
-    wscanf(L"%d", &linhas);
+    if (wscanf(L"%d", &linhas)==EOF) {
+        wprintf(L"O Scan do numero de linhas é inválido.\n");
+        return 1;
+    }
 
     int e=1; // usado no loop embaixo
     
