@@ -11,7 +11,7 @@ int main () {
     carta *baralho = malloc(56 * sizeof(carta));
 
     if (baralho == NULL) {
-        printf("Erro ao tentar alocar memória para o baralho.\n");
+        wprintf(L"Erro ao tentar alocar memória para o baralho.\n");
         return 1;
     }
 
@@ -19,13 +19,13 @@ int main () {
     carta *baralhoDef = definirCartas();
 
     if (baralhoDef == NULL) {
-        printf("Erro ao tentar definir o baralho.\n");
+        wprintf(L"Erro ao tentar definir o baralho.\n");
         free(baralho);
         return 1;
     }
 
     setlocale(LC_CTYPE, "C.UTF-8");
-    
+
     // lê o numero de linhas que recebe
     int linhas;
     wscanf(L"%d", &linhas);
@@ -35,7 +35,7 @@ int main () {
     limpar();
     while (e<=linhas) 
     {
-        //imprimir(1, baralhoDef);
+        //imprimir(6, baralhoDef);
         lerMao(baralhoDef);
         e++;
     }
