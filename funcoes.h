@@ -3,6 +3,7 @@
 #define FUNCOES_H
 #include <wchar.h>
 #include "cartas.h"
+#include <stdbool.h>
 
 
 //Funcao teste para imprimir
@@ -19,6 +20,15 @@ void ordena(int mao[], int tamanho);
 
 //Funcao para ler que combinação é
 void verificarCombinacao (wchar_t mao[], int quantidade,carta baralho[]);
+
+//Funcao para verificar se é conjunto
+void verificaConjunto(int quantidade, int maoNum[], bool *combinacao);
+
+//Funcao para verificar se é sequencia
+void verificaSequencia(int quantidade, int maoNum[], bool *combinacao);
+
+//Funcao para verificar se é dupla sequencia
+void verificaDSequencia(int quantidade, int maoNum[], bool *combinacao);
 
 //Funcao para ler Conjuntos
 void lerConjunto (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordenadoNum[]);
