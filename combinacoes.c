@@ -15,7 +15,7 @@ void lerConjunto (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordenad
     //vai comparar as cartas todas da mao, com as quatro naipes da carta de maior numero, de forma decrescente até encontrar a igual
 
     int i=0;
-    while (encontrada==false && j!=limj)
+    while (encontrada==false && j>=limj)
     { 
         if (mao[i]==baralho[j].codigo) //caso o codigo da carta seja igual á carta do baralho
         {   
@@ -71,7 +71,7 @@ void lerDuplaSequencia (wchar_t mao[], int quantidade, carta baralho[], wchar_t 
     //vai comparar as cartas todas da mao, com as quatro naipes da carta de maior numero, de forma decrescente até encontrar a igual
 
     int i=0;
-    while (encontrada==false && j!=limj)
+    while (encontrada==false && j>=limj)
     { 
         if (mao[i]==baralho[j].codigo) //caso o codigo da carta seja igual á carta do baralho
         {   
