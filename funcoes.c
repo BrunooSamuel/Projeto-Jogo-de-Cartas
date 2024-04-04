@@ -5,65 +5,56 @@
 #include "cartas.h"
 
 void imprimir(int t, carta baralho[]) {
-    setlocale(LC_CTYPE, "C.UTF-8");
     wprintf(L"Começa a imprimir as cartas com numero: %d\n", t);
 
     for (int i = 0; i < 56; i++) {
         if (baralho[i].numero == t) {
 
             wchar_t c = baralho[i].codigo;
-    	    wprintf(L"%C\n", c);
+    	    wprintf(L"%lc\n", c);
         }
     } 
 
     wprintf(L"Acabou de Imprimir\n");  
 }
 
-/* 
-    ESQUELETO DE WCHAR
 
-    setlocale(LC_CTYPE, "C.UTF-8");
-    wchar_t s;
-    wscanf(L"%C", &s);
-    wprintf(L"O símbolo digitado foi: %C\n", s);
-    wprintf(L"O Codigo é digitado foi: %x\n", s);
-    
-*/
-
-void lerMao(carta baralho[]) {
+int lerMao(carta baralho[]) {
     //posicao no array da mao
     int pos;
-
-    setlocale(LC_CTYPE, "C.UTF-8");
 
     wchar_t mao[14]={0};
 
     //funcao que coloca as cartas recebidas no array mao
-    fgetws(mao, 14, stdin);
-
-
-
-    // wprintf(L"Está na mao: %ls\n", mao);
-    for (pos = 0; mao[pos+1]!='\0'; pos++)
-    {
-        // wprintf(L"Os símbolos são: %x\t", mao[pos]);
+    if (fgetws(mao, 14, stdin)==NULL) {
+        wprintf(L"O Scan da mão é inválido.\n");
+        return 1;
     }
 
-    // wprintf(L"\n");
+
+
+    //wprintf(L"Está na mao: %ls\n", mao);
+    for (pos = 0; mao[pos+1]!='\0'; pos++)
+    {
+        //wprintf(L"Os símbolos são: %x\t", mao[pos]);
+    }
+
+    //wprintf(L"\n");
 
     verificarCombinacao (mao, pos, baralho);
+
+    return 0;
 }
 
 
 // FUNCAO DE LIMPEZA
 void limpar() {
-    setlocale(LC_CTYPE, "C.UTF-8");
     wchar_t limpeza;
-    wscanf(L"%C", &limpeza);
+    wscanf(L"%lc", &limpeza);
 }
 
 // Funcao que ordena um array
-void ordena(int array[], int tamanho) {
+void ordena(int mao[], int tamanho) {
     int aux[tamanho];
     // O array tem como valor minimo 1 e máximo 14
     int n=1; //numero para ordenar
@@ -75,7 +66,7 @@ void ordena(int array[], int tamanho) {
     {   
         for (pos=0; pos<tamanho; pos++)
         {
-            if (array[pos]==n) 
+            if (mao[pos]==n) 
             {
             aux[posA++]=n;
             }
@@ -85,7 +76,7 @@ void ordena(int array[], int tamanho) {
     //passar do auxiliar para o array
     for (int i = 0; i < tamanho; i++)
     {
-        array[i]=aux[i];
+        mao[i]=aux[i];
     }
 
 }   
