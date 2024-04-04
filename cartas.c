@@ -1,6 +1,7 @@
 #include "cartas.h"
 #include <wchar.h>
 #include <locale.h>
+#include <stdio.h>
 
 /*
 A ordem ascendente dos valores é: A 2 3 4 5 6 7 8 9 10 J C Q K
@@ -8,9 +9,9 @@ A ordem dos naipes é: ♠ ♥ ♦ ♣ (Espadas -> Copas -> Ouros -> Paus)
 O naipe das cartas é definido por um numero: Espadas-1, Copas-2, Ouros-3, Paus-4
 */
 
-void definirCartas(carta baralho[]) { //funcao para definir todas as cartas
+carta* definirCartas() { //funcao para definir todas as cartas
 
-    setlocale(LC_CTYPE, "C.UTF-8");
+    static carta baralho[56]; // Declaração de baralho
 
     //Espadas-1, Copas-2, Ouros-3, Paus-4
     // A 2 3 4 5 6 7 8 9 10 J C Q K
@@ -36,6 +37,6 @@ void definirCartas(carta baralho[]) { //funcao para definir todas as cartas
             pos++;
         }
     }
-    wprintf(L"%lc\n", 0x2648); //SO SERVE PARA TESTAR, NAO CONSIGO IMPRIMIR ESTA LINHA :(
-    printf("Definiu Cartas Com Sucesso!\n");
+
+    return baralho;
 } 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <locale.h>
 #include <wchar.h>
+#include <stdbool.h>
 #include "funcoes.h"
 #include "cartas.h"
 
@@ -10,7 +11,7 @@ void lerConjunto (wchar_t array[], int quantidade, carta baralho[],wchar_t orden
 }
 
 void lerSequencia (wchar_t array[], int quantidade, carta baralho[],wchar_t ordenadoNum[]) {
-    wprintf(L"Veio para a lerSequenciauuuuuh\n");
+    wprintf(L"Veio para a lerSequencia\n");
 
 }
 
@@ -47,12 +48,56 @@ void verificarCombinacao (wchar_t array[], int quantidade, carta baralho[]) {
 
     for (int i = 0; i < 56; i++)
     {
-        if (baralho[i].numero==t) 
+        if (baralho[i].codigo==array[j]) 
         {
-            wprintf(L"%lc ", baralho[i].codigo);  
+            maoNum[j]=baralho[i].numero;
+            j++;
+            i=0;
         }
-    } 
-    printf("\n");  
+    }
+    //passa pela funcao ordena para ordenar o array
+    ordena(maoNum, quantidade);
+
+    //verifica se é um conjunto
+    int soma=0;
+    for (int i = 0; i < quantidade; i++)
+    {
+        soma+=maoNum[i];
+    }
+    if ((soma/quantidade)==(maoNum[0])) 
+    {
+        combDescoberta=true;
+        lerConjunto(array,quantidade,baralho,maoNum);
+    }
+
+    //verifica se é sequencia
+    bool falhouSequencia=false;
+    for (int i = 0; i < (quantidade-1) && falhouSequencia==false; i++)
+    {
+        if(maoNum[i+1]-maoNum[i]!=1) falhouSequencia=true;
+    }
+    if (falhouSequencia==false) 
+    {
+        combDescoberta=true;
+        lerSequencia(array,quantidade,baralho,maoNum);
+    }
+
+    //verifica se é dupla sequencia
+    bool falhouDuplaSeq=false;
+    for (int i = 0; i < (quantidade-2) && falhouDuplaSeq==false; i=i+2)
+    {
+        if(maoNum[i]!=maoNum[i+1]) falhouDuplaSeq=true;
+        if(maoNum[i+2]-maoNum[i+1]!=1) falhouDuplaSeq=true;
+    }
+    if (falhouDuplaSeq==false) 
+    {
+        combDescoberta=true;
+        lerDuplaSequencia(array,quantidade,baralho, maoNum);
+    }
+
+    // caso não tenha nenhuma combinacao
+    if (combDescoberta==false)
+    {
+        wprintf(L"Nada!\n");
+    }
 }
-
-
