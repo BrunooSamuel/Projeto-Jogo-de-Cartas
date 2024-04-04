@@ -21,7 +21,7 @@ A ordem dos naipes é: ♠ ♥ ♦ ♣ (Espadas -> Copas -> Ouros -> Paus)
 */
 
 // função que define todas as cartas
-void definirCartas(carta baralho[]);
+carta* definirCartas();
 
 // Esta linha fecha a diretiva #ifndef
 #endif
