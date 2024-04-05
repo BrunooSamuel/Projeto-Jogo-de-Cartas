@@ -23,10 +23,10 @@ int lerMao(carta baralho[]) {
     //posicao no array da mao
     int pos;
 
-    wchar_t mao[14]={0};
+    wchar_t mao[16]={0};
 
     //funcao que coloca as cartas recebidas no array mao
-    if (fgetws(mao, 14, stdin)==NULL) {
+    if (fgetws(mao, 16, stdin)==NULL) {
         wprintf(L"O Scan da mão é inválido.\n");
         return 1;
     }
@@ -72,11 +72,22 @@ void ordena(int mao[], int tamanho) {
             }
         }
     }
-
+    
     //passar do auxiliar para o array
     for (int i = 0; i < tamanho; i++)
     {
         mao[i]=aux[i];
     }
+
+
+    /*
+    FUNÇÃO TESTE QUE IMPRIME OS NUMEROS PARA VERIFICAR SE ESTÁ ORGANIZADO
+    for (int i = 0; i < tamanho; i++)
+    {
+        wprintf(L"%d\t",aux[i]);
+    }
+    wprintf(L"\n");
+    */
+    
 
 }   
