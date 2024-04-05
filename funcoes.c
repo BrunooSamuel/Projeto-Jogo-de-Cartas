@@ -22,7 +22,8 @@ void imprimir(int t, carta baralho[]) {
 int lerMao(carta baralho[]) {
     //posicao no array da mao
     int pos;
-
+    
+    //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
     wchar_t mao[32]={0};
 
     //funcao que coloca as cartas recebidas no array mao
