@@ -90,18 +90,20 @@ void lerDuplaSequencia (wchar_t mao[], int quantidade, carta baralho[], wchar_t 
 }
 
 void verificaConjunto(int quantidade, int maoNum[], bool *combinacao) {
-    int soma=0;
+    float soma=0;
     for (int i = 0; i < quantidade && !(*combinacao); i++)
     {
         soma+=maoNum[i];
     }
-    if ((soma/quantidade)==(maoNum[0])) 
+    float calculo=soma/quantidade;
+    if ((calculo)==(maoNum[0])) 
     {
         *combinacao=true;
     }
 }
 
 void verificaSequencia(int quantidade, int maoNum[], bool *combinacao) {
+    
     if (quantidade>=3) 
     {
         bool falhouSequencia=false;
@@ -134,10 +136,11 @@ void verificaDSequencia(int quantidade, int maoNum[], bool *combinacao) {
 }
 // Funçao que receba a mão, e verifica se existe alguma combinação
 void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[]) {
-    int j=0;
     int maoNum[quantidade];
 
-    for (int i = 0; i < 56; i++)
+    int i=0;
+    int j=0;
+    while (i < 56)
     {
         if (baralho[i].codigo==mao[j]) 
         {
@@ -145,7 +148,9 @@ void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[]) {
             j++;
             i=0;
         }
+        else i++;
     }
+
     //passa pela funcao ordena para ordenar o array
     ordena(maoNum, quantidade);
 
@@ -153,7 +158,6 @@ void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[]) {
     bool conjunto=false; 
     verificaConjunto(quantidade, maoNum, &conjunto);
     if (conjunto) lerConjunto(mao,quantidade,baralho,maoNum);
-
 
     //verifica se é sequencia
     bool sequencia=false;
