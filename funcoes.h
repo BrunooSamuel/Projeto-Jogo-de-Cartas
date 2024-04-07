@@ -14,7 +14,7 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-int lerMao(carta baralho[],int arrayCombinacoes[], int arrayTamanhos[], wchar_t todasMaos[], int posTodasMaos);
+int lerMao(carta baralho[],int arrayCombinacoes[], int arrayTamanhos[], wchar_t todasMaos[][32], int posTodasMaos);
 
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);

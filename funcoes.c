@@ -19,7 +19,7 @@ void imprimir(int t, carta baralho[]) {
 }
 
 
-int lerMao(carta baralho[],int arrayCombinacoes[], int arrayTamanhos[], wchar_t todasMaos[], int posTodasMaos) {
+int lerMao(carta baralho[],int arrayCombinacoes[], int arrayTamanhos[], wchar_t todasMaos[][32], int posTodasMaos) {
     //posicao no array da mao
     int pos;
     
@@ -41,9 +41,8 @@ int lerMao(carta baralho[],int arrayCombinacoes[], int arrayTamanhos[], wchar_t 
     //wprintf(L"\n");
 
     //copia a mao, para o array de maos
-    wcscpy(&todasMaos[posTodasMaos], mao);
-    posTodasMaos++;
-
+    wcscpy(todasMaos[posTodasMaos], mao);
+    
     GuardarTamanhos(arrayTamanhos, pos);
 
     verificarCombinacao (mao, pos, baralho,arrayCombinacoes);

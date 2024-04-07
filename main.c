@@ -27,7 +27,7 @@ int main () {
     setlocale(LC_CTYPE, "C.UTF-8");
 
     // lê o numero de testes
-    int numtestes;
+    int numtestes=0;
     if (wscanf(L"%d", &numtestes)==EOF) {
         wprintf(L"O Scan do numero de testes é inválido.\n");
         return 1;
@@ -42,34 +42,41 @@ int main () {
         wprintf(L"Teste %d\n", e1);
 
         // lê o numero de linhas que recebe de cada teste
-        int linhas;
+        int linhas=0;
         if (wscanf(L"%d", &linhas)==EOF) {
             wprintf(L"O Scan do numero de linhas é inválido.\n");
             return 1;
         }
-
+        int linhasBackup=linhas;
         limpar();
 
         //array para serem guardados os arrays por ordem que são colocados
-        wchar_t todasMaos[linhas];
+        wchar_t todasMaos[linhasBackup][32];
         int posTodasMaos=0;
-        for (int e2=1; e2<=linhas ; e2++) 
+
+        for (int e2=1; e2<=linhasBackup ; e2++) 
         {
             //imprimir(6, baralhoDef);
-            lerMao(baralhoDef, arrayCombinacoes, arrayTamanhos, todasMaos, posTodasMaos);
-            wprintf(L"Leu a mao, vai na linha %d de %d\n", e2,linhas);
+            lerMao(baralhoDef, arrayCombinacoes, arrayTamanhos, &todasMaos[posTodasMaos], posTodasMaos);
+            wprintf(L"%d posicao \n", posTodasMaos);
+            wprintf(L"%d é o backup \n", linhasBackup);
+            posTodasMaos++;
         }
-
+        
+        for (int i = 0; i < posTodasMaos; i++)
+        {
+            wprintf(L"Mao - %ls\n", todasMaos[i]);
+        }
+        
         bool tamiguais=true;
         CompararTamanhos(arrayTamanhos, &tamiguais);
-        if (tamiguais) wprintf(L"Tamiguais é positivo\n");
         bool combiguais=true;
-        CompararCombinacao(arrayCombinacoes, linhas, &combiguais);
-        if (combiguais) wprintf(L"Combiguais é positivo\n");
+        CompararCombinacao(arrayCombinacoes, linhasBackup, &combiguais);
 
 
-        compararMaos(baralhoDef, combiguais, tamiguais, todasMaos, arrayCombinacoes);
+        compararMaos(baralhoDef, combiguais, tamiguais, *todasMaos, arrayCombinacoes);
     }
+    
 
     // Liberta o espaço na memória alocada para o baralho
     free(baralho);
