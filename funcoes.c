@@ -20,7 +20,9 @@ void imprimir(int t, carta baralho[]) {
 }
 
 
+
 int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int arrayTamanhos[]) {
+
 
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
     wchar_t mao[32]={0};
@@ -41,6 +43,7 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
     /*
     int pos;
     wprintf(L"Está na mao: %ls\n", mao);
+
     for (pos = 0; mao[pos+1]!='\0'; pos++)
     {
         wprintf(L"Os símbolos são: %x\t", mao[pos]);
@@ -48,8 +51,8 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
     wprintf(L"\n");
     */
 
-
     verificarCombinacao (mao, tamanho, baralho, arrayComb);
+
 
     return tamanho;
 }

@@ -107,4 +107,3 @@ void ordenarDupSeq(wchar_t *todasMaos, carta baralho[], int comprimento) {
         */
 
 }
-

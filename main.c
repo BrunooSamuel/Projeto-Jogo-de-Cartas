@@ -103,7 +103,9 @@ int main () {
         free(arrayTamanhos);
         free(arrayComb);
         free(todasMaos);
+
     }
+    
 
     // Liberta o espaço na memória alocada para o baralho
     free(baralho);
