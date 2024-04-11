@@ -17,7 +17,6 @@ void limpar();
 //Funcao que lê a mao que recebe
 int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int arrayTamanhos[]);
 
-
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);
 
@@ -26,7 +25,6 @@ void ordena(int mao[], int tamanho);
 
 //Funcao para ler que combinação é
 void verificarCombinacao (wchar_t mao[], int quantidade,carta baralho[], int *arrayComb);
-
 
 //Funcao para verificar se é conjunto
 void verificaConjunto(int quantidade, int maoNum[], bool *combinacao);
