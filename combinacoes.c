@@ -13,7 +13,7 @@ void lerConjunto (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordenad
     bool encontrada=false;
 
     //vai comparar as cartas todas da mao, com as quatro naipes da carta de maior numero, de forma decrescente até encontrar a igual
-
+    
     int i=0;
     while (encontrada==false && j>=limj)
     { 
@@ -31,7 +31,6 @@ void lerConjunto (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordenad
     }
 
     wprintf(L"conjunto com %d cartas onde a carta mais alta é %lc\n",quantidade, maior);
-    
 }
 
 void lerSequencia (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordenadoNum[]) {
@@ -135,7 +134,8 @@ void verificaDSequencia(int quantidade, int maoNum[], bool *combinacao) {
     }
 }
 // Funçao que receba a mão, e verifica se existe alguma combinação
-void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[]) {
+
+void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[], int *arrayComb) {
     int maoNum[quantidade];
 
     int i=0;
@@ -157,21 +157,32 @@ void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[]) {
     //verifica se é um conjunto
     bool conjunto=false; 
     verificaConjunto(quantidade, maoNum, &conjunto);
-    if (conjunto) lerConjunto(mao,quantidade,baralho,maoNum);
+
+    if (conjunto) arrayComb[0]++;
+    // if (conjunto) lerConjunto(mao,quantidade,baralho,maoNum);
+
 
     //verifica se é sequencia
     bool sequencia=false;
     if (conjunto==false) verificaSequencia(quantidade, maoNum, &sequencia);
-    if (sequencia) lerSequencia(mao,quantidade,baralho,maoNum);
+
+    if (sequencia) arrayComb[1]++;
+    // if (sequencia) lerSequencia(mao,quantidade,baralho,maoNum);
+
 
     //verifica se é dupla sequencia
     bool duplasequencia=false;
     if (conjunto==false&&sequencia==false) verificaDSequencia(quantidade, maoNum, &duplasequencia);
-    if (duplasequencia) lerDuplaSequencia(mao,quantidade,baralho,maoNum);
+    if (duplasequencia) arrayComb[2]++;
+    // if (duplasequencia) lerDuplaSequencia(mao,quantidade,baralho,maoNum);
+
 
     // caso não tenha nenhuma combinacao
     if (sequencia==false&&conjunto==false&&duplasequencia==false)
     {
+        arrayComb[3]++;
         wprintf(L"Nada!\n");
     }
+
+    GuardarCombinacao(arrayCombinacoes,conjunto,sequencia,duplasequencia);
 }
