@@ -183,6 +183,4 @@ void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[], int *a
         arrayComb[3]++;
         wprintf(L"Nada!\n");
     }
-
-    GuardarCombinacao(arrayCombinacoes,conjunto,sequencia,duplasequencia);
 }
