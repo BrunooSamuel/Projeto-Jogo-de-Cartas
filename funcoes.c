@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <locale.h>
 #include <wchar.h>
+#include <stdlib.h>
 #include "funcoes.h"
 #include "cartas.h"
 
@@ -19,32 +20,41 @@ void imprimir(int t, carta baralho[]) {
 }
 
 
-int lerMao(carta baralho[]) {
-    //posicao no array da mao
-    int pos;
-    
+
+int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int arrayTamanhos[]) {
+
+
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
     wchar_t mao[32]={0};
 
     //funcao que coloca as cartas recebidas no array mao
     if (fgetws(mao, 32, stdin)==NULL) {
         wprintf(L"O Scan da mão é inválido.\n");
-        return 1;
+        free(arrayTamanhos);
+        free(arrayComb);
+        free(baralho);
+        return -1;
     }
 
+    int tamanho = wcslen(mao)-1;
+    //copia o mao para o array todasMaos
+    wcsncpy(&todasMaos[posMaos * 14], mao, tamanho);
 
+    /*
+    int pos;
+    wprintf(L"Está na mao: %ls\n", mao);
 
-    //wprintf(L"Está na mao: %ls\n", mao);
     for (pos = 0; mao[pos+1]!='\0'; pos++)
     {
-        //wprintf(L"Os símbolos são: %x\t", mao[pos]);
+        wprintf(L"Os símbolos são: %x\t", mao[pos]);
     }
+    wprintf(L"\n");
+    */
 
-    //wprintf(L"\n");
+    verificarCombinacao (mao, tamanho, baralho, arrayComb);
 
-    verificarCombinacao (mao, pos, baralho);
 
-    return 0;
+    return tamanho;
 }
 
 
