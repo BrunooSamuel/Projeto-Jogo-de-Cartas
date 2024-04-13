@@ -111,10 +111,9 @@ void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos) {
 }
 
 
-int* alocarArrayInt (carta *baralho, int linhas) {
-    int *array=malloc((linhas-1)*sizeof(int)); //aloca memoria para o array
+int* alocarArrayInt (int linhas) {
+    int *array=malloc((linhas)*sizeof(int)); //aloca memoria para o array
     if (array == NULL) {
-        free(baralho);
         return NULL;
     }
     else {
@@ -123,21 +122,27 @@ int* alocarArrayInt (carta *baralho, int linhas) {
     }
 }
 
-wchar_t* alocarArrayWchar (carta *baralho,int *arrayTamanhos,int *arrayComb, int linhas) {
+wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
     wchar_t *array=malloc(sizeof(wchar_t)*14*linhas); //array para colocar todas as maos
     if (array == NULL) {
         libertarTodas (arrayTamanhos,arrayComb,array);
-        free(baralho);
         return NULL;
     }
     else return array; 
 }
 
 
-int scanInt (carta *baralho) {
-    int numero=0;
+carta* alocarArrayCartas () {
+    carta *array = malloc(56 * sizeof(carta));
+    if (array == NULL) {
+        return NULL;
+    }
+    else return array;
+}
+
+int scanInt () {
+    int numero;
     if (wscanf(L"%d", &numero)==EOF) {
-        free(baralho);
         return 1;
     }
     else return numero;

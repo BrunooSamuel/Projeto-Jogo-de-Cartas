@@ -10,11 +10,7 @@
 int main () {
 
     //Baralho de cartas, usado malloc para alocar a memória necessária para o baralho
-    carta *baralho = malloc(56 * sizeof(carta));
-
-    if (baralho == NULL) {
-        return 1;
-    }
+    carta *baralho = alocarArrayCartas();
 
     // define o baralho
     carta *baralhoDef = definirCartas();
@@ -33,15 +29,15 @@ int main () {
         wprintf(L"Teste %d\n", e1);
 
         // lê o numero de linhas que recebe
-        int linhas=scanInt(baralho);
+        int linhas=scanInt();
         
         limpar();
 
-        int *arrayTamanhos=alocarArrayInt(baralho, linhas);
+        int *arrayTamanhos=alocarArrayInt(linhas);
 
-        int *arrayComb=alocarArrayInt(baralho, linhas);
+        int *arrayComb=alocarArrayInt(linhas);
 
-        wchar_t *todasMaos=alocarArrayWchar (baralho, arrayTamanhos, arrayComb, linhas);
+        wchar_t *todasMaos=alocarArrayWchar (arrayTamanhos, arrayComb, linhas);
         
         int e2=0;
         while (e2<linhas)   

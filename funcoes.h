@@ -24,13 +24,16 @@ void ordena(int mao[], int tamanho);
 void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos);
 
 //Função que aloca memoria para arrays de Int
-int* alocarArrayInt (carta *baralho, int linhas);
+int* alocarArrayInt (int linhas);
 
 //Função que aloca memoria para array de Wchar
-wchar_t* alocarArrayWchar (carta *baralho,int *arrayTamanhos,int *arrayComb, int linhas);
+wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas);
+
+//Função que aloca array de cartas
+carta* alocarArrayCartas ();
 
 //Função que dá scan a um int
-int scanInt (carta *baralho);
+int scanInt ();
 
 // COMBINACOES.C
 
