@@ -10,15 +10,10 @@
 int main () {
 
     //Baralho de cartas, usado malloc para alocar a memória necessária para o baralho
-    carta *baralho = malloc(56 * sizeof(carta));
-
-    if (baralho == NULL) {
-        return 1;
-    }
+    carta *baralho = alocarArrayCartas();
 
     // define o baralho
     carta *baralhoDef = definirCartas();
-
     if (baralhoDef == NULL) {
         free(baralho);
         return 1;
