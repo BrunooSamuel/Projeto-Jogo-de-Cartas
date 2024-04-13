@@ -2,6 +2,7 @@
 #include <locale.h>
 #include <wchar.h>
 #include <stdlib.h>
+#include <string.h>
 #include "funcoes.h"
 #include "cartas.h"
 
@@ -109,3 +110,15 @@ void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos) {
     free(todasMaos);
 }
 
+
+int* alocarArrayInt (carta *baralho, int linhas) {
+    int *array=malloc((linhas-1)*sizeof(int)); //aloca memoria para o array
+    if (array == NULL) {
+        free(baralho);
+        return NULL;
+    }
+    else {
+        memset(array, 0, sizeof(array[0])*linhas); //coloca tudo a 0 no array
+        return array;
+    }
+}

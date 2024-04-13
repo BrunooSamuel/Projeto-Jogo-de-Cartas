@@ -23,6 +23,8 @@ void ordena(int mao[], int tamanho);
 //Função que dá free
 void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos);
 
+//FUnção que aloca memoria para arrays
+int* alocarArrayInt (carta *baralho, int linhas);
 
 // COMBINACOES.C
 

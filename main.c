@@ -45,27 +45,16 @@ int main () {
         
         limpar();
 
-        int *arrayTamanhos=malloc((linhas-1)*sizeof(int)); //aloca memoria para o array que vai guardar os tamanhos das linhas
-        memset(arrayTamanhos, 0, sizeof(arrayTamanhos[0])*linhas); //coloca tudo a 0 no array
-        if (arrayTamanhos == NULL) {
-            free(baralho);
-            return 1;
-        }
+        int *arrayTamanhos=alocarArrayInt(baralho, linhas);
 
-        int *arrayComb=malloc(4*sizeof(int)); //aloca memoria para o array que vai guardar as combinacoes para depois serem comparadas
-        memset(arrayComb, 0, sizeof(arrayComb[0])*4); //coloca tudo a 0 no array
-        //pos 0 é relativa a conjuntos, pos 1 a sequencias, pos 2 a dupla sequencias e pos 3 a nada
-        if (arrayComb == NULL) {
-            free(arrayTamanhos);
-            free(baralho);
-            return 1;
-        }
+        int *arrayComb=alocarArrayInt(baralho, linhas);
 
         wchar_t *todasMaos=malloc(sizeof(wchar_t)*14*linhas); //array para colocar todas as maos
         if (todasMaos == NULL) {
             libertarTodas (arrayTamanhos,arrayComb,todasMaos);
             return 1;
         }
+        
         int tamanho=0;
         for (int e2=1; e2<=linhas; e2++)   
         {
@@ -90,7 +79,6 @@ int main () {
 
     }
     
-
     // Liberta o espaço na memória alocada para o baralho
     free(baralho);
 
