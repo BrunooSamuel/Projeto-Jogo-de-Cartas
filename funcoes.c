@@ -122,3 +122,12 @@ int* alocarArrayInt (carta *baralho, int linhas) {
         return array;
     }
 }
+
+int scanInt (carta *baralho) {
+    int numero=0;
+    if (wscanf(L"%d", &numero)==EOF) {
+        free(baralho);
+        return 1;
+    }
+    else return numero;
+}

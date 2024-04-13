@@ -26,22 +26,14 @@ int main () {
 
     setlocale(LC_CTYPE, "C.UTF-8");
 
-    int numtestes=0;
-    if (wscanf(L"%d", &numtestes)==EOF) {
-        free(baralho);
-        return 1;
-    }
+    int numtestes=scanInt(baralho);
     
     for (int e1=1; e1<=numtestes;e1++) 
     {
         wprintf(L"Teste %d\n", e1);
 
         // lê o numero de linhas que recebe
-        int linhas=0;
-        if (wscanf(L"%d", &linhas)==EOF) {
-            free(baralho);
-            return 1;
-        }
+        int linhas=scanInt(baralho);
         
         limpar();
 
@@ -54,7 +46,7 @@ int main () {
             libertarTodas (arrayTamanhos,arrayComb,todasMaos);
             return 1;
         }
-        
+
         int tamanho=0;
         for (int e2=1; e2<=linhas; e2++)   
         {
