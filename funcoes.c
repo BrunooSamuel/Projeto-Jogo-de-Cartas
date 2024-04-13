@@ -133,13 +133,6 @@ wchar_t* alocarArrayWchar (carta *baralho,int *arrayTamanhos,int *arrayComb, int
     else return array; 
 }
 
-carta* alocarArrayCartas () {
-    carta *array = malloc(56 * sizeof(carta));
-    if (array == NULL) {
-        return NULL;
-    }
-    else return array;
-}
 
 int scanInt (carta *baralho) {
     int numero=0;

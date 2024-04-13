@@ -7,6 +7,7 @@
 
 // FUNCOES.C
 
+
 //Funcao teste para imprimir
 void imprimir (int t, carta baralho[]);
 
@@ -28,13 +29,8 @@ int* alocarArrayInt (carta *baralho, int linhas);
 //Função que aloca memoria para array de Wchar
 wchar_t* alocarArrayWchar (carta *baralho,int *arrayTamanhos,int *arrayComb, int linhas);
 
-//Função que aloca array de cartas
-carta* alocarArrayCartas ();
-
 //Função que dá scan a um int
 int scanInt (carta *baralho);
-
-
 
 // COMBINACOES.C
 
@@ -59,8 +55,6 @@ void lerSequencia (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordena
 //Funcao para Dupla Sequencias
 void lerDuplaSequencia (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordenadoNum[]);
 
-
-
 // COMPARACOES.C
 
 //Funcao para verificar se todas as linhas têm o mesmo tamanho
@@ -68,8 +62,6 @@ bool compararTamanhos(int array[], int total);
 
 //Funcao para verificar se todas as linhas são a mesma combinacao
 bool compararCombinacoes(int array[]);
-
-
 
 
 // PARES.C
