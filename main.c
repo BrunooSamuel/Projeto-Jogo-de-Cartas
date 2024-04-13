@@ -44,11 +44,11 @@ int main () {
         wchar_t *todasMaos=alocarArrayWchar (baralho, arrayTamanhos, arrayComb, linhas);
 
         int tamanho=0;
-        for (int e2=1; e2<=linhas; e2++)   
+        for (int e2=0; e2<linhas; e2++)   
         {
             //imprimir(6, baralhoDef);
-            tamanho=lerMao(baralhoDef, arrayComb, todasMaos, (e2-1), arrayTamanhos);
-            arrayTamanhos[e2-1]=tamanho;
+            tamanho=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos);
+            arrayTamanhos[e2]=tamanho;
         }
         
         bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
