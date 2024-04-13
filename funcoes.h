@@ -20,6 +20,9 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);
 
+//Função que dá free
+void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos);
+
 
 // COMBINACOES.C
 

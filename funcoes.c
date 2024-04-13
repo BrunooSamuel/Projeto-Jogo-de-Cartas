@@ -102,3 +102,10 @@ void ordena(int mao[], int tamanho) {
     
 }   
 
+
+void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos) {
+    free(arrayTamanhos);
+    free(arrayComb);
+    free(todasMaos);
+}
+
