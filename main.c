@@ -37,13 +37,13 @@ int main () {
         int *arrayComb=alocarArrayInt(baralho, linhas);
 
         wchar_t *todasMaos=alocarArrayWchar (baralho, arrayTamanhos, arrayComb, linhas);
-
-        int tamanho=0;
-        for (int e2=0; e2<linhas; e2++)   
+        
+        int e2=0;
+        while (e2<linhas)   
         {
             //imprimir(6, baralhoDef);
-            tamanho=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos);
-            arrayTamanhos[e2]=tamanho;
+            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos);
+            e2++;
         }
         
         bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
@@ -52,9 +52,8 @@ int main () {
         if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
 
         else {
-            ordenarTudo (baralhoDef, todasMaos, tamanho, linhas);
-
-            maosCrescente (baralhoDef, todasMaos, tamanho, linhas, arrayTamanhos);
+            ordenarTudo (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas);
+            maosCrescente (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas, arrayTamanhos);
         }
 
 
