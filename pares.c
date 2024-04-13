@@ -74,11 +74,11 @@ void ordenarTudo (carta baralho[], wchar_t *todasMaos, int comprimento, int linh
     }
 }
 
-void ultimoValor(carta baralho[], wchar_t *mao,int comprimento, int *valores, int posicao) {
+void ultimoValor(carta baralho[], wchar_t *mao,int tamanho, int *valores, int posicao) {
     bool encontrado=false;
     for (int k = 0; k < 56 && !encontrado; k++)
     {
-        if(mao[comprimento]==baralho[k].codigo)  
+        if(mao[tamanho]==baralho[k].codigo)  
         {
             valores[posicao]=baralho[k].numero*4+(baralho[k].naipe-4);
             encontrado=true;
@@ -86,11 +86,12 @@ void ultimoValor(carta baralho[], wchar_t *mao,int comprimento, int *valores, in
     } 
 }
 
-void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int linhas) {
+void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int linhas, int arrayTamanhos[]) {
     int valores[linhas];
+    int tamanho=comprimento-1;
     for (int i = 0; i < linhas; i++)
     {
-        ultimoValor(baralho, &todasMaos[i*14], (comprimento-1), valores, i);
+        ultimoValor(baralho, &todasMaos[i*14], tamanho, valores, i);
     }
     
     for (int i = 0; i < linhas - 1; i++) {
@@ -110,4 +111,10 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
         }
     }
     
+    // IMPRIME AS MAOS ORDENADAS
+    for (int i = 0; i < linhas; i++) 
+    {
+        // *indica que a largura é fornececida pelo argumento arrayTamanhos[i]
+        wprintf(L"%.*ls\n", arrayTamanhos[i], &todasMaos[i * 14]);
+    }
 }
