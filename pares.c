@@ -70,7 +70,7 @@ void ordenarMao (carta baralho[], wchar_t *mao, int comprimento) {
 void ordenarTudo (carta baralho[], wchar_t *todasMaos, int comprimento, int linhas) {
     for (int i = 0; i < linhas; i++)
     {
-        ordenarMao(baralho,&todasMaos[i*14], comprimento);
+        ordenarMao(baralho,&todasMaos[i*32], comprimento);
     }
 }
 
@@ -91,7 +91,7 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
     int tamanho=comprimento-1;
     for (int i = 0; i < linhas; i++)
     {
-        ultimoValor(baralho, &todasMaos[i*14], tamanho, valores, i);
+        ultimoValor(baralho, &todasMaos[i*32], tamanho, valores, i);
     }
     
     for (int i = 0; i < linhas - 1; i++) {
@@ -103,10 +103,12 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
                 valores[j + 1] = tInt;
 
                 // Troca as maos
-                wchar_t tMao[14];
-                wcscpy(tMao, &todasMaos[j * 14]);
-                wcscpy(&todasMaos[j * 14], &todasMaos[(j + 1) * 14]);
-                wcscpy(&todasMaos[(j + 1) * 14], tMao);
+                wchar_t tMao[32];
+                wcsncpy(tMao, &todasMaos[j * 32], 31);
+                tMao[31] = L'\0';
+                wcsncpy(&todasMaos[j * 32], &todasMaos[(j + 1) * 32],31);
+                todasMaos[(j + 1) * 32 + 31] = L'\0';
+                wcsncpy(&todasMaos[(j + 1) * 32], tMao,31);
             }
         }
     }
@@ -115,6 +117,6 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
     for (int i = 0; i < linhas; i++) 
     {
         // *indica que a largura é fornececida pelo argumento arrayTamanhos[i]
-        wprintf(L"%.*ls\n", arrayTamanhos[i], &todasMaos[i * 14]);
+        wprintf(L"%.*ls\n", arrayTamanhos[i], &todasMaos[i * 32]);
     }
 }

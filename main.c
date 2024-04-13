@@ -22,7 +22,7 @@ int main () {
 
     setlocale(LC_CTYPE, "C.UTF-8");
 
-    int numtestes=scanInt(baralho);
+    int numtestes=scanInt();
     
     for (int e1=1; e1<=numtestes;e1++) 
     {

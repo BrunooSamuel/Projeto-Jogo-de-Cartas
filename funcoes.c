@@ -39,7 +39,7 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
 
     int tamanho = wcslen(mao)-1;
     //copia o mao para o array todasMaos
-    wcsncpy(&todasMaos[posMaos * 14], mao, tamanho);
+    wcsncpy(&todasMaos[posMaos * 32], mao, tamanho);
 
     /*
     int pos;
@@ -68,13 +68,13 @@ void limpar() {
 // Funcao que ordena um array
 void ordena(int mao[], int tamanho) {
     int aux[tamanho];
-    // O array tem como valor minimo 1 e máximo 14
+    // O array tem como valor minimo 1 e máximo 32
     int n=1; //numero para ordenar
     int pos=0; //posiçao no array original
     int posA=0; //posicao no array auxiliar
 
     //ordenaçao no array auxiliar
-    for (n=1; n<=14; n++)
+    for (n=1; n<=32; n++)
     {   
         for (pos=0; pos<tamanho; pos++)
         {
@@ -123,7 +123,7 @@ int* alocarArrayInt (int linhas) {
 }
 
 wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
-    wchar_t *array=malloc(sizeof(wchar_t)*14*linhas); //array para colocar todas as maos
+    wchar_t *array=malloc(sizeof(wchar_t)*32*linhas); //array para colocar todas as maos
     if (array == NULL) {
         libertarTodas (arrayTamanhos,arrayComb,array);
         return NULL;
