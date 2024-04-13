@@ -100,5 +100,5 @@ void ordena(int mao[], int tamanho) {
     wprintf(L"\n");
     */
     
-
 }   
+

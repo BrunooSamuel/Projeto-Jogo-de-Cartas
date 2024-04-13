@@ -52,18 +52,26 @@ bool compararTamanhos(int array[], int total);
 //Funcao para verificar se todas as linhas são a mesma combinacao
 bool compararCombinacoes(int array[]);
 
-//Funcao que envia para a comparação da determinada combinação
-void escolherCombinacao(int array[], wchar_t *todasMaos, carta baralho[], int comprimento);
 
-//Função que ordena as maos por ordem
-void ordenarConjunto(wchar_t *todasMaos, carta baralho[], int comprimento);
+// PARES.C
 
-//Função que ordena as maos por ordem
-void ordenarSeq(wchar_t *todasMaos, carta baralho[], int comprimento);
+//Função que ordena todas as maos
+void ordenarTudo (carta baralho[], wchar_t *todasMaos, int comprimento, int linhas);
 
-//Função que ordena as maos por ordem
-void ordenarDupSeq(wchar_t *todasMaos, carta baralho[], int comprimento);
+//Função que ordena uma mao
+void ordenarMao (carta baralho[], wchar_t *todasMaos, int comprimento);
 
+//Função que transforma as cartas que recebe em pares numero naipe
+void arranjaPar (carta baralho[], wchar_t mao[], int comprimento, int *numeros, int *naipes);
+
+//Função que ordena os pares
+void ordenaPares (int comprimento, int *numeros, int *naipes);
+
+//Função que transforma os pares em carta
+void parParaCarta (carta baralho[], wchar_t *mao, int comprimento, int *numeros, int *naipes);
+
+//Função que troca dois ints num array
+void trocarPosicoes(int *x, int *y);
 
 // Esta linha fecha a diretiva #ifndef
 #endif

@@ -98,7 +98,17 @@ int main () {
         bool comIguais= compararCombinacoes(arrayComb);
 
         if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
-        else escolherCombinacao(arrayComb, todasMaos, baralhoDef, tamanho); //vai para a ordenação
+
+        else {
+            ordenarTudo (baralhoDef, todasMaos, tamanho, linhas);
+        } 
+
+        // IMPRIME AS MAOS ORDENADAS
+        for (int i = 0; i < linhas; i++) 
+        {
+            // *indica que a largura é fornececida pelo argumento arrayTamanhos[i]
+            wprintf(L"%.*ls\n", arrayTamanhos[i], &todasMaos[i * 14]);
+        }
 
         free(arrayTamanhos);
         free(arrayComb);
