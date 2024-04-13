@@ -73,5 +73,11 @@ void parParaCarta (carta baralho[], wchar_t *mao, int comprimento, int *numeros,
 //Função que troca dois ints num array
 void trocarPosicoes(int *x, int *y);
 
+//Função que coloca as maos por ordem crescente
+void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int linhas);
+
+//Função que transforma a ultima carta num valor (numero*4+(naipe-4))
+void ultimoValor(carta baralho[], wchar_t *mao,int comprimento, int *valores, int posicao);
+
 // Esta linha fecha a diretiva #ifndef
 #endif

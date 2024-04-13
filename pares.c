@@ -73,3 +73,41 @@ void ordenarTudo (carta baralho[], wchar_t *todasMaos, int comprimento, int linh
         ordenarMao(baralho,&todasMaos[i*14], comprimento);
     }
 }
+
+void ultimoValor(carta baralho[], wchar_t *mao,int comprimento, int *valores, int posicao) {
+    bool encontrado=false;
+    for (int k = 0; k < 56 && !encontrado; k++)
+    {
+        if(mao[comprimento]==baralho[k].codigo)  
+        {
+            valores[posicao]=baralho[k].numero*4+(baralho[k].naipe-4);
+            encontrado=true;
+        }
+    } 
+}
+
+void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int linhas) {
+    int valores[linhas];
+    for (int i = 0; i < linhas; i++)
+    {
+        ultimoValor(baralho, &todasMaos[i*14], (comprimento-1), valores, i);
+    }
+    
+    for (int i = 0; i < linhas - 1; i++) {
+        for (int j = 0; j < linhas - i - 1; j++) {
+            if (valores[j] > valores[j + 1]) {
+                // Troca os valores das cartas mais altas
+                int tInt = valores[j];
+                valores[j] = valores[j + 1];
+                valores[j + 1] = tInt;
+
+                // Troca as maos
+                wchar_t tMao[14];
+                wcscpy(tMao, &todasMaos[j * 14]);
+                wcscpy(&todasMaos[j * 14], &todasMaos[(j + 1) * 14]);
+                wcscpy(&todasMaos[(j + 1) * 14], tMao);
+            }
+        }
+    }
+    
+}

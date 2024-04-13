@@ -101,13 +101,15 @@ int main () {
 
         else {
             ordenarTudo (baralhoDef, todasMaos, tamanho, linhas);
-        } 
 
-        // IMPRIME AS MAOS ORDENADAS
-        for (int i = 0; i < linhas; i++) 
-        {
-            // *indica que a largura é fornececida pelo argumento arrayTamanhos[i]
-            wprintf(L"%.*ls\n", arrayTamanhos[i], &todasMaos[i * 14]);
+            maosCrescente (baralhoDef, todasMaos, tamanho, linhas);
+
+            // IMPRIME AS MAOS ORDENADAS
+            for (int i = 0; i < linhas; i++) 
+            {
+                // *indica que a largura é fornececida pelo argumento arrayTamanhos[i]
+                wprintf(L"%.*ls\n", arrayTamanhos[i], &todasMaos[i * 14]);
+            }
         }
 
         free(arrayTamanhos);
