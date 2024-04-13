@@ -41,11 +41,7 @@ int main () {
 
         int *arrayComb=alocarArrayInt(baralho, linhas);
 
-        wchar_t *todasMaos=malloc(sizeof(wchar_t)*14*linhas); //array para colocar todas as maos
-        if (todasMaos == NULL) {
-            libertarTodas (arrayTamanhos,arrayComb,todasMaos);
-            return 1;
-        }
+        wchar_t *todasMaos=alocarArrayWchar (baralho, arrayTamanhos, arrayComb, linhas);
 
         int tamanho=0;
         for (int e2=1; e2<=linhas; e2++)   

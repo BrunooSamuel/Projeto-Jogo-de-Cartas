@@ -123,6 +123,17 @@ int* alocarArrayInt (carta *baralho, int linhas) {
     }
 }
 
+wchar_t* alocarArrayWchar (carta *baralho,int *arrayTamanhos,int *arrayComb, int linhas) {
+    wchar_t *array=malloc(sizeof(wchar_t)*14*linhas); //array para colocar todas as maos
+    if (array == NULL) {
+        libertarTodas (arrayTamanhos,arrayComb,array);
+        free(baralho);
+        return NULL;
+    }
+    else return array; 
+}
+
+
 int scanInt (carta *baralho) {
     int numero=0;
     if (wscanf(L"%d", &numero)==EOF) {
