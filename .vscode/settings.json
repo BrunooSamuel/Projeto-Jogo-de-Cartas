@@ -4,6 +4,7 @@
         "stdio.h": "c",
         "funcoes.h": "c",
         "locale.h": "c",
-        "cartas.h": "c"
+        "cartas.h": "c",
+        "stdlib.h": "c"
     }
 }
