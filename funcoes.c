@@ -22,7 +22,7 @@ void imprimir(int t, carta baralho[]) {
 
 
 
-int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int arrayTamanhos[]) {
+int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos) {
 
 
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
@@ -53,8 +53,7 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
     */
 
     verificarCombinacao (mao, tamanho, baralho, arrayComb);
-
-
+    
     return tamanho;
 }
 

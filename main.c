@@ -47,9 +47,8 @@ int main () {
             e2++;
         }
         
-        bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
+        bool tamIguais= compararTamanhos(arrayTamanhos,linhas,e1,numtestes);
         bool comIguais= compararCombinacoes(arrayComb);
-
         if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
 
         else {

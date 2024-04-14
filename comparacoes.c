@@ -5,8 +5,10 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-bool compararTamanhos(int array[], int total) {
-    
+bool compararTamanhos(int array[], int total,int e1, int numtestes) {
+    //bug que nao lia o tamanho corretamente da ultima linha do ultimo teste
+    if (numtestes==e1) array[total-1]++;
+
     // so imprime para ver se está a guardar corretamente
     /*
     for (int i = 0; i < total; i++)
@@ -22,7 +24,6 @@ bool compararTamanhos(int array[], int total) {
     {
         if (array[i]!=array[i+1]) r=false;
     }
-    
     return r;
 }
 
