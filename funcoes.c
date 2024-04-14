@@ -22,7 +22,7 @@ void imprimir(int t, carta baralho[]) {
 
 
 
-int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos) {
+int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos, int linhas, int e1, int numtestes) {
 
 
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
@@ -36,6 +36,16 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
         free(baralho);
         return -1;
     }
+
+    //na ultima linha do ultimo teste, adiciona um espaço no fim porque nao estava a ler a ultima carta
+    if (linhas==(posMaos+1)&&e1==numtestes) {
+        size_t len = wcslen(mao);
+        if (len > 0 && mao[len - 1] != L' ') {
+            mao[len] = L' ';
+            mao[len + 1] = L'\0';
+        }
+    }
+
 
     int tamanho = wcslen(mao)-1;
     //copia o mao para o array todasMaos

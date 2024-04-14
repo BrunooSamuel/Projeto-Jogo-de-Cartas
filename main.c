@@ -43,12 +43,13 @@ int main () {
         while (e2<linhas)   
         {
             //imprimir(6, baralhoDef);
-            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos);
+            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos, linhas, e1, numtestes);
             e2++;
         }
         
-        bool tamIguais= compararTamanhos(arrayTamanhos,linhas,e1,numtestes);
+        bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
         bool comIguais= compararCombinacoes(arrayComb);
+
         if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
 
         else {
@@ -65,5 +66,4 @@ int main () {
     free(baralho);
 
     return 0;
-
 }

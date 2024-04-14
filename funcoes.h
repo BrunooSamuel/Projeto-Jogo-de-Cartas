@@ -15,7 +15,7 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos);
+int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos, int linhas, int e1, int numtestes);
 
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);
@@ -61,7 +61,7 @@ void lerDuplaSequencia (wchar_t mao[], int quantidade, carta baralho[],wchar_t o
 // COMPARACOES.C
 
 //Funcao para verificar se todas as linhas têm o mesmo tamanho
-bool compararTamanhos(int array[], int total,int e1, int numtestes);
+bool compararTamanhos(int array[], int total);
 
 //Funcao para verificar se todas as linhas são a mesma combinacao
 bool compararCombinacoes(int array[]);
