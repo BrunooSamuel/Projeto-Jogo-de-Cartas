@@ -93,5 +93,8 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
 //Função que transforma a ultima carta num valor (numero*4+(naipe-4))
 void ultimoValor(carta baralho[], wchar_t *mao,int tamanho, int *valores, int posicao);
 
+//Funçao final que imprime as maos
+void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *todasMaos);
+
 // Esta linha fecha a diretiva #ifndef
 #endif

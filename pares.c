@@ -88,10 +88,9 @@ void ultimoValor(carta baralho[], wchar_t *mao,int tamanho, int *valores, int po
 
 void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int linhas, int arrayTamanhos[]) {
     int valores[linhas];
-    int tamanho=comprimento-1;
     for (int i = 0; i < linhas; i++)
     {
-        ultimoValor(baralho, &todasMaos[i*32], tamanho, valores, i);
+        ultimoValor(baralho, &todasMaos[i*32], (comprimento-1), valores, i);
     }
     
     for (int i = 0; i < linhas - 1; i++) {
@@ -112,8 +111,11 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
             }
         }
     }
-    
-   // IMPRIME AS MAOS ORDENADAS
+    imprimeMaosOrdenadas (linhas, arrayTamanhos, todasMaos);
+}
+
+void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *todasMaos) {
+    // IMPRIME AS MAOS ORDENADAS
     for (int i = 0; i < linhas; i++) 
     {
         int j=0;
@@ -124,5 +126,4 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
         wprintf(L"%lc", todasMaos[i * 32 + j]);
         wprintf(L"\n");
     }
-
 }
