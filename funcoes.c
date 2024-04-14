@@ -2,6 +2,7 @@
 #include <locale.h>
 #include <wchar.h>
 #include <stdlib.h>
+#include <string.h>
 #include "funcoes.h"
 #include "cartas.h"
 
@@ -21,7 +22,7 @@ void imprimir(int t, carta baralho[]) {
 
 
 
-int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int arrayTamanhos[]) {
+int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos) {
 
 
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
@@ -38,7 +39,7 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
 
     int tamanho = wcslen(mao)-1;
     //copia o mao para o array todasMaos
-    wcsncpy(&todasMaos[posMaos * 14], mao, tamanho);
+    wcsncpy(&todasMaos[posMaos * 32], mao, tamanho);
 
     /*
     int pos;
@@ -52,8 +53,7 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
     */
 
     verificarCombinacao (mao, tamanho, baralho, arrayComb);
-
-
+    
     return tamanho;
 }
 
@@ -67,13 +67,13 @@ void limpar() {
 // Funcao que ordena um array
 void ordena(int mao[], int tamanho) {
     int aux[tamanho];
-    // O array tem como valor minimo 1 e máximo 14
+    // O array tem como valor minimo 1 e máximo 32
     int n=1; //numero para ordenar
     int pos=0; //posiçao no array original
     int posA=0; //posicao no array auxiliar
 
     //ordenaçao no array auxiliar
-    for (n=1; n<=14; n++)
+    for (n=1; n<=32; n++)
     {   
         for (pos=0; pos<tamanho; pos++)
         {
@@ -100,5 +100,49 @@ void ordena(int mao[], int tamanho) {
     wprintf(L"\n");
     */
     
-
 }   
+
+
+void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos) {
+    free(arrayTamanhos);
+    free(arrayComb);
+    free(todasMaos);
+}
+
+
+int* alocarArrayInt (int linhas) {
+    int *array=malloc((linhas)*sizeof(int)); //aloca memoria para o array
+    if (array == NULL) {
+        return NULL;
+    }
+    else {
+        memset(array, 0, sizeof(array[0])*linhas); //coloca tudo a 0 no array
+        return array;
+    }
+}
+
+wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
+    wchar_t *array=malloc(sizeof(wchar_t)*32*linhas); //array para colocar todas as maos
+    if (array == NULL) {
+        libertarTodas (arrayTamanhos,arrayComb,array);
+        return NULL;
+    }
+    else return array; 
+}
+
+
+carta* alocarArrayCartas () {
+    carta *array = malloc(56 * sizeof(carta));
+    if (array == NULL) {
+        return NULL;
+    }
+    else return array;
+}
+
+int scanInt () {
+    int numero;
+    if (wscanf(L"%d", &numero)==EOF) {
+        return 1;
+    }
+    else return numero;
+}
