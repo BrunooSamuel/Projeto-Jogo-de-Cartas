@@ -118,10 +118,11 @@ void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int lin
     {
         int j=0;
         // *indica que a largura é fornecida pelo argumento arrayTamanhos[i]
-        while(j < arrayTamanhos[i]-1) {
+        for (j = 0; j < arrayTamanhos[i]-1; j++) {
             wprintf(L"%lc ", todasMaos[i * 32 + j]);
-            j++;
         }
-        wprintf(L"%lc\n", todasMaos[i * 32 + j]);
+        wprintf(L"%lc", todasMaos[i * 32 + j]);
+        wprintf(L"\n");
     }
+
 }

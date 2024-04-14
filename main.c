@@ -43,7 +43,7 @@ int main () {
         while (e2<linhas)   
         {
             //imprimir(6, baralhoDef);
-            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos, linhas, e1, numtestes);
+            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos);
             e2++;
         }
         
