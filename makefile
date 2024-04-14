@@ -3,8 +3,8 @@ CFLAGS = -Wall -Wextra -g
 
 all: jogoCartas
 
-jogoCartas: main.o combinacoes.o cartas.o funcoes.o comparacoes.o
-	$(CC) $(CFLAGS) -o jogoCartas main.o combinacoes.o cartas.o funcoes.o comparacoes.o
+jogoCartas: main.o combinacoes.o cartas.o funcoes.o comparacoes.o pares.o
+	$(CC) $(CFLAGS) -o jogoCartas main.o combinacoes.o cartas.o funcoes.o comparacoes.o pares.o
 
 main.o: main.c funcoes.h cartas.h
 	$(CC) $(CFLAGS) -c main.c
@@ -20,6 +20,9 @@ funcoes.o: funcoes.c funcoes.h cartas.h
 
 comparacoes.o: comparacoes.c funcoes.h cartas.h
 	$(CC) $(CFLAGS) -c comparacoes.c
+
+pares.o: pares.c funcoes.h cartas.h
+	$(CC) $(CFLAGS) -c pares.c
 
 run: jogoCartas
 	./jogoCartas
