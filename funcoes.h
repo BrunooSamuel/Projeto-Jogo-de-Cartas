@@ -15,7 +15,8 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos);
+// ler mao antiga int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos);
+int lerMao(wchar_t *mao);
 
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);
@@ -34,6 +35,9 @@ carta* alocarArrayCartas ();
 
 //Função que dá scan a um int
 int scanInt ();
+
+//Função que aloca apenas uma mão
+wchar_t* alocarMao ();
 
 // COMBINACOES.C
 

@@ -22,24 +22,21 @@ void imprimir(int t, carta baralho[]) {
 
 
 
-int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos) {
-
-
-    //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
-    wchar_t mao[32]={0};
+int lerMao(wchar_t *mao) {
 
     //funcao que coloca as cartas recebidas no array mao
     if (fgetws(mao, 32, stdin)==NULL) {
         wprintf(L"O Scan da mão é inválido.\n");
-        free(arrayTamanhos);
-        free(arrayComb);
-        free(baralho);
+        //free(arrayTamanhos);
+        //free(arrayComb);
+        //free(baralho);
+        free(mao);
         return -1;
     }
 
-    int tamanho = wcslen(mao)-1;
+    //int tamanho = wcslen(mao)-1;
     //copia o mao para o array todasMaos
-    wcsncpy(&todasMaos[posMaos * 32], mao, tamanho);
+    //wcsncpy(&todasMaos[posMaos * 32], mao, tamanho);
 
     /*
     int pos;
@@ -52,9 +49,8 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int
     wprintf(L"\n");
     */
 
-    verificarCombinacao (mao, tamanho, baralho, arrayComb);
-    
-    return tamanho;
+    //verificarCombinacao (mao, tamanho, baralho, arrayComb);
+    return 0;
 }
 
 
@@ -125,6 +121,15 @@ wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
     wchar_t *array=malloc(sizeof(wchar_t)*32*linhas); //array para colocar todas as maos
     if (array == NULL) {
         libertarTodas (arrayTamanhos,arrayComb,array);
+        return NULL;
+    }
+    else return array; 
+}
+
+wchar_t* alocarMao () {
+    wchar_t *array=malloc(sizeof(wchar_t)*32);
+    if (array == NULL) {
+        free (array);
         return NULL;
     }
     else return array; 
