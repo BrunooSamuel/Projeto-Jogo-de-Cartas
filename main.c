@@ -33,32 +33,46 @@ int main () {
         
         limpar();
 
-        int *arrayTamanhos=alocarArrayInt(linhas);
+        //int *arrayTamanhos=alocarArrayInt(linhas);
 
-        int *arrayComb=alocarArrayInt(linhas);
+        //int *arrayComb=alocarArrayInt(linhas);
 
-        wchar_t *todasMaos=alocarArrayWchar (arrayTamanhos, arrayComb, linhas);
+        // wchar_t *todasMaos=alocarArrayWchar (arrayTamanhos, arrayComb, linhas);
         
-        int e2=0;
-        while (e2<linhas)   
+        wchar_t *mao=alocarMao();
+        lerMao(mao);
+
+        int e2=linhas;
+        while (e2>0)   
         {
-            //imprimir(6, baralhoDef);
-            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos);
-            e2++;
+            //vem uma mao nova para ser usada
+            wchar_t *jogada=alocarMao();
+
+
+            lerMao(jogada);
+            e2--;
+
+            //limpa a mao para dps receber a nova
+            free(jogada);
         }
+        wchar_t *jogada=alocarMao();
+        //recebe a jogada do jogador   
+        lerMao(jogada);
+        wprintf(L"Mao - %ls", mao);
+        wprintf(L"Jogada - %ls\n", jogada);
+        //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
+        //bool comIguais= compararCombinacoes(arrayComb);
+
+        //if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
+
         
-        bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
-        bool comIguais= compararCombinacoes(arrayComb);
-
-        if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
-
-        else {
-            ordenarTudo (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas);
-            maosCrescente (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas, arrayTamanhos);
-        }
+        //ordenarTudo (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas);
+        //maosCrescente (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas, arrayTamanhos);
+        
 
 
-        libertarTodas (arrayTamanhos,arrayComb,todasMaos);
+        //libertarTodas (arrayTamanhos,arrayComb,todasMaos);
+        free(mao);
 
     }
     
