@@ -1,7 +1,6 @@
-Teste 1
-Mao Inicial:
+8
+15
 🂪🃛🃌
-Jogadas Anteriores:
 🂦
 🃖
 🃈
@@ -17,14 +16,9 @@ PASSO
 PASSO
 PASSO
 PASSO
-Jogada do Jogador:
 🂪🃛🃌
-Mao do Jogador Ordenada
-🂪 🃛 🃌
-Teste 2
-Mao Inicial:
+15
 🂪🃛🃌
-Jogadas Anteriores:
 🂦
 🃖
 🃈
@@ -40,14 +34,9 @@ PASSO
 PASSO
 PASSO
 PASSO
-Jogada do Jogador:
 🃊🃋🂼
-Mao do Jogador Ordenada
-🂪 🃛 🃌
-Teste 3
-Mao Inicial:
+15
 🂪🃛🃌
-Jogadas Anteriores:
 🂦
 🃖
 🃈
@@ -63,14 +52,9 @@ PASSO
 PASSO
 PASSO
 PASSO
-Jogada do Jogador:
 🃌
-Mao do Jogador Ordenada
-🂪 🃛 🃌
-Teste 4
-Mao Inicial:
+15
 🂪🃛🃌
-Jogadas Anteriores:
 🂦
 🃖
 🃈
@@ -86,14 +70,9 @@ PASSO
 PASSO
 PASSO
 PASSO
-Jogada do Jogador:
 🂪
-Mao do Jogador Ordenada
-🂪 🃛 🃌
-Teste 5
-Mao Inicial:
+15
 🂪🃛🃌
-Jogadas Anteriores:
 🂦
 🃖
 🃈
@@ -109,14 +88,9 @@ PASSO
 PASSO
 PASSO
 PASSO
-Jogada do Jogador:
 🃛
-Mao do Jogador Ordenada
-🂪 🃛 🃌
-Teste 6
-Mao Inicial:
+15
 🂪🃛🃌
-Jogadas Anteriores:
 🂦
 🃖
 🃈
@@ -132,14 +106,9 @@ PASSO
 PASSO
 PASSO
 PASSO
-Jogada do Jogador:
 🂼
-Mao do Jogador Ordenada
-🂪 🃛 🃌
-Teste 7
-Mao Inicial:
+15
 🃛🃌🂪
-Jogadas Anteriores:
 🂦
 🃖
 🃈
@@ -155,14 +124,7 @@ PASSO
 PASSO
 PASSO
 PASSO
-Jogada do Jogador:
 PASSO
-Mao do Jogador Ordenada
-🂪 🃛 🃌
-Teste 8
-Mao Inicial:
+0
 🃕🃒🂶🃔🃖🂴🂤🂢🃆🃂🂵🂥🃄🃅🂦
-Não tem Jogadas Anteriores
-Jogada do Jogador:
-🂥🂵Mao do Jogador Ordenada
-🂢 🃂 🃒 🂤 🂴 🃄 🃔 🂥 🂵 🃅 🃕 🂦 🂶 🃆 🃖
+🂥🂵

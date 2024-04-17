@@ -28,38 +28,58 @@ int main () {
     {
         wprintf(L"Teste %d\n", e1);
 
-        // lê o numero de linhas que recebe
-        int linhas=scanInt();
+        // lê o numero de jogadas anteriores que recebe
+        int NumJogAnteriores=scanInt();
         
         limpar();
 
-        int *arrayTamanhos=alocarArrayInt(linhas);
+        int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
 
-        int *arrayComb=alocarArrayInt(linhas);
-
-        wchar_t *todasMaos=alocarArrayWchar (arrayTamanhos, arrayComb, linhas);
+        int *arrayComb=alocarArrayInt(NumJogAnteriores);
+    
+        wchar_t *jogadasAnteriores=alocarArrayWchar (arrayTamanhos, arrayComb, NumJogAnteriores);
+        
+        wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
+        int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
+        
+        wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
         
         int e2=0;
-        while (e2<linhas)   
+        while (e2<NumJogAnteriores)   
         {
-            //imprimir(6, baralhoDef);
-            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, todasMaos, e2, arrayTamanhos);
+            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, e2, arrayTamanhos);
             e2++;
         }
-        
-        bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
-        bool comIguais= compararCombinacoes(arrayComb);
+        wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
+        int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
 
-        if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
+        //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
+        //bool comIguais= compararCombinacoes(arrayComb);
 
+        // if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
+
+        //Este print todo é teste
+        if (e2==0) wprintf(L"Não tem Jogadas Anteriores\n");
         else {
-            ordenarTudo (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas);
-            maosCrescente (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas, arrayTamanhos);
+            wprintf(L"Jogadas Anteriores:\n");
+            for (int i = 0; i < e2; i++) {
+                wprintf(L"%ls\n", &jogadasAnteriores[i * 32]);
+            }
         }
 
+        wprintf(L"Jogada do Jogador:\n%ls", jogadaJogador);
+        //para cima é teste
 
-        libertarTodas (arrayTamanhos,arrayComb,todasMaos);
+        // else {
+            // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
+            // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
+            ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
 
+
+        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
+        free(jogadaJogador);
+        free(maoJogador);
     }
     
     // Liberta o espaço na memória alocada para o baralho
