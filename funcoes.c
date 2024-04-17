@@ -22,7 +22,15 @@ void imprimir(int t, carta baralho[]) {
 
 
 
+<<<<<<< Updated upstream
 int lerMao(wchar_t *mao) {
+=======
+int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posMaos, int *arrayTamanhos) {
+
+
+    //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
+    wchar_t mao[32]={0};
+>>>>>>> Stashed changes
 
     //funcao que coloca as cartas recebidas no array mao
     if (fgetws(mao, 32, stdin)==NULL) {
@@ -34,9 +42,51 @@ int lerMao(wchar_t *mao) {
         return -1;
     }
 
+<<<<<<< Updated upstream
     //int tamanho = wcslen(mao)-1;
     //copia o mao para o array todasMaos
     //wcsncpy(&todasMaos[posMaos * 32], mao, tamanho);
+=======
+    int tamanho = wcslen(mao)-1;
+    //copia o mao para o array jogadasAnteriores
+    wcsncpy(&jogadasAnteriores[posMaos * 32], mao, tamanho);
+
+    /*
+    int pos;
+    wprintf(L"Está na mao: %ls\n", mao);
+
+    for (pos = 0; mao[pos+1]!='\0'; pos++)
+    {
+        wprintf(L"Os símbolos são: %x\t", mao[pos]);
+    }
+    wprintf(L"\n");
+    */
+
+    verificarCombinacao (mao, tamanho, baralho, arrayComb);
+    
+    return tamanho;
+}
+
+int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *arrayTamanhos) {
+
+
+    //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
+    wchar_t mao[32]={0};
+
+    //funcao que coloca as cartas recebidas no array mao
+    if (fgetws(mao, 32, stdin)==NULL) {
+        wprintf(L"O Scan da mão é inválido.\n");
+        free(arrayTamanhos);
+        free(arrayComb);
+        free(baralho);
+        free (jogadasAnteriores);
+        return -1;
+    }
+
+    int tamanho = wcslen(mao)-1;
+    //copia o mao para o array jogadasAnteriores
+    wcsncpy(jogadasAnteriores, mao, tamanho);
+>>>>>>> Stashed changes
 
     /*
     int pos;
@@ -99,10 +149,10 @@ void ordena(int mao[], int tamanho) {
 }   
 
 
-void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos) {
+void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores) {
     free(arrayTamanhos);
     free(arrayComb);
-    free(todasMaos);
+    free(jogadasAnteriores);
 }
 
 
@@ -126,10 +176,18 @@ wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
     else return array; 
 }
 
+<<<<<<< Updated upstream
 wchar_t* alocarMao () {
     wchar_t *array=malloc(sizeof(wchar_t)*32);
     if (array == NULL) {
         free (array);
+=======
+wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas) {
+    wchar_t *array=malloc(sizeof(wchar_t)*32);
+    if (array == NULL) {
+        free(array);
+        libertarTodas (arrayTamanhos,arrayComb,jogadas);
+>>>>>>> Stashed changes
         return NULL;
     }
     else return array; 

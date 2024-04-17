@@ -28,11 +28,12 @@ int main () {
     {
         wprintf(L"Teste %d\n", e1);
 
-        // lê o numero de linhas que recebe
-        int linhas=scanInt();
+        // lê o numero de jogadas anteriores que recebe
+        int NumJogAnteriores=scanInt();
         
         limpar();
 
+<<<<<<< Updated upstream
         //int *arrayTamanhos=alocarArrayInt(linhas);
 
         //int *arrayComb=alocarArrayInt(linhas);
@@ -69,11 +70,51 @@ int main () {
         //ordenarTudo (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas);
         //maosCrescente (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas, arrayTamanhos);
         
+=======
+        int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
 
+        int *arrayComb=alocarArrayInt(NumJogAnteriores);
+    
+        wchar_t *jogadasAnteriores=alocarArrayWchar (arrayTamanhos, arrayComb, NumJogAnteriores);
+        
+        wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
+        int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
 
+        int e2=0;
+        while (e2<NumJogAnteriores)   
+        {
+            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, e2, arrayTamanhos);
+            e2++;
+        }
+        wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
+        int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
+
+        //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
+        //bool comIguais= compararCombinacoes(arrayComb);
+
+        // if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
+
+        for (int i=0; jogadasAnteriores[i]!='\0'; i++) {
+            wprintf(L"%ls", jogadasAnteriores[i]);
+            wprintf(L"\n");
+        }
+>>>>>>> Stashed changes
+
+        // else {
+            // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
+            // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
+            ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
+
+<<<<<<< Updated upstream
         //libertarTodas (arrayTamanhos,arrayComb,todasMaos);
         free(mao);
+=======
+>>>>>>> Stashed changes
 
+        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
+        free(jogadaJogador);
+        free(maoJogador);
     }
     
     // Liberta o espaço na memória alocada para o baralho
