@@ -33,44 +33,6 @@ int main () {
         
         limpar();
 
-<<<<<<< Updated upstream
-        //int *arrayTamanhos=alocarArrayInt(linhas);
-
-        //int *arrayComb=alocarArrayInt(linhas);
-
-        // wchar_t *todasMaos=alocarArrayWchar (arrayTamanhos, arrayComb, linhas);
-        
-        wchar_t *mao=alocarMao();
-        lerMao(mao);
-
-        int e2=linhas;
-        while (e2>0)   
-        {
-            //vem uma mao nova para ser usada
-            wchar_t *jogada=alocarMao();
-
-
-            lerMao(jogada);
-            e2--;
-
-            //limpa a mao para dps receber a nova
-            free(jogada);
-        }
-        wchar_t *jogada=alocarMao();
-        //recebe a jogada do jogador   
-        lerMao(jogada);
-        wprintf(L"Mao - %ls", mao);
-        wprintf(L"Jogada - %ls\n", jogada);
-        //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
-        //bool comIguais= compararCombinacoes(arrayComb);
-
-        //if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
-
-        
-        //ordenarTudo (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas);
-        //maosCrescente (baralhoDef, todasMaos, arrayTamanhos[e2-1], linhas, arrayTamanhos);
-        
-=======
         int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
 
         int *arrayComb=alocarArrayInt(NumJogAnteriores);
@@ -79,7 +41,9 @@ int main () {
         
         wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-
+        
+        wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+        
         int e2=0;
         while (e2<NumJogAnteriores)   
         {
@@ -94,11 +58,17 @@ int main () {
 
         // if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
 
-        for (int i=0; jogadasAnteriores[i]!='\0'; i++) {
-            wprintf(L"%ls", jogadasAnteriores[i]);
-            wprintf(L"\n");
+        //Este print todo é teste
+        if (e2==0) wprintf(L"Não tem Jogadas Anteriores\n");
+        else {
+            wprintf(L"Jogadas Anteriores:\n");
+            for (int i = 0; i < e2; i++) {
+                wprintf(L"%ls\n", &jogadasAnteriores[i * 32]);
+            }
         }
->>>>>>> Stashed changes
+
+        wprintf(L"Jogada do Jogador:\n%ls", jogadaJogador);
+        //para cima é teste
 
         // else {
             // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
@@ -106,11 +76,6 @@ int main () {
             ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
         
 
-<<<<<<< Updated upstream
-        //libertarTodas (arrayTamanhos,arrayComb,todasMaos);
-        free(mao);
-=======
->>>>>>> Stashed changes
 
         libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
         free(jogadaJogador);

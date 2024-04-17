@@ -15,15 +15,10 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-<<<<<<< Updated upstream
-// ler mao antiga int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos);
-int lerMao(wchar_t *mao);
-=======
 int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posMaos, int *arrayTamanhos);
 
 //Função que lê uma mão
 int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *arrayTamanhos);
->>>>>>> Stashed changes
 
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);
@@ -43,13 +38,8 @@ carta* alocarArrayCartas ();
 //Função que dá scan a um int
 int scanInt ();
 
-<<<<<<< Updated upstream
-//Função que aloca apenas uma mão
-wchar_t* alocarMao ();
-=======
 //Função que aloca memoria para a mao
 wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
->>>>>>> Stashed changes
 
 // COMBINACOES.C
 

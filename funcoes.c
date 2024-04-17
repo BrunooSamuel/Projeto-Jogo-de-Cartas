@@ -22,34 +22,23 @@ void imprimir(int t, carta baralho[]) {
 
 
 
-<<<<<<< Updated upstream
-int lerMao(wchar_t *mao) {
-=======
 int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posMaos, int *arrayTamanhos) {
 
-
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
-    wchar_t mao[32]={0};
->>>>>>> Stashed changes
+    wchar_t maoTemp[32]={0};
 
     //funcao que coloca as cartas recebidas no array mao
-    if (fgetws(mao, 32, stdin)==NULL) {
+    if (fgetws(maoTemp, 32, stdin)==NULL) {
         wprintf(L"O Scan da mão é inválido.\n");
-        //free(arrayTamanhos);
-        //free(arrayComb);
-        //free(baralho);
-        free(mao);
+        free(arrayTamanhos);
+        free(arrayComb);
+        free(baralho);
         return -1;
     }
 
-<<<<<<< Updated upstream
-    //int tamanho = wcslen(mao)-1;
-    //copia o mao para o array todasMaos
-    //wcsncpy(&todasMaos[posMaos * 32], mao, tamanho);
-=======
-    int tamanho = wcslen(mao)-1;
+    int tamanho = wcslen(maoTemp)-1;
     //copia o mao para o array jogadasAnteriores
-    wcsncpy(&jogadasAnteriores[posMaos * 32], mao, tamanho);
+    wcsncpy(&jogadasAnteriores[posMaos * 32], maoTemp, tamanho);
 
     /*
     int pos;
@@ -62,19 +51,15 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posM
     wprintf(L"\n");
     */
 
-    verificarCombinacao (mao, tamanho, baralho, arrayComb);
+    verificarCombinacao (maoTemp, tamanho, baralho, arrayComb);
     
     return tamanho;
 }
 
 int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *arrayTamanhos) {
 
-
-    //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
-    wchar_t mao[32]={0};
-
     //funcao que coloca as cartas recebidas no array mao
-    if (fgetws(mao, 32, stdin)==NULL) {
+    if (fgetws(maoJogador, 32, stdin)==NULL) {
         wprintf(L"O Scan da mão é inválido.\n");
         free(arrayTamanhos);
         free(arrayComb);
@@ -83,10 +68,7 @@ int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jog
         return -1;
     }
 
-    int tamanho = wcslen(mao)-1;
-    //copia o mao para o array jogadasAnteriores
-    wcsncpy(jogadasAnteriores, mao, tamanho);
->>>>>>> Stashed changes
+    int tamanho = wcslen(maoJogador)-1;
 
     /*
     int pos;
@@ -100,7 +82,7 @@ int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jog
     */
 
     //verificarCombinacao (mao, tamanho, baralho, arrayComb);
-    return 0;
+    return tamanho;
 }
 
 
@@ -176,18 +158,11 @@ wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
     else return array; 
 }
 
-<<<<<<< Updated upstream
-wchar_t* alocarMao () {
-    wchar_t *array=malloc(sizeof(wchar_t)*32);
-    if (array == NULL) {
-        free (array);
-=======
 wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas) {
     wchar_t *array=malloc(sizeof(wchar_t)*32);
     if (array == NULL) {
         free(array);
         libertarTodas (arrayTamanhos,arrayComb,jogadas);
->>>>>>> Stashed changes
         return NULL;
     }
     else return array; 

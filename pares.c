@@ -66,6 +66,7 @@ void ordenarMao (carta baralho[], wchar_t *mao, int comprimento) {
     ordenaPares(comprimento, numeros, naipes);
     parParaCarta (baralho, mao, comprimento, numeros, naipes);
     int i;
+    wprintf(L"Mao do Jogador Ordenada\n");
     for (i = 0; i < comprimento-1; i++) 
     {
         wprintf(L"%lc ", mao[i]);
