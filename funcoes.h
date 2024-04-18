@@ -72,6 +72,9 @@ bool compararTamanhos(int array[], int total);
 //Funcao para verificar se todas as linhas são a mesma combinacao
 bool compararCombinacoes(int array[]);
 
+//Função que verifica se a jogada é válida
+bool verificarJogada(carta baralho[], wchar_t *maoJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
+
 
 // PARES.C
 

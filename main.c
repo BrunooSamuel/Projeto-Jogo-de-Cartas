@@ -53,6 +53,8 @@ int main () {
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
 
+        bool valida = verificarJogada(baralhoDef, maoJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+
         //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
         //bool comIguais= compararCombinacoes(arrayComb);
 
