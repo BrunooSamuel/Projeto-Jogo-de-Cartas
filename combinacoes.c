@@ -181,6 +181,6 @@ void verificarCombinacao (wchar_t mao[], int quantidade, carta baralho[], int *a
     if (sequencia==false&&conjunto==false&&duplasequencia==false)
     {
         arrayComb[3]++;
-        wprintf(L"Nada!\n");
+        //wprintf(L"Nada!\n");
     }
 }

@@ -15,13 +15,16 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-int lerMao(carta baralho[], int *arrayComb, wchar_t *todasMaos, int posMaos, int *arrayTamanhos);
+int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posMaos, int *arrayTamanhos);
+
+//Função que lê uma mão
+int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *arrayTamanhos);
 
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);
 
 //Função que dá free
-void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *todasMaos);
+void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores);
 
 //Função que aloca memoria para arrays de Int
 int* alocarArrayInt (int linhas);
@@ -34,6 +37,9 @@ carta* alocarArrayCartas ();
 
 //Função que dá scan a um int
 int scanInt ();
+
+//Função que aloca memoria para a mao
+wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
 
 // COMBINACOES.C
 
@@ -70,10 +76,10 @@ bool compararCombinacoes(int array[]);
 // PARES.C
 
 //Função que ordena todas as maos
-void ordenarTudo (carta baralho[], wchar_t *todasMaos, int comprimento, int linhas);
+void ordenarTudo (carta baralho[], wchar_t *jogadasAnteriores, int comprimento, int linhas);
 
 //Função que ordena uma mao
-void ordenarMao (carta baralho[], wchar_t *todasMaos, int comprimento);
+void ordenarMao (carta baralho[], wchar_t *jogadasAnteriores, int comprimento);
 
 //Função que transforma as cartas que recebe em pares numero naipe
 void arranjaPar (carta baralho[], wchar_t mao[], int comprimento, int *numeros, int *naipes);
@@ -88,13 +94,13 @@ void parParaCarta (carta baralho[], wchar_t *mao, int comprimento, int *numeros,
 void trocarPosicoes(int *x, int *y);
 
 //Função que coloca as maos por ordem crescente
-void maosCrescente (carta baralho[], wchar_t *todasMaos,int comprimento, int linhas, int array[]);
+void maosCrescente (carta baralho[], wchar_t *jogadasAnteriores,int comprimento, int linhas, int array[]);
 
 //Função que transforma a ultima carta num valor (numero*4+(naipe-4))
 void ultimoValor(carta baralho[], wchar_t *mao,int tamanho, int *valores, int posicao);
 
 //Funçao final que imprime as maos
-void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *todasMaos);
+void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnteriores);
 
 // Esta linha fecha a diretiva #ifndef
 #endif
