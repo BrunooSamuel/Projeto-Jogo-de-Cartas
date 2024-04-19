@@ -74,8 +74,15 @@ int main () {
             // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
             // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
             ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
-        
 
+        if(/*verificar jogada valida true*/) {
+            void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador);
+            ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
+            wprintf(L"Nova Mão do Jogador: %ls\n", maoJogador);
+        }
+        else {
+            wprintf(L"%ls\n", maoJogador); //imprimir a mao inicial
+        }
 
         libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
         free(jogadaJogador);

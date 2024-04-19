@@ -41,6 +41,10 @@ int scanInt ();
 //Função que aloca memoria para a mao
 wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
 
+//função para verificar se as cartas da jogada atual estão na mão do jogador
+void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador);
+
+
 // COMBINACOES.C
 
 //Funcao para ler que combinação é
