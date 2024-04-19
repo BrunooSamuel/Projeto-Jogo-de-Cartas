@@ -42,8 +42,10 @@ int scanInt ();
 wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
 
 //função para verificar se as cartas da jogada atual estão na mão do jogador
-void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador);
+void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho);
 
+//Funcão usada para imprimir apenas uma mão
+void imprimirUmaMao (wchar_t *mao,int comprimento);
 
 // COMBINACOES.C
 
@@ -76,6 +78,8 @@ bool compararTamanhos(int array[], int total);
 //Funcao para verificar se todas as linhas são a mesma combinacao
 bool compararCombinacoes(int array[]);
 
+//Função que verifica se a jogada é válida
+bool verificarJogada(carta baralho[], wchar_t *maoJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
 
 // PARES.C
 

@@ -42,7 +42,7 @@ int main () {
         wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
         
-        wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+        // wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
         
         int e2=0;
         while (e2<NumJogAnteriores)   
@@ -53,12 +53,15 @@ int main () {
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
 
+        bool valida = verificarJogada(baralhoDef, maoJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+
         //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
         //bool comIguais= compararCombinacoes(arrayComb);
 
         // if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
 
-        //Este print todo é teste
+        //Este print todo é teste 
+        /*
         if (e2==0) wprintf(L"Não tem Jogadas Anteriores\n");
         else {
             wprintf(L"Jogadas Anteriores:\n");
@@ -68,20 +71,21 @@ int main () {
         }
 
         wprintf(L"Jogada do Jogador:\n%ls", jogadaJogador);
-        //para cima é teste
+        */
 
         // else {
             // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
             // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
-            ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        //para ser comparado com o tamanho original
 
-        if(/*verificar jogada valida true*/) {
-            void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador);
+        if(valida) {
+            verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
             ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-            wprintf(L"Nova Mão do Jogador: %ls\n", maoJogador);
+            imprimirUmaMao (maoJogador, tamMaoJogador);
         }
         else {
-            wprintf(L"%ls\n", maoJogador); //imprimir a mao inicial
+            imprimirUmaMao (maoJogador, tamMaoJogador);
         }
 
         libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);

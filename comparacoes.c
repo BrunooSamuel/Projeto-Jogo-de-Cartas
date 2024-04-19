@@ -59,3 +59,36 @@ bool compararCombinacoes(int array[]) {
     return r;
 }
 
+bool verificarJogada(carta baralho[], wchar_t *maoJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte)
+{  
+    int comb[4] = {0};
+    if(numAnte == 0)
+    {
+        verificarCombinacao(maoJogador, tamJogadaJogador, baralho, comb);
+        return(comb[3] == 0);
+    }
+    else
+    {   
+        int i;
+        int passosEncontrados = 0;
+        for(i = numAnte - 1; wcscmp(&jogadasAnte[i], L"PASSO") == 0; i--) passosEncontrados++;
+        if(passosEncontrados == 3)
+        {
+            verificarCombinacao(maoJogador, tamJogadaJogador, baralho, comb);
+            return(comb[3] == 0);
+        }
+        else // caso nao tenha 3 passos
+        {
+            if(arrayTamanhos[i] != tamJogadaJogador) return false;
+            verificarCombinacao(maoJogador, tamJogadaJogador, baralho, comb);
+            verificarCombinacao(&jogadasAnte[i], tamJogadaJogador, baralho, comb);
+            if(comb[3] != 0) return false;
+            for(i = 0; i < 3; i++)
+            {
+                if(comb[i] == 2) return true;
+                if(comb[i] == 1) return false;
+            }
+        }
+    }
+    return false;
+}

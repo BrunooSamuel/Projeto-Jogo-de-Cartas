@@ -186,25 +186,40 @@ int scanInt () {
 }
 
 // Função para verificar e remover cartas da mão do jogador
-void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador) {
+void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho) {
     while (*jogadaJogador != L'\0') {
+        bool encontrou=false;
         wchar_t *posicao = NULL; // Buscar a carta na mão do jogador
-        for (wchar_t *ptr = maoJogador; *ptr != L'\0'; ++ptr) {
-            if (*ptr == *jogadaJogador) {
+
+        for (wchar_t *ptr = maoJogador; *ptr != L'\0' && !encontrou; ++ptr) 
+        {
+            if (*ptr == *jogadaJogador) 
+            {
                 posicao = ptr;
-                break;
+                encontrou=true;
             }
         }
-
         // Se a carta estiver na mão, removê-la
-        if (posicao != NULL) {
-            while (*posicao != L'\0') {
+        if (encontrou) 
+        {
+            while (*posicao != L'\0') 
+            {
                 *posicao = *(posicao + 1);
                 posicao++;
             }
+            (*tamanho)--;
         } 
-        
         // Avançar para a próxima carta da jogada
         jogadaJogador++;
     }
+}
+
+
+void imprimirUmaMao (wchar_t *mao,int comprimento) {
+    int i;
+    for (i = 0; i < comprimento; i++) 
+    {
+        wprintf(L"%lc ", mao[i]);
+    }
+    wprintf(L"%lc\n", mao[i]);
 }
