@@ -35,6 +35,9 @@ carta* alocarArrayCartas ();
 //Função que dá scan a um int
 int scanInt ();
 
+//função para verificar se as cartas da jogada atual estão na mão do jogador
+void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador);
+
 // COMBINACOES.C
 
 //Funcao para ler que combinação é
