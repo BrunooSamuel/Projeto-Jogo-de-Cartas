@@ -51,7 +51,7 @@ int main () {
         }
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-        bool valida = verificarJogada(baralhoDef, maoJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        bool valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
         
         //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
         //bool comIguais= compararCombinacoes(arrayComb);
@@ -81,7 +81,6 @@ int main () {
         
         if(valida) {
             verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
-            ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
             //wprintf(L"numero do tamanho depois:%d\n", tamMaoJogador);
             imprimirUmaMao (maoJogador);
         }
