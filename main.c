@@ -41,7 +41,6 @@ int main () {
         
         wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-        
         // wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
         
         int e2=0;
@@ -52,9 +51,8 @@ int main () {
         }
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-
         bool valida = verificarJogada(baralhoDef, maoJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
-
+        
         //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
         //bool comIguais= compararCombinacoes(arrayComb);
 
@@ -77,15 +75,20 @@ int main () {
             // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
             // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
         ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
         //para ser comparado com o tamanho original
-
+        //wprintf(L"numero do tamanho antes:%d\n", tamMaoJogador);
+        
         if(valida) {
             verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
             ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-            imprimirUmaMao (maoJogador, tamMaoJogador);
+            //wprintf(L"numero do tamanho depois:%d\n", tamMaoJogador);
+            imprimirUmaMao (maoJogador);
         }
         else {
-            imprimirUmaMao (maoJogador, tamMaoJogador);
+            //wprintf(L"numero do tamanho depois:%d\n", tamMaoJogador);
+            tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
+            imprimirUmaMao (maoJogador);
         }
 
         libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);

@@ -79,7 +79,7 @@ bool verificarJogada(carta baralho[], wchar_t *maoJogador, wchar_t *jogadasAnte,
         }
         else // caso nao tenha 3 passos
         {
-            if(arrayTamanhos[i] != tamJogadaJogador) return false;
+            if(arrayTamanhos[i] != tamJogadaJogador) {wprintf(L"%d e %d\n", arrayTamanhos[i], tamJogadaJogador); return false;}
             verificarCombinacao(maoJogador, tamJogadaJogador, baralho, comb);
             verificarCombinacao(&jogadasAnte[i], tamJogadaJogador, baralho, comb);
             if(comb[3] != 0) return false;

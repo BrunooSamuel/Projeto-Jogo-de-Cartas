@@ -67,8 +67,14 @@ int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jog
         free (jogadasAnteriores);
         return -1;
     }
+    
+    int comprimento = 0;
 
-    int tamanho = wcslen(maoJogador)-1;
+    // Percorre a sequência até encontrar '\n' ou '\0'
+    while (maoJogador[comprimento] != L'\n' && maoJogador[comprimento] != L'\0') {
+        comprimento++;
+    }
+    return comprimento;
 
     /*
     int pos;
@@ -82,7 +88,6 @@ int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jog
     */
 
     //verificarCombinacao (mao, tamanho, baralho, arrayComb);
-    return tamanho;
 }
 
 
@@ -187,7 +192,7 @@ int scanInt () {
 
 // Função para verificar e remover cartas da mão do jogador
 void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho) {
-    while (*jogadaJogador != L'\0') {
+    while (*jogadaJogador != L'\0' && *tamanho>0) {
         bool encontrou=false;
         wchar_t *posicao = NULL; // Buscar a carta na mão do jogador
 
@@ -215,11 +220,20 @@ void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanh
 }
 
 
-void imprimirUmaMao (wchar_t *mao,int comprimento) {
-    int i;
-    for (i = 0; i < comprimento; i++) 
+void imprimirUmaMao (wchar_t *mao) {
+    int comp = 0;
+    while (mao[comp] != L'\n' && mao[comp] != L'\0') 
     {
-        wprintf(L"%lc ", mao[i]);
+        comp++;
     }
-    wprintf(L"%lc\n", mao[i]);
+    if (comp==0) wprintf(L"\n");
+    else 
+    {
+        int i;
+        for (i = 0; i < (comp-1); i++) 
+        {
+            wprintf(L"%lc ", mao[i]);
+        }
+        wprintf(L"%lc\n", mao[i]);
+    }
 }

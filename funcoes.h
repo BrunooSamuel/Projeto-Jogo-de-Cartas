@@ -45,7 +45,8 @@ wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
 void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho);
 
 //Funcão usada para imprimir apenas uma mão
-void imprimirUmaMao (wchar_t *mao,int comprimento);
+void imprimirUmaMao (wchar_t *mao);
+
 
 // COMBINACOES.C
 
