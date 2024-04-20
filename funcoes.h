@@ -92,9 +92,10 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
 //Funçao que da o valor da maior carta
 int maiorCartaValor(carta baralho[], wchar_t *mao,int tamanho);
 
-
 //Caso tenha reis
-bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
+bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int tamJogadaJogador, int numReis);
+
+
 // PARES.C
 
 //Função que ordena todas as maos

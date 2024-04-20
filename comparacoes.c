@@ -116,49 +116,25 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
     return false;
 }
 
-bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte)
-
-{  
+bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int tamJogadaJogador, int numReis) {
     int comb[4] = {0};
-    if(numAnte == 0)
-    {
-
+    
+    if (numReis==1) {
         verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
-
-        return(comb[3] == 0);
+        if (tamJogadaJogador==4&&comb[0]==1) return true;
+        else if (tamJogadaJogador==6&&comb[2]==1) return true;
+        else return false;
     }
-    else
-    {   
-        int i;
-        int passosEncontrados = 0;
-
-        for(i = numAnte - 1; wcscmp(&jogadasAnte[i], L"PASSO") == 0; i--) passosEncontrados++;
-        if(passosEncontrados == 3)
-        {
-            verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
-
-            return(comb[3] == 0);
-        }
-        else // caso nao tenha 3 passos
-        {
-            if(arrayTamanhos[i] != tamJogadaJogador) return false;
-
-            verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
-            int valorMao=maiorCartaValor(baralho, jogadaJogador,tamJogadaJogador);
-
-            verificarCombinacao(&jogadasAnte[i], tamJogadaJogador, baralho, comb);
-            int valorAnte=maiorCartaValor(baralho, &jogadasAnte[i],tamJogadaJogador);
-
-            if (valorMao<=valorAnte) return false;
-
-
-            if(comb[3] != 0) return false;
-            for(i = 0; i < 3; i++)
-            {
-                if(comb[i] == 2) return true;
-                if(comb[i] == 1) return false;
-            }
-        }
+    else if (numReis==2) {
+        verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
+        if (tamJogadaJogador==8&&comb[2]==1) return true;
+        else return false;
     }
+    else if(numReis==3) {
+        verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
+        if (tamJogadaJogador==10&&comb[2]==1) return true;
+        else return false;
+    }
+
     return false;
 }
