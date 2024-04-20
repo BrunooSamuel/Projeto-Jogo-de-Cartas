@@ -41,8 +41,7 @@ int main () {
         
         wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-        
-        wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+        // wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
         
         int e2=0;
         while (e2<NumJogAnteriores)   
@@ -50,35 +49,24 @@ int main () {
             arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, e2, arrayTamanhos);
             e2++;
         }
+        
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-
-        bool valida = verificarJogada(baralhoDef, maoJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
-
-        //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
-        //bool comIguais= compararCombinacoes(arrayComb);
-
-        // if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
-
-        //Este print todo é teste
-        if (e2==0) wprintf(L"Não tem Jogadas Anteriores\n");
-        else {
-            wprintf(L"Jogadas Anteriores:\n");
-            for (int i = 0; i < e2; i++) {
-                wprintf(L"%ls\n", &jogadasAnteriores[i * 32]);
-            }
-        }
-
-        wprintf(L"Jogada do Jogador:\n%ls", jogadaJogador);
-        //para cima é teste
-
-        // else {
-            // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
-            // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
-            ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
         
+        int numReis=0;
+        if (e2!=0) numReis = contadorReis (baralhoDef, jogadasAnteriores, (e2-1), arrayTamanhos[e2-1]);
 
+        bool valida=false;
+        if (e2!=0 && numReis>0) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        else valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        
+        ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
+        if(valida) verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
+        else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
 
+        imprimirUmaMao (maoJogador);
+        
         libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
         free(jogadaJogador);
         free(maoJogador);
