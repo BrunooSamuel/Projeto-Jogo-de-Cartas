@@ -47,6 +47,11 @@ void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanh
 //Funcão usada para imprimir apenas uma mão
 void imprimirUmaMao (wchar_t *mao);
 
+//FUnção que conta os reis
+int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp);
+
+//Auxiliar a função a cima
+int contadorAuxiliar (carta baralho[], wchar_t *jogada, int comp);
 
 // COMBINACOES.C
 
@@ -71,6 +76,7 @@ void lerSequencia (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordena
 //Funcao para Dupla Sequencias
 void lerDuplaSequencia (wchar_t mao[], int quantidade, carta baralho[],wchar_t ordenadoNum[]);
 
+
 // COMPARACOES.C
 
 //Funcao para verificar se todas as linhas têm o mesmo tamanho
@@ -84,6 +90,9 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
 
 //Funçao que da o valor da maior carta
 int maiorCartaValor(carta baralho[], wchar_t *mao,int tamanho);
+
+//Caso tenha reis
+bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
 // PARES.C
 
 //Função que ordena todas as maos

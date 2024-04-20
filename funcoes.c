@@ -237,3 +237,27 @@ void imprimirUmaMao (wchar_t *mao) {
         wprintf(L"%lc\n", mao[i]);
     }
 }
+
+int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp) {
+    int passos=0;
+    int pos;
+    for(pos = ultimo; (wcscmp(&jogadas[pos], L"PASSO") == 0) && passos<4; pos--) passos++;
+    if (passos==3) return 0;
+    else return contadorAuxiliar(baralho, &jogadas[pos*32], comp);
+
+}
+
+int contadorAuxiliar (carta baralho[], wchar_t *aux, int comp) {
+    int r=0;
+    for (int i = 0; i < comp; i++) 
+    {
+        for (int k = 52; k < 56; k++) 
+        {
+            if (aux[i] == baralho[k].codigo) 
+            {
+            r++;  
+            }
+        }
+    }
+    return r;
+}
