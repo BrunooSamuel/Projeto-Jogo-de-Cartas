@@ -57,7 +57,7 @@ int main () {
         if (e2!=0) numReis = contadorReis (baralhoDef, jogadasAnteriores, (e2-1), arrayTamanhos[e2-1]);
 
         bool valida=false;
-        if (e2!=0 && numReis>0) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        if (e2!=0 && numReis>0 && numReis<4) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
         else valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
         
         ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
@@ -66,7 +66,7 @@ int main () {
         else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
 
         imprimirUmaMao (maoJogador);
-        
+
         libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
         free(jogadaJogador);
         free(maoJogador);
