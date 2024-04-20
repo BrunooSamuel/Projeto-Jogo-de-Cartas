@@ -86,10 +86,12 @@ bool compararTamanhos(int array[], int total);
 bool compararCombinacoes(int array[]);
 
 //Função que verifica se a jogada é válida
+
 bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
 
 //Funçao que da o valor da maior carta
 int maiorCartaValor(carta baralho[], wchar_t *mao,int tamanho);
+
 
 //Caso tenha reis
 bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
