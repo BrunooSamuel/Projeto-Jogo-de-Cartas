@@ -67,8 +67,14 @@ int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jog
         free (jogadasAnteriores);
         return -1;
     }
+    
+    int comprimento = 0;
 
-    int tamanho = wcslen(maoJogador)-1;
+    // Percorre a sequência até encontrar '\n' ou '\0'
+    while (maoJogador[comprimento] != L'\n' && maoJogador[comprimento] != L'\0') {
+        comprimento++;
+    }
+    return comprimento;
 
     /*
     int pos;
@@ -82,7 +88,6 @@ int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jog
     */
 
     //verificarCombinacao (mao, tamanho, baralho, arrayComb);
-    return tamanho;
 }
 
 
@@ -183,4 +188,76 @@ int scanInt () {
         return 1;
     }
     else return numero;
+}
+
+// Função para verificar e remover cartas da mão do jogador
+void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho) {
+    while (*jogadaJogador != L'\0' && *tamanho>0) {
+        bool encontrou=false;
+        wchar_t *posicao = NULL; // Buscar a carta na mão do jogador
+
+        for (wchar_t *ptr = maoJogador; *ptr != L'\0' && !encontrou; ++ptr) 
+        {
+            if (*ptr == *jogadaJogador) 
+            {
+                posicao = ptr;
+                encontrou=true;
+            }
+        }
+        // Se a carta estiver na mão, removê-la
+        if (encontrou) 
+        {
+            while (*posicao != L'\0') 
+            {
+                *posicao = *(posicao + 1);
+                posicao++;
+            }
+            (*tamanho)--;
+        } 
+        // Avançar para a próxima carta da jogada
+        jogadaJogador++;
+    }
+}
+
+
+void imprimirUmaMao (wchar_t *mao) {
+    int comp = 0;
+    while (mao[comp] != L'\n' && mao[comp] != L'\0') 
+    {
+        comp++;
+    }
+    if (comp==0) wprintf(L"\n");
+    else 
+    {
+        int i;
+        for (i = 0; i < (comp-1); i++) 
+        {
+            wprintf(L"%lc ", mao[i]);
+        }
+        wprintf(L"%lc\n", mao[i]);
+    }
+}
+
+int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp) {
+    int passos=0;
+    int pos;
+    for(pos = ultimo; (wcscmp(&jogadas[pos], L"PASSO") == 0) && passos<4; pos--) passos++;
+    if (passos==3) return 0;
+    else return contadorAuxiliar(baralho, &jogadas[pos*32], comp);
+
+}
+
+int contadorAuxiliar (carta baralho[], wchar_t *aux, int comp) {
+    int r=0;
+    for (int i = 0; i < comp; i++) 
+    {
+        for (int k = 52; k < 56; k++) 
+        {
+            if (aux[i] == baralho[k].codigo) 
+            {
+            r++;  
+            }
+        }
+    }
+    return r;
 }

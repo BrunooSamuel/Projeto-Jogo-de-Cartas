@@ -89,6 +89,7 @@ void lerDuplaSequencia (wchar_t mao[], int quantidade, carta baralho[], wchar_t 
 }
 
 void verificaConjunto(int quantidade, int maoNum[], bool *combinacao) {
+    
     float soma=0;
     for (int i = 0; i < quantidade && !(*combinacao); i++)
     {
