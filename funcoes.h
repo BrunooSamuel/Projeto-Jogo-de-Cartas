@@ -15,7 +15,7 @@ void imprimir (int t, carta baralho[]);
 void limpar();
 
 //Funcao que lê a mao que recebe
-int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posMaos, int *arrayTamanhos);
+int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *posMaos, int *arrayTamanhos);
 
 //Função que lê uma mão
 int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *arrayTamanhos);
@@ -24,7 +24,7 @@ int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jog
 void ordena(int mao[], int tamanho);
 
 //Função que dá free
-void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores);
+void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores,wchar_t *maoJogador, wchar_t *jogadaJogador);
 
 //Função que aloca memoria para arrays de Int
 int* alocarArrayInt (int linhas);
@@ -45,10 +45,10 @@ wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
 void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho);
 
 //Funcão usada para imprimir apenas uma mão
-void imprimirUmaMao (wchar_t *mao);
+void imprimirUmaMao (wchar_t *mao, int numTestes, int esteTeste);
 
 //FUnção que conta os reis
-int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp);
+int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo);
 
 //Auxiliar a função a cima
 int contadorAuxiliar (carta baralho[], wchar_t *jogada, int comp);
@@ -92,9 +92,10 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
 //Funçao que da o valor da maior carta
 int maiorCartaValor(carta baralho[], wchar_t *mao,int tamanho);
 
-
 //Caso tenha reis
-bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
+bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int numReis, int tamJogadaJogador);
+
+
 // PARES.C
 
 //Função que ordena todas as maos

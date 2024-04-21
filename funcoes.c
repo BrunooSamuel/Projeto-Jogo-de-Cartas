@@ -22,7 +22,7 @@ void imprimir(int t, carta baralho[]) {
 
 
 
-int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posMaos, int *arrayTamanhos) {
+int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *posMaos, int *arrayTamanhos) {
 
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
     wchar_t maoTemp[32]={0};
@@ -36,9 +36,15 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posM
         return -1;
     }
 
-    int tamanho = wcslen(maoTemp)-1;
+    int tamanho = 0;
+
+    // Percorre a sequência até encontrar '\n' ou '\0'
+    while (maoTemp[tamanho] != L'\n' && maoTemp[tamanho] != L'\0') {
+        tamanho++;
+    }
+
     //copia o mao para o array jogadasAnteriores
-    wcsncpy(&jogadasAnteriores[posMaos * 32], maoTemp, tamanho);
+    wcsncpy(&jogadasAnteriores[*posMaos * 32], maoTemp, tamanho);
 
     /*
     int pos;
@@ -50,6 +56,7 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int posM
     }
     wprintf(L"\n");
     */
+    (*posMaos)++;
 
     verificarCombinacao (maoTemp, tamanho, baralho, arrayComb);
     
@@ -136,10 +143,12 @@ void ordena(int mao[], int tamanho) {
 }   
 
 
-void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores) {
+void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores,wchar_t *maoJogador, wchar_t *jogadaJogador) {
     free(arrayTamanhos);
     free(arrayComb);
     free(jogadasAnteriores);
+    free(maoJogador);
+    free(jogadaJogador);
 }
 
 
@@ -157,7 +166,9 @@ int* alocarArrayInt (int linhas) {
 wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
     wchar_t *array=malloc(sizeof(wchar_t)*32*linhas); //array para colocar todas as maos
     if (array == NULL) {
-        libertarTodas (arrayTamanhos,arrayComb,array);
+        free(array);
+        free(arrayTamanhos);
+        free(arrayComb);
         return NULL;
     }
     else return array; 
@@ -167,7 +178,9 @@ wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas) {
     wchar_t *array=malloc(sizeof(wchar_t)*32);
     if (array == NULL) {
         free(array);
-        libertarTodas (arrayTamanhos,arrayComb,jogadas);
+        free(arrayTamanhos);
+        free(arrayComb);
+        free(jogadas);
         return NULL;
     }
     else return array; 
@@ -220,7 +233,7 @@ void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanh
 }
 
 
-void imprimirUmaMao (wchar_t *mao) {
+void imprimirUmaMao (wchar_t *mao, int numTestes, int esteTeste) {
     int comp = 0;
     while (mao[comp] != L'\n' && mao[comp] != L'\0') 
     {
@@ -234,26 +247,38 @@ void imprimirUmaMao (wchar_t *mao) {
         {
             wprintf(L"%lc ", mao[i]);
         }
-        wprintf(L"%lc\n", mao[i]);
+        wprintf(L"%lc", mao[i]);
+        if (numTestes!=esteTeste) wprintf(L"\n");
     }
 }
 
-int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp) {
+int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo) {
     int passos=0;
     int pos;
-    for(pos = ultimo; (wcscmp(&jogadas[pos], L"PASSO") == 0) && passos<4; pos--) passos++;
+
+    for(pos = ultimo; pos > (ultimo-3) && passos < 3; pos--) {
+        //wprintf(L"Jogada atual: %ls\n", &jogadas[pos * 32]);
+        if (wcscmp(&jogadas[pos * 32], L"PASSO") == 0) {
+            passos++;
+        }
+    }
+    pos++;
+    int comp=wcslen(&jogadas[pos * 32]);
+    //wprintf(L"Deu %d passos na funcao contadorReis\n", passos);
     if (passos==3) return 0;
     else return contadorAuxiliar(baralho, &jogadas[pos*32], comp);
 
 }
 
-int contadorAuxiliar (carta baralho[], wchar_t *aux, int comp) {
+int contadorAuxiliar (carta baralho[], wchar_t *jogadas, int comp) {
+    //wprintf(L"O comp é %d\n", comp);
     int r=0;
     for (int i = 0; i < comp; i++) 
     {
         for (int k = 52; k < 56; k++) 
         {
-            if (aux[i] == baralho[k].codigo) 
+            //wprintf(L"%lc e %lc\n", jogadas[i], baralho[k].codigo);
+            if (jogadas[i] == baralho[k].codigo) 
             {
             r++;  
             }
