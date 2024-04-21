@@ -1,34 +1,28 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
+SRCS = main.c combinacoes.c cartas.c funcoes.c comparacoes.c pares.c
+HDRS = funcoes.h cartas.h
+ZIP_DIR = ./
 
 all: jogoCartas
 
-jogoCartas: main.o combinacoes.o cartas.o funcoes.o comparacoes.o pares.o
-	$(CC) $(CFLAGS) -o jogoCartas main.o combinacoes.o cartas.o funcoes.o comparacoes.o pares.o
+jogoCartas: $(SRCS:.c=.o)
+	$(CC) $(CFLAGS) -o jogoCartas $^
 
-main.o: main.c funcoes.h cartas.h
-	$(CC) $(CFLAGS) -c main.c
-
-combinacoes.o: combinacoes.c funcoes.h cartas.h
-	$(CC) $(CFLAGS) -c combinacoes.c
-
-cartas.o: cartas.c funcoes.h cartas.h
-	$(CC) $(CFLAGS) -c cartas.c
-
-funcoes.o: funcoes.c funcoes.h cartas.h
-	$(CC) $(CFLAGS) -c funcoes.c
-
-comparacoes.o: comparacoes.c funcoes.h cartas.h
-	$(CC) $(CFLAGS) -c comparacoes.c
-
-pares.o: pares.c funcoes.h cartas.h
-	$(CC) $(CFLAGS) -c pares.c
+%.o: %.c $(HDRS)
+	$(CC) $(CFLAGS) -c $<
 
 run: jogoCartas
 	./jogoCartas
 
 clean:
 	rm -f jogoCartas *.o
+	rm -f $(ZIP_DIR)CC207_GUIAO3.zip
+	@echo "🧹 Limpeza concluída 🧹"
 
 debug:
 	gdb ./jogoCartas
+
+zip:
+	zip $(ZIP_DIR)CC207_GUIAO3.zip $(SRCS) $(HDRS) makefile
+	@echo "📦 ZIP criado com sucesso 📦"

@@ -41,54 +41,35 @@ int main () {
         
         wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-        
-        wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+        //wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
         
         int e2=0;
         while (e2<NumJogAnteriores)   
         {
-            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, e2, arrayTamanhos);
-            e2++;
+            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, &e2, arrayTamanhos);
         }
+        
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-
-        //bool tamIguais= compararTamanhos(arrayTamanhos,linhas);
-        //bool comIguais= compararCombinacoes(arrayComb);
-
-        // if (!tamIguais||!comIguais) wprintf(L"Combinações não iguais!\n");
-
-        //Este print todo é teste
-        if (e2==0) wprintf(L"Não tem Jogadas Anteriores\n");
-        else {
-            wprintf(L"Jogadas Anteriores:\n");
-            for (int i = 0; i < e2; i++) {
-                wprintf(L"%ls\n", &jogadasAnteriores[i * 32]);
-            }
-        }
-
-        wprintf(L"Jogada do Jogador:\n%ls", jogadaJogador);
-        //para cima é teste
-
-        // else {
-            // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
-            // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
-            ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
+        int numReis=0;
+        if (e2!=0) numReis = contadorReis (baralhoDef, jogadasAnteriores, (e2-1));
+        //wprintf(L"Numero de reis %d\n", numReis);
+        
+        bool valida=false;
+        if (numReis>0) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador);
+        else valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
         
         
-        if(/*verificar jogada valida true*/) {
-            void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador);
-            ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-            wprintf(L"Nova Mão do Jogador: %ls\n", maoJogador);
-        }
-        else {
-            wprintf(L"%ls\n", maoJogador); //imprimir a mao inicial
-        }
-
-
-        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
-        free(jogadaJogador);
-        free(maoJogador);
+        ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
+        if(valida) verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
+        else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
+        
+        
+        imprimirUmaMao (maoJogador, numtestes, e1);
+        
+        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
     }
     
     // Liberta o espaço na memória alocada para o baralho
@@ -96,8 +77,3 @@ int main () {
 
     return 0;
 }
-
-
-
-           
-
