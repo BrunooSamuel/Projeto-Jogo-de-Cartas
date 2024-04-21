@@ -46,8 +46,7 @@ int main () {
         int e2=0;
         while (e2<NumJogAnteriores)   
         {
-            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, e2, arrayTamanhos);
-            e2++;
+            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, &e2, arrayTamanhos);
         }
         
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
@@ -58,8 +57,8 @@ int main () {
         //wprintf(L"Numero de reis %d\n", numReis);
         
         bool valida=false;
-        valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
-        if (e2!=0 && numReis>0 && numReis<4) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        if (numReis>0) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador);
+        else valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
         
         
         ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
@@ -68,11 +67,9 @@ int main () {
         else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
         
         
-        imprimirUmaMao (maoJogador);
+        imprimirUmaMao (maoJogador, numtestes, e1);
         
-        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores);
-        free(jogadaJogador);
-        free(maoJogador);
+        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
     }
     
     // Liberta o espaço na memória alocada para o baralho
