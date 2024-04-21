@@ -1,4 +1,24 @@
 Teste 1
+Mao Inicial:
+🂶🃆🂸🃈🂹🃙🂪🃚🂼🃜🂭🂽🃝
+
+
+
+
+
+deu 5 passos
+Numero de reis 0
+Numero de passos 3
 🂶 🃆 🂼 🃜 🂭 🂽 🃝
 Teste 2
+Mao Inicial:
+🂶🃆🂸🃈🂹🃙🂪🃚🂼🃜🂭🂽
+
+
+
+
+
+deu 5 passos
+Numero de reis 0
+Numero de passos 3
 🂶 🃆 🂼 🃜 🂭 🂽

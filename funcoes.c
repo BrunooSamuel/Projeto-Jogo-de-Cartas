@@ -241,7 +241,8 @@ void imprimirUmaMao (wchar_t *mao) {
 int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp) {
     int passos=0;
     int pos;
-    for(pos = ultimo; (wcscmp(&jogadas[pos], L"PASSO") == 0) && passos<4; pos--) passos++;
+    for(pos = ultimo; (wcscmp(&jogadas[pos], L"PASSO\n") != 0) && passos<3; pos--) {passos++;}
+    wprintf(L"deu %d passos\n", passos);
     if (passos==3) return 0;
     else return contadorAuxiliar(baralho, &jogadas[pos*32], comp);
 

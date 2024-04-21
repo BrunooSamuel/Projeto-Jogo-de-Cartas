@@ -41,7 +41,7 @@ int main () {
         
         wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-        // wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+        wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
         
         int e2=0;
         while (e2<NumJogAnteriores)   
@@ -55,6 +55,7 @@ int main () {
         
         int numReis=0;
         if (e2!=0) numReis = contadorReis (baralhoDef, jogadasAnteriores, (e2-1), arrayTamanhos[e2-1]);
+        wprintf(L"Numero de reis %d\n", numReis);
         
         bool valida=false;
         valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
