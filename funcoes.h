@@ -48,7 +48,7 @@ void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanh
 void imprimirUmaMao (wchar_t *mao);
 
 //FUnção que conta os reis
-int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp);
+int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo);
 
 //Auxiliar a função a cima
 int contadorAuxiliar (carta baralho[], wchar_t *jogada, int comp);

@@ -88,9 +88,13 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
     {   
         int i;
         int passosEncontrados = 0;
-        for(i = numAnte - 1; i > 0 && wcscmp(&jogadasAnte[i], L"PASSO\n") != 0 && passosEncontrados<3; i--) passosEncontrados++;
-        wprintf(L"Numero de passos %d\n", passosEncontrados);
-        if(passosEncontrados == 3)
+        for(i = numAnte - 1; i > (numAnte-4) && passosEncontrados < 3; i--) {
+        if (wcscmp(&jogadasAnte[i * 32], L"PASSO") == 0) {
+            passosEncontrados++;
+        }
+    }
+        //wprintf(L"Numero de passos %d\n", passosEncontrados);
+        if(passosEncontrados != 0)
         {
             verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
             return(comb[3] == 0);

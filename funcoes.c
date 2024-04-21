@@ -238,23 +238,33 @@ void imprimirUmaMao (wchar_t *mao) {
     }
 }
 
-int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo, int comp) {
+int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo) {
     int passos=0;
     int pos;
-    for(pos = ultimo; (wcscmp(&jogadas[pos], L"PASSO\n") != 0) && passos<3; pos--) {passos++;}
-    wprintf(L"deu %d passos\n", passos);
+
+    for(pos = ultimo; pos > (ultimo-3) && passos < 3; pos--) {
+        //wprintf(L"Jogada atual: %ls\n", &jogadas[pos * 32]);
+        if (wcscmp(&jogadas[pos * 32], L"PASSO") == 0) {
+            passos++;
+        }
+    }
+    pos++;
+    int comp=wcslen(&jogadas[pos * 32]);
+    //wprintf(L"Deu %d passos na funcao contadorReis\n", passos);
     if (passos==3) return 0;
     else return contadorAuxiliar(baralho, &jogadas[pos*32], comp);
 
 }
 
-int contadorAuxiliar (carta baralho[], wchar_t *aux, int comp) {
+int contadorAuxiliar (carta baralho[], wchar_t *jogadas, int comp) {
+    //wprintf(L"O comp é %d\n", comp);
     int r=0;
     for (int i = 0; i < comp; i++) 
     {
         for (int k = 52; k < 56; k++) 
         {
-            if (aux[i] == baralho[k].codigo) 
+            //wprintf(L"%lc e %lc\n", jogadas[i], baralho[k].codigo);
+            if (jogadas[i] == baralho[k].codigo) 
             {
             r++;  
             }
