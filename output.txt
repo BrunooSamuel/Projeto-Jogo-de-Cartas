@@ -1,4 +1,5 @@
 Teste 1
+<<<<<<< Updated upstream
 Mao Inicial:
 🂪🃛🃌
 Jogadas Anteriores:
@@ -166,3 +167,10 @@ Não tem Jogadas Anteriores
 Jogada do Jogador:
 🂥🂵Mao do Jogador Ordenada
 🂢 🃂 🃒 🂤 🂴 🃄 🃔 🂥 🂵 🃅 🃕 🂦 🂶 🃆 🃖
+=======
+Numero de passos 12
+🂶 🃆 🂼 🃜 🂭 🂽 🃝
+Teste 2
+Numero de passos 12
+🂶 🃆 🂼 🃜 🂭 🂽
+>>>>>>> Stashed changes

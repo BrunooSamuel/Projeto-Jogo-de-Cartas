@@ -41,15 +41,21 @@ int main () {
         
         wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
+<<<<<<< Updated upstream
         
         wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
         
+=======
+        // wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+
+>>>>>>> Stashed changes
         int e2=0;
         while (e2<NumJogAnteriores)   
         {
             arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, e2, arrayTamanhos);
             e2++;
         }
+<<<<<<< Updated upstream
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
 
@@ -74,6 +80,28 @@ int main () {
             // ordenarTudo (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas);
             // maosCrescente (baralhoDef, jogadasAnteriores, arrayTamanhos[e2-1], linhas, arrayTamanhos);
             ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+=======
+        
+
+        wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
+        int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
+        
+        int numReis=0;
+        if (e2!=0) numReis = contadorReis (baralhoDef, jogadasAnteriores, (e2-1), arrayTamanhos[e2-1]);
+        
+        bool valida=false;
+        valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        if (e2!=0 && numReis>0 && numReis<4) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        
+        
+        ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
+        if(valida) verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
+        else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
+        
+        
+        imprimirUmaMao (maoJogador);
+>>>>>>> Stashed changes
         
 
 
