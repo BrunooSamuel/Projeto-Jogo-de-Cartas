@@ -89,7 +89,9 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
         int i;
         int passosEncontrados = 0;
         for(i = numAnte - 1; i > 0 && wcscmp(&jogadasAnte[i], L"PASSO\n") != 0; i--) passosEncontrados++;
-        //wprintf(L"Numero de passos %d\n", passosEncontrados);
+
+        wprintf(L"Numero de passos %d\n", passosEncontrados);
+
         if(passosEncontrados != 0)
         {
             verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
@@ -121,7 +123,9 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
 bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte)
 
 {  
+
      int comb[4] = {0};
+
     if(numAnte == 0)
     {
 
@@ -164,3 +168,4 @@ bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, wchar_t *jo
     }
     return false;
 }
+
