@@ -53,12 +53,9 @@ int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo);
 //Auxiliar a função a cima
 int contadorAuxiliar (carta baralho[], wchar_t *jogada, int comp);
 
-<<<<<<< Updated upstream
-=======
 //Processa a parte de dentro do loop, para a main não ficar demasiado grande
 void processarCodigo(int esteTeste, carta *baralhoDef);
 
->>>>>>> Stashed changes
 // COMBINACOES.C
 
 //Funcao para ler que combinação é

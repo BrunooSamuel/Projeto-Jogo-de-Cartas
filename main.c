@@ -67,7 +67,7 @@ int main () {
         else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
         
         
-        imprimirUmaMao (maoJogador, numtestes, e1);
+        imprimirUmaMao (maoJogador);
         
         libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
     }
