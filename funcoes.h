@@ -51,7 +51,7 @@ void imprimirUmaMao (wchar_t *mao);
 int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo);
 
 //Auxiliar a função a cima
-int contadorAuxiliar (carta baralho[], wchar_t *jogada, int comp);
+int contadorAuxiliar (carta baralho[], wchar_t *jogada);
 
 //Processa a parte de dentro do loop, para a main não ficar demasiado grande
 void processarCodigo(int esteTeste, carta *baralhoDef);
