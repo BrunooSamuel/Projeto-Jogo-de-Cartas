@@ -45,13 +45,16 @@ wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
 void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho);
 
 //Funcão usada para imprimir apenas uma mão
-void imprimirUmaMao (wchar_t *mao, int numTestes, int esteTeste);
+void imprimirUmaMao (wchar_t *mao);
 
 //FUnção que conta os reis
 int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo);
 
 //Auxiliar a função a cima
 int contadorAuxiliar (carta baralho[], wchar_t *jogada, int comp);
+
+//Processa a parte de dentro do loop, para a main não ficar demasiado grande
+void processarCodigo(int esteTeste, carta *baralhoDef);
 
 // COMBINACOES.C
 
@@ -88,6 +91,9 @@ bool compararCombinacoes(int array[]);
 //Função que verifica se a jogada é válida
 
 bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte);
+
+//Auxiliar
+bool verificarAux (carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int i, int *comb);
 
 //Funçao que da o valor da maior carta
 int maiorCartaValor(carta baralho[], wchar_t *mao,int tamanho);

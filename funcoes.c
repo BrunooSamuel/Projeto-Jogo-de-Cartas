@@ -47,12 +47,13 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *pos
     wcsncpy(&jogadasAnteriores[*posMaos * 32], maoTemp, tamanho);
 
     /*
+    wprintf(L"tamanho %d\n", tamanho);
     int pos;
-    wprintf(L"Está na mao: %ls\n", mao);
+    wprintf(L"Está na mao: %ls\n", maoTemp);
 
-    for (pos = 0; mao[pos+1]!='\0'; pos++)
+    for (pos = 0; maoTemp[pos+1]!='\0'; pos++)
     {
-        wprintf(L"Os símbolos são: %x\t", mao[pos]);
+        wprintf(L"Os símbolos são: %lc\t", maoTemp[pos]);
     }
     wprintf(L"\n");
     */
@@ -205,7 +206,9 @@ int scanInt () {
 
 // Função para verificar e remover cartas da mão do jogador
 void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho) {
-    while (*jogadaJogador != L'\0' && *tamanho>0) {
+    if (wcscmp(jogadaJogador, L"PASSO\n") != 0) 
+    {
+        while (*jogadaJogador != L'\0' && *tamanho>0) {
         bool encontrou=false;
         wchar_t *posicao = NULL; // Buscar a carta na mão do jogador
 
@@ -229,11 +232,19 @@ void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanh
         } 
         // Avançar para a próxima carta da jogada
         jogadaJogador++;
+        }
     }
+
+    int comprimento = 0;
+    // Percorre a sequência até encontrar '\n' ou '\0'
+    while (maoJogador[comprimento] != L'\n' && maoJogador[comprimento] != L'\0') {
+        comprimento++;
+    }
+    (*tamanho)=comprimento;
 }
 
 
-void imprimirUmaMao (wchar_t *mao, int numTestes, int esteTeste) {
+void imprimirUmaMao (wchar_t *mao) {
     int comp = 0;
     while (mao[comp] != L'\n' && mao[comp] != L'\0') 
     {
@@ -248,19 +259,19 @@ void imprimirUmaMao (wchar_t *mao, int numTestes, int esteTeste) {
             wprintf(L"%lc ", mao[i]);
         }
         wprintf(L"%lc", mao[i]);
-        if (numTestes!=esteTeste) wprintf(L"\n");
     }
 }
 
 int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo) {
     int passos=0;
     int pos;
-
-    for(pos = ultimo; pos > (ultimo-3) && passos < 3; pos--) {
+    bool encontrouCartas=false;
+    for(pos = ultimo; pos > (ultimo-3) && passos < 3 && pos>=0 && !encontrouCartas; pos--) {
         //wprintf(L"Jogada atual: %ls\n", &jogadas[pos * 32]);
-        if (wcscmp(&jogadas[pos * 32], L"PASSO") == 0) {
+        if (jogadas[pos * 32] == L'P') {
             passos++;
         }
+        else encontrouCartas=true;
     }
     pos++;
     int comp=wcslen(&jogadas[pos * 32]);
