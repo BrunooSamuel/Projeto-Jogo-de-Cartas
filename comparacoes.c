@@ -75,9 +75,9 @@ int maiorCartaValor(carta baralho[], wchar_t *mao,int tamanho) {
 }
 
 
-bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte)
-{ 
-    if (wcscmp(jogadaJogador, L"PASSO\n") == 0) return false;
+bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int numAnte) { 
+
+    if (jogadaJogador[0] == L'P') return true;
 
     int comb[4] = {0};
 
@@ -90,14 +90,18 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
     {   
         int i;
         int passosEncontrados = 0;
-        for(i = numAnte - 1; i>0 && i > (numAnte-4) && passosEncontrados < 3; i--) 
+        bool parar=false;
+        for(i=numAnte - 1; i>=0 && i > (numAnte-4) && passosEncontrados < 3 && !parar; i--) 
         {
             if (jogadasAnte[i * 32] == L'P') 
             {
                 passosEncontrados++;
             }
+            else {parar=true; i++;}
         }
+
         //wprintf(L"Numero de passos %d\n", passosEncontrados);
+
         if(passosEncontrados == 3)
         {
             verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
@@ -106,34 +110,40 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
         else // caso nao tenha 3 passos
         {
             //wprintf(L"%d e %d\n", arrayTamanhos[i],tamJogadaJogador);
-
-            if(arrayTamanhos[i] != tamJogadaJogador) return false;
-
-            verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
-            int valorMao=maiorCartaValor(baralho, jogadaJogador,tamJogadaJogador);
-
-            verificarCombinacao(&jogadasAnte[i], tamJogadaJogador, baralho, comb);
-            int valorAnte=maiorCartaValor(baralho, &jogadasAnte[i],tamJogadaJogador);
-
-            if (valorMao<=valorAnte) return false;
-
-            for(i = 0; i < 3; i++)
-            {
-                if(comb[i] == 2) return true;
-            }
+            
+            return verificarAux (baralho, jogadaJogador, jogadasAnte, arrayTamanhos, tamJogadaJogador, i, comb);
+            
         }
     }
+}
+
+bool verificarAux (carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAnte, int arrayTamanhos[], int tamJogadaJogador, int i, int *comb) {
+    
+    if(arrayTamanhos[i] != tamJogadaJogador) return false;
+
+    verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
+    int valorMao=maiorCartaValor(baralho, jogadaJogador,tamJogadaJogador);
+
+    verificarCombinacao(&jogadasAnte[i*32], tamJogadaJogador, baralho, comb);
+    int valorAnte=maiorCartaValor(baralho, &jogadasAnte[i*32],tamJogadaJogador);
+
+    if (valorMao<=valorAnte) return false;
+            
+    for(i = 0; i < 3; i++)
+    {
+    if(comb[i] == 2) return true;
+    }
+
     return false;
 }
 
-bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int numReis, int tamJogadaJogador)
+bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int numReis, int tamJogadaJogador) {  
+    if (wcscmp(jogadaJogador, L"PASSO\n") == 0) return true;
 
-{  
     int comb[4] = {0};
-
+    verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
     if (numReis==1) 
     {
-        verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
         if (comb[0]==1 && tamJogadaJogador==4) return true;
         else if (comb[2]==1 && tamJogadaJogador==6) return true;
         else return false;
@@ -147,5 +157,6 @@ bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int numReis
     {
         if (comb[2]==1 && tamJogadaJogador==10) return true;
         else return false;
-    } else return false;
+    } 
+    else return false;
 }
