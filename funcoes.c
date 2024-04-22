@@ -45,7 +45,7 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *pos
 
     //copia o mao para o array jogadasAnteriores
     wcsncpy(&jogadasAnteriores[*posMaos * 32], maoTemp, tamanho);
-
+    
     /*
     wprintf(L"tamanho %d\n", tamanho);
     int pos;
@@ -274,26 +274,43 @@ int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo) {
         else encontrouCartas=true;
     }
     pos++;
-    int comp=wcslen(&jogadas[pos * 32]);
+    
     //wprintf(L"Deu %d passos na funcao contadorReis\n", passos);
     if (passos==3) return 0;
-    else return contadorAuxiliar(baralho, &jogadas[pos*32], comp);
+    else return contadorAuxiliar(baralho, &jogadas[pos*32]);
 
 }
 
-int contadorAuxiliar (carta baralho[], wchar_t *jogadas, int comp) {
-    //wprintf(L"O comp é %d\n", comp);
-    int r=0;
-    for (int i = 0; i < comp; i++) 
-    {
-        for (int k = 52; k < 56; k++) 
+int contadorAuxiliar (carta baralho[], wchar_t *jogadas) {
+    int comp = 0;
+    int i=0;
+    bool naoCarta = false;
+    for (int k = 0; k<=56 && !naoCarta; k++) {
+        if (k==56) naoCarta=true;
+        else if (jogadas[i] == baralho[k].codigo) 
         {
-            //wprintf(L"%lc e %lc\n", jogadas[i], baralho[k].codigo);
-            if (jogadas[i] == baralho[k].codigo) 
+            comp++;
+            i++;
+            k=0;
+        }
+        else if (jogadas[i] == L'\n' && jogadas[i] == L'\0') naoCarta=true;
+    }
+    int comb[4]={0};
+    verificarCombinacao(jogadas, comp, baralho, comb);
+    if (comb[0]==0) return 0;
+    else {
+            int r=0;
+        for (int i = 0; i < comp; i++) 
+        {
+            for (int k = 52; k < 56; k++) 
             {
-            r++;  
+                //wprintf(L"%lc e %lc\n", jogadas[i], baralho[k].codigo);
+                if (jogadas[i] == baralho[k].codigo) 
+                {
+                r++;  
+                }
             }
         }
+        return r;
     }
-    return r;
 }
