@@ -23,10 +23,25 @@ int main () {
     setlocale(LC_CTYPE, "C.UTF-8");
 
     int numtestes=scanInt();
+    int totalTestes = numtestes;
     
     for (int e1=1; e1<=numtestes;e1++) 
     {
-        wprintf(L"Teste %d\n", e1);
+        processarCodigo(e1, baralhoDef);
+        if (e1 != totalTestes) { // Verifica se não é o último teste
+            wprintf(L"\n"); // Adiciona uma nova linha após cada teste, exceto o último
+        }
+    }
+    
+    // Liberta o espaço na memória alocada para o baralho
+    free(baralho);
+
+    return 0;
+}
+
+void processarCodigo(int esteTeste, carta *baralhoDef) {
+
+    wprintf(L"Teste %d\n", esteTeste);
 
         // lê o numero de jogadas anteriores que recebe
         int NumJogAnteriores=scanInt();
@@ -51,29 +66,19 @@ int main () {
         
         wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
         int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-        
-        int numReis=0;
-        if (e2!=0) numReis = contadorReis (baralhoDef, jogadasAnteriores, (e2-1));
+    
+        // se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
+        int numReis = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
         //wprintf(L"Numero de reis %d\n", numReis);
-        
-        bool valida=false;
-        if (numReis>0) valida = verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador);
-        else valida = verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
-        
+        // se numReis for maior que 0, vai realizar a verificarJogadaComReis, se não, verificarJogada
+        bool valida = numReis > 0 ? verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador) : verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
         
         ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
         
         if(valida) verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
         else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
-        
-        
-        imprimirUmaMao (maoJogador, numtestes, e1);
-        
-        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
-    }
-    
-    // Liberta o espaço na memória alocada para o baralho
-    free(baralho);
 
-    return 0;
+        if (tamMaoJogador>=0) imprimirUmaMao (maoJogador);
+    
+        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
 }
