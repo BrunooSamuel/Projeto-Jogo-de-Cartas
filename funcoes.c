@@ -266,7 +266,7 @@ int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo) {
     int passos=0;
     int pos;
 
-    for(pos = ultimo; pos > (ultimo-3) && passos < 3; pos--) {
+    for(pos = ultimo; pos > (ultimo-3) && passos < 3 && pos>=0; pos--) {
         //wprintf(L"Jogada atual: %ls\n", &jogadas[pos * 32]);
         if (wcscmp(&jogadas[pos * 32], L"PASSO") == 0) {
             passos++;

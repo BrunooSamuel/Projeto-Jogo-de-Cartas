@@ -69,6 +69,7 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
     
         // se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
         int numReis = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
+        //wprintf(L"Numero de reis %d\n", numReis);
         // se numReis for maior que 0, vai realizar a verificarJogadaComReis, se não, verificarJogada
         bool valida = numReis > 0 ? verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador) : verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
         
