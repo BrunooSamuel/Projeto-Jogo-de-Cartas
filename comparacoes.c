@@ -141,10 +141,9 @@ bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int numReis
     if (wcscmp(jogadaJogador, L"PASSO\n") == 0) return true;
 
     int comb[4] = {0};
-
+    verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
     if (numReis==1) 
     {
-        verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
         if (comb[0]==1 && tamJogadaJogador==4) return true;
         else if (comb[2]==1 && tamJogadaJogador==6) return true;
         else return false;
@@ -158,5 +157,6 @@ bool verificarJogadacomReis(carta baralho[], wchar_t *jogadaJogador, int numReis
     {
         if (comb[2]==1 && tamJogadaJogador==10) return true;
         else return false;
-    } else return false;
+    } 
+    else return false;
 }
