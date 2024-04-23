@@ -5,6 +5,7 @@
         "funcoes.h": "c",
         "locale.h": "c",
         "cartas.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "wchar.h": "c"
     }
 }
