@@ -24,7 +24,7 @@ int main () {
 
     int numtestes=scanInt();
     int totalTestes = numtestes;
-    
+    limpar();
     for (int e1=1; e1<=numtestes;e1++) 
     {
         processarCodigo(e1, baralhoDef);
@@ -43,31 +43,22 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
 
     wprintf(L"Teste %d\n", esteTeste);
 
-        // lê o numero de jogadas anteriores que recebe
-        int NumJogAnteriores=scanInt();
-        
-        limpar();
+        wchar_t *jogadaAnterior = alocarMao ();
+        int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
+        wprintf(L"Jogada Anterior: %lsTamanho:%d\n", jogadaAnterior,tamJogadaAnterior);
 
-        int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
+        wchar_t *maoJogador = alocarMao ();
+        int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
+        wprintf(L"Mao Inicial: %lsTamanho:%d\n", maoJogador,tamMaoJogador);
 
-        int *arrayComb=alocarArrayInt(NumJogAnteriores);
-    
-        wchar_t *jogadasAnteriores=alocarArrayWchar (arrayTamanhos, arrayComb, NumJogAnteriores);
-        
-        wchar_t *maoJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
-        int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-        //wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
-        
-        int e2=0;
-        while (e2<NumJogAnteriores)   
-        {
-            arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, &e2, arrayTamanhos);
-        }
-        
-        wchar_t *jogadaJogador = alocarMao (arrayTamanhos,arrayComb, jogadasAnteriores);
-        int tamJogadaJogador = lerUmaMao(jogadaJogador, baralhoDef, arrayComb, jogadasAnteriores, arrayTamanhos);
-    
-        // se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
+        free(jogadaAnterior);
+        free(maoJogador);
+}
+
+
+/* COISAS DO GUIAO ANTERIOR
+
+// se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
         int numReis = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
         //wprintf(L"Numero de reis %d\n", numReis);
         // se numReis for maior que 0, vai realizar a verificarJogadaComReis, se não, verificarJogada
@@ -79,6 +70,5 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
 
         if (tamMaoJogador>=0) imprimirUmaMao (maoJogador);
-    
-        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
-}
+
+*/
