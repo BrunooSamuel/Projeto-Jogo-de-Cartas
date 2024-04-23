@@ -18,7 +18,7 @@ void limpar();
 int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *posMaos, int *arrayTamanhos);
 
 //Função que lê uma mão
-int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *arrayTamanhos);
+int lerUmaMao(wchar_t *mao, carta baralho[]);
 
 //Funcao que ordena um array de Ints
 void ordena(int mao[], int tamanho);
@@ -39,7 +39,7 @@ carta* alocarArrayCartas ();
 int scanInt ();
 
 //Função que aloca memoria para a mao
-wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas);
+wchar_t* alocarMao ();
 
 //função para verificar se as cartas da jogada atual estão na mão do jogador
 void verificarCartasMao(wchar_t *maoJogador, wchar_t *jogadaJogador, int *tamanho);

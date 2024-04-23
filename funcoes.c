@@ -64,22 +64,20 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *pos
     return tamanho;
 }
 
-int lerUmaMao(wchar_t *maoJogador, carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *arrayTamanhos) {
+int lerUmaMao(wchar_t *mao, carta baralho[]) {
 
     //funcao que coloca as cartas recebidas no array mao
-    if (fgetws(maoJogador, 32, stdin)==NULL) {
+    if (fgetws(mao, 60, stdin)==NULL) {
         wprintf(L"O Scan da mão é inválido.\n");
-        free(arrayTamanhos);
-        free(arrayComb);
+        free(mao);
         free(baralho);
-        free (jogadasAnteriores);
         return -1;
     }
     
     int comprimento = 0;
-
+    //wprintf(L"Está na mao: %ls\n", mao);
     // Percorre a sequência até encontrar '\n' ou '\0'
-    while (maoJogador[comprimento] != L'\n' && maoJogador[comprimento] != L'\0') {
+    while (mao[comprimento] != L'\n' && mao[comprimento] != L'\0') {
         comprimento++;
     }
     return comprimento;
@@ -175,13 +173,10 @@ wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas) {
     else return array; 
 }
 
-wchar_t* alocarMao (int *arrayTamanhos,int *arrayComb, wchar_t *jogadas) {
-    wchar_t *array=malloc(sizeof(wchar_t)*32);
+wchar_t* alocarMao () {
+    wchar_t *array=malloc(sizeof(wchar_t)*60);
     if (array == NULL) {
         free(array);
-        free(arrayTamanhos);
-        free(arrayComb);
-        free(jogadas);
         return NULL;
     }
     else return array; 

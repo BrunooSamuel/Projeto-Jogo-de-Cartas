@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
-SRCS = main.c combinacoes.c cartas.c funcoes.c comparacoes.c pares.c
+SRCS = main.c combinacoes.c cartas.c funcoes.c comparacoes.c pares.c gerar.c
 HDRS = funcoes.h cartas.h
 ZIP_DIR = ./
 
@@ -24,5 +24,5 @@ debug:
 	gdb ./jogoCartas
 
 zip:
-	zip $(ZIP_DIR)CC207_GUIAO3.zip $(SRCS) $(HDRS) makefile
+	zip $(ZIP_DIR)CC207_GUIAO4.zip $(SRCS) $(HDRS) makefile
 	@echo "📦 ZIP criado com sucesso 📦"
