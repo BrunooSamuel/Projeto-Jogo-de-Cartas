@@ -56,6 +56,12 @@ int contadorAuxiliar (carta baralho[], wchar_t *jogada);
 //Processa a parte de dentro do loop, para a main não ficar demasiado grande
 void processarCodigo(int esteTeste, carta *baralhoDef);
 
+//Apenas devolve o numero da combinacao
+int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]);
+
+//Devolve o valor da carta mais alta
+int valorDaCarta (carta baralho[], wchar_t mao[], int tamanho);
+
 // COMBINACOES.C
 
 //Funcao para ler que combinação é
@@ -130,6 +136,20 @@ void ultimoValor(carta baralho[], wchar_t *mao,int tamanho, int *valores, int po
 
 //Funçao final que imprime as maos
 void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnteriores);
+
+
+
+//GERAR.C
+
+//Gera os conjuntos
+void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+
+//Gera as sequencias
+void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+
+//Gera as duplas sequencias
+void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+
 
 // Esta linha fecha a diretiva #ifndef
 #endif

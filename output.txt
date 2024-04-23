@@ -1,28 +1,48 @@
 Teste 1
 Jogada Anterior: 🂺
 Tamanho:1
-Mao Inicial: 🃊🃚🂪🃇🂢🂮🃝🂼
+Carta mais alta da jogada anterior : 🂺	O valor dela é 38
+O Numero de reis é 0
+A jogada anterior era de combinação: 0
+Mao Inicial: 🂢🃇🂪🃊🃚🂼🃝🂮
 Tamanho:8
+Veio para gerar Conjunto
 
 Teste 2
 Jogada Anterior: 🂣🃓🃃
 Tamanho:3
-Mao Inicial: 🃓🃕🃒🂶🃔🃖🂴🂤🂢🃆🃂🂵🂥🃄🃅🂦
+Carta mais alta da jogada anterior : 🃓	O valor dela é 12
+O Numero de reis é 0
+A jogada anterior era de combinação: 0
+Mao Inicial: 🂢🃂🃒🃓🂤🂴🃄🃔🂥🂵🃅🃕🂦🂶🃆🃖
 Tamanho:16
+Veio para gerar Conjunto
 
 Teste 3
 Jogada Anterior: 🃕🂤🂶
 Tamanho:3
-Mao Inicial: 🂥🂵🃘🂩🃄🂦🂺🃖🂷🃆🂧
+Carta mais alta da jogada anterior : 🂶	O valor dela é 22
+O Numero de reis é 0
+A jogada anterior era de combinação: 1
+Mao Inicial: 🃄🂥🂵🂦🃆🃖🂧🂷🃘🂩🂺
 Tamanho:11
+Veio para gerar Sequencia
 
 Teste 4
 Jogada Anterior: 🂣🂤🂳🂢🂴🂲
 Tamanho:6
-Mao Inicial: 🂦🃖🂵🃇🃕🃅🃄🃔🂷🂶🂥
+Carta mais alta da jogada anterior : 🂴	O valor dela é 14
+O Numero de reis é 0
+A jogada anterior era de combinação: 2
+Mao Inicial: 🃄🃔🂥🂵🃅🃕🂦🂶🃖🂷🃇
 Tamanho:11
+Veio para gerar Dupla Sequencia
 
 Teste 5
 Jogada Anterior: 🂺🃚🂪
 Tamanho:3
-Mao Inicial: 🂢🂲🃂🃓🃃🂣🂳🃄🃔🂤🂴🃊🂼🂬Tamanho:14
+Carta mais alta da jogada anterior : 🃚	O valor dela é 40
+O Numero de reis é 0
+A jogada anterior era de combinação: 0
+Mao Inicial: 🂢🂲🃂🂣🂳🃃🃓🂤🂴🃄🃔🃊🂬🂼Tamanho:14
+Veio para gerar Conjunto

@@ -309,3 +309,30 @@ int contadorAuxiliar (carta baralho[], wchar_t *jogadas) {
         return r;
     }
 }
+
+int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]) {
+    int comb[4]={0};
+
+    verificarCombinacao (mao, quantidade, baralho, comb);
+
+    if (comb[0]==1) return 0;
+    else if (comb[1]==1) return 1; 
+    else if (comb[2]==1) return 2; 
+    else return 3; 
+}
+
+int valorDaCarta (carta baralho[], wchar_t mao[], int tamanho) {
+    int r=0;
+    int posicao=tamanho-1;
+    bool encontrado=false;
+    for (int k = 0; k < 56 && !encontrado; k++)
+    {
+        if(mao[posicao]==baralho[k].codigo)  
+        {
+            //wprintf(L"%d + %d\n", baralho[k].numero*4, (baralho[k].naipe-4));
+            r=baralho[k].numero*4+(baralho[k].naipe-4);
+            encontrado=true;
+        }
+    } 
+    return r;
+}
