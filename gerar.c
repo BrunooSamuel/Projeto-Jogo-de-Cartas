@@ -22,7 +22,7 @@ int numeroCarta (carta baralho[], wchar_t carta) {
 }
 
 //Esta função verifica a quantidade de cartas do mesmo numero
-void analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
+int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
     bool passou=false;
     int pos=0;
     int t;
@@ -35,14 +35,16 @@ void analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
         else if (t==numero) {contagem++; pos++;}
         else if(t>numero) {passou=true;}
     }
-    wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
+    //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
+    return contagem;
 }
 
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
     wprintf(L"Veio para gerar Conjunto\n");
 
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);  
-    analisarMao (baralho, mao, numeroMaisAlta, tamMao);
+    int contagem=analisarMao (baralho, mao, numeroMaisAlta, tamMao);
+    wprintf(L"A mão tem %d cartas de número %d\n", contagem, numeroMaisAlta);
 
 }
 
@@ -50,12 +52,14 @@ void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wcha
     wprintf(L"Veio para gerar Sequencia\n");
 
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);  
-    analisarMao (baralho, mao, numeroMaisAlta, tamMao);
+    int contagem=analisarMao (baralho, mao, numeroMaisAlta, tamMao);
+    wprintf(L"A mão tem %d cartas de número %d\n", contagem, numeroMaisAlta);
 }
 
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
     wprintf(L"Veio para gerar Dupla Sequencia\n");
 
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);  
-    analisarMao (baralho, mao, numeroMaisAlta, tamMao);
+    int contagem=analisarMao (baralho, mao, numeroMaisAlta, tamMao);
+    wprintf(L"A mão tem %d cartas de número %d\n", contagem, numeroMaisAlta);
 }

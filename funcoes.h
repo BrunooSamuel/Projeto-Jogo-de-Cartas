@@ -145,7 +145,7 @@ void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnte
 int numeroCarta (carta baralho[], wchar_t carta);
 
 //Esta função verifica a quantidade de cartas do mesmo numero
-void analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
+int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
 
 //Gera os conjuntos
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
