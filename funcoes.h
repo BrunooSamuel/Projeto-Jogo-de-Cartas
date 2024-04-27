@@ -141,14 +141,20 @@ void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnte
 
 //GERAR.C
 
+//Devolve o numero da carta
+int numeroCarta (carta baralho[], wchar_t carta);
+
+//Esta função verifica a quantidade de cartas do mesmo numero
+int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
+
 //Gera os conjuntos
-void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
 //Gera as sequencias
-void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
 //Gera as duplas sequencias
-void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
 
 // Esta linha fecha a diretiva #ifndef

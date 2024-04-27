@@ -17,7 +17,7 @@ run: jogoCartas
 
 clean:
 	rm -f jogoCartas *.o
-	rm -f $(ZIP_DIR)CC207_GUIAO3.zip
+	rm -f $(ZIP_DIR)CC207_GUIAO4.zip
 	@echo "🧹 Limpeza concluída 🧹"
 
 debug:
