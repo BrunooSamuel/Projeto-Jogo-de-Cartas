@@ -21,25 +21,21 @@ int numeroCarta (carta baralho[], wchar_t carta) {
     return r;
 }
 
-//Esta função verifica a quantidade de cartas do mesmo numero a partir de um certo numero
+//Esta função verifica a quantidade de cartas do mesmo numero
 void analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
     bool passou=false;
     int pos=0;
     int t;
-    while (numero<=14)
+    int contagem=0;
+
+    while ((pos < tamanho) && !passou)
     {
-        int contagem=0;
-        while ((pos < tamanho) && !passou)
-        {
-            t=numeroCarta(baralho, mao[pos]);
-            if (t<numero) pos++;
-            else if (t==numero) {contagem++; pos++;}
-            else if(t>numero) {passou=true;}
-        }
-        if (t>=numero) wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
-        passou=false;
-        numero++;
+        t=numeroCarta(baralho, mao[pos]);
+        if (t<numero) pos++;
+        else if (t==numero) {contagem++; pos++;}
+        else if(t>numero) {passou=true;}
     }
+    wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
 }
 
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
