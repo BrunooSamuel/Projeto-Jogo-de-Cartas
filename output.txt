@@ -7,6 +7,11 @@ A jogada anterior era de combinação: 0
 Mao Inicial: 🂢🃇🂪🃊🃚🂼🃝🂮
 Tamanho:8
 Veio para gerar Conjunto
+A mão tem 3 cartas de número 10
+A mão tem 0 cartas de número 11
+A mão tem 1 cartas de número 12
+A mão tem 1 cartas de número 13
+A mão tem 1 cartas de número 14
 
 Teste 2
 Jogada Anterior: 🂣🃓🃃
@@ -17,6 +22,10 @@ A jogada anterior era de combinação: 0
 Mao Inicial: 🂢🃂🃒🃓🂤🂴🃄🃔🂥🂵🃅🃕🂦🂶🃆🃖
 Tamanho:16
 Veio para gerar Conjunto
+A mão tem 1 cartas de número 3
+A mão tem 4 cartas de número 4
+A mão tem 4 cartas de número 5
+A mão tem 4 cartas de número 6
 
 Teste 3
 Jogada Anterior: 🃕🂤🂶
@@ -27,6 +36,11 @@ A jogada anterior era de combinação: 1
 Mao Inicial: 🃄🂥🂵🂦🃆🃖🂧🂷🃘🂩🂺
 Tamanho:11
 Veio para gerar Sequencia
+A mão tem 3 cartas de número 6
+A mão tem 2 cartas de número 7
+A mão tem 1 cartas de número 8
+A mão tem 1 cartas de número 9
+A mão tem 1 cartas de número 10
 
 Teste 4
 Jogada Anterior: 🂣🂤🂳🂢🂴🂲
@@ -37,6 +51,10 @@ A jogada anterior era de combinação: 2
 Mao Inicial: 🃄🃔🂥🂵🃅🃕🂦🂶🃖🂷🃇
 Tamanho:11
 Veio para gerar Dupla Sequencia
+A mão tem 2 cartas de número 4
+A mão tem 4 cartas de número 5
+A mão tem 3 cartas de número 6
+A mão tem 2 cartas de número 7
 
 Teste 5
 Jogada Anterior: 🂺🃚🂪
@@ -46,3 +64,6 @@ O Numero de reis é 0
 A jogada anterior era de combinação: 0
 Mao Inicial: 🂢🂲🃂🂣🂳🃃🃓🂤🂴🃄🃔🃊🂬🂼Tamanho:14
 Veio para gerar Conjunto
+A mão tem 1 cartas de número 10
+A mão tem 0 cartas de número 11
+A mão tem 2 cartas de número 12
