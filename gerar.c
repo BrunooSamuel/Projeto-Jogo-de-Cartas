@@ -40,7 +40,6 @@ int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
 }
 
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
-    wprintf(L"Veio para gerar Conjunto\n");
 
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);
     for (int i = numeroMaisAlta; i <= 14; i++)
@@ -51,39 +50,84 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar
         if (contagem>=tamAnterior) 
         {
             //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", i, contagem);
-            imprimirConjuntos (baralho, mao, i, contagem, tamAnterior, tamMao);
+            criarConjuntos (baralho, mao, i, contagem, tamAnterior, tamMao, valorCartaMaisAlta);
         }
     }
 
 
 }
 
-void imprimirConjuntos (carta baralho[], wchar_t mao[], int numero, int contagem, int tamAnterior, int tamMao) {
+int criarConjuntos (carta baralho[], wchar_t mao[], int numero, int contagem, int tamAnterior, int tamMao, int valorCartaMaisAlta) {
     bool encontrou=false;
     int tamanho=1;
-    wprintf(L"Imprimindo:\n");
-    for (int i = 0; i < tamMao && tamanho<=tamAnterior; i++)
+    bool temMais=true;
+    int contagemTamAnterior=tamAnterior;
+    int posicao=0;
+    int posGuardada;
+
+    wchar_t* conjuntoAtual = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
+        if (conjuntoAtual == NULL) {
+            free (conjuntoAtual);
+            return -1;
+        }
+
+    for (int i = 0; i < tamMao; i++)
     {
-        for (int k = (numero*4)-4; k <= (numero*4)-1 && !encontrou; k++)
+        for (int k = (numero*4)-4; k <= (numero*4)-1; k++)
         {
             if (mao[i]==baralho[k].codigo) 
             {
-                if (tamAnterior==tamanho) 
-                {
-                    wprintf(L"%lc\n", mao[i]);
-                    encontrou=true;
-                    tamanho++;
-                }
-                else 
-                {
-                    wprintf(L"%lc ", mao[i]);
-                    encontrou=true;
-                    tamanho++;
-                }
+                conjuntoAtual[posicao]=mao[i];
+                posGuardada=i;
+                posicao++;
+                encontrou=true;
             }
         }
-        encontrou=false;
+
+        if (analisarMao (baralho, mao, numero, tamMao)>tamAnterior) {temMais=true; contagemTamAnterior--;}
+        else temMais=false;
+
+        if (encontrou && posicao == tamAnterior) 
+        {
+            if (valorDaCartaMaisAlta (baralho, conjuntoAtual, tamAnterior) > valorCartaMaisAlta) 
+            {
+                imprimirConjuntos (conjuntoAtual, tamAnterior);
+            }
+            tamanho++;
+            posicao=0;
+        }
+
+        /*
+        if (temMais && tamAnterior!=1) 
+        {
+            for (int o = tamAnterior-1; o>=0; o--)
+            {
+                if (numeroCarta(baralho,conjuntoAtual[o])==numeroCarta(baralho,mao[posGuardada])) 
+                {
+                    wchar_t temp=conjuntoAtual[o];
+                    conjuntoAtual[o]=mao[posGuardada];
+                    imprimirConjuntos (conjuntoAtual, tamAnterior);
+                    conjuntoAtual[o]=temp;
+                } 
+            }  
+        }
+        */
+
+        // Reinicializa o conjuntoAtual
+        memset(conjuntoAtual, 0, sizeof(wchar_t)*tamAnterior);
     }
+
+    free (conjuntoAtual);
+    return 0;
+}
+
+void imprimirConjuntos (wchar_t mao[], int tamAnterior) {
+    int i;
+    for (i = 0; i < tamAnterior-1; i++)
+    {
+        wprintf(L"%lc ", mao[i]);
+    }
+    wprintf(L"%lc\n", mao[i]);
 }
 
 void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
@@ -115,7 +159,7 @@ void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wcha
 }
 
 int criarSequencias(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao) {
-    wchar_t* sequenciaAtual = (wchar_t*)malloc (sizeof(wchar_t)*16);
+    wchar_t* sequenciaAtual = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
     if (sequenciaAtual == NULL) {
         free (sequenciaAtual);
         return -1;
