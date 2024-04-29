@@ -6,7 +6,7 @@ Tamanho:8
 Veio para gerar Conjunto
 Imprimindo:
 🂪
-Imprimindo:
+🃊 🃚 Imprimindo:
 🂼
 Imprimindo:
 🃝
@@ -21,11 +21,11 @@ Tamanho:16
 Veio para gerar Conjunto
 Imprimindo:
 🂤 🂴 🃄
-Imprimindo:
+🃔 Imprimindo:
 🂥 🂵 🃅
-Imprimindo:
+🃕 Imprimindo:
 🂦 🂶 🃆
-
+🃖 
 Teste 3
 Jogada Anterior: 🃕🂤🂶
 Tamanho:3

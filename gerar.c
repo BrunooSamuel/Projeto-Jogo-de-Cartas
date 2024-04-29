@@ -53,8 +53,6 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar
             //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", i, contagem);
             imprimirConjuntos (baralho, mao, i, contagem, tamAnterior, tamMao);
         }
-
-        if (valorDaCarta (baralho, mao, int tamanho)
     }
 
 
