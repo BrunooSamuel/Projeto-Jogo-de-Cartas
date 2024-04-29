@@ -60,7 +60,10 @@ void processarCodigo(int esteTeste, carta *baralhoDef);
 int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]);
 
 //Devolve o valor da carta mais alta
-int valorDaCarta (carta baralho[], wchar_t mao[], int tamanho);
+int valorDaCartaMaisAlta (carta baralho[], wchar_t mao[], int tamanho);
+
+//Devolve o valor de uma carta especifica
+int valorDaCarta(carta baralho[], wchar_t mao[], int posicao);
 
 // COMBINACOES.C
 

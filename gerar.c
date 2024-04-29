@@ -53,6 +53,8 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar
             //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", i, contagem);
             imprimirConjuntos (baralho, mao, i, contagem, tamAnterior, tamMao);
         }
+
+        if (valorDaCarta (baralho, mao, int tamanho)
     }
 
 
@@ -61,7 +63,7 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar
 void imprimirConjuntos (carta baralho[], wchar_t mao[], int numero, int contagem, int tamAnterior, int tamMao) {
     bool encontrou=false;
     int tamanho=1;
-
+    wprintf(L"Imprimindo:\n");
     for (int i = 0; i < tamMao && tamanho<=tamAnterior; i++)
     {
         for (int k = (numero*4)-4; k <= (numero*4)-1 && !encontrou; k++)
@@ -70,13 +72,13 @@ void imprimirConjuntos (carta baralho[], wchar_t mao[], int numero, int contagem
             {
                 if (tamAnterior==tamanho) 
                 {
-                    wprintf("%lc\n", mao[i]);
+                    wprintf(L"%lc\n", mao[i]);
                     encontrou=true;
                     tamanho++;
                 }
                 else 
                 {
-                    wprintf("%lc ", mao[i]);
+                    wprintf(L"%lc ", mao[i]);
                     encontrou=true;
                     tamanho++;
                 }
