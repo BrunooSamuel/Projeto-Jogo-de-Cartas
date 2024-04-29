@@ -159,6 +159,9 @@ void imprimirConjuntos (carta baralho[], wchar_t mao[], int numero, int contagem
 //Gera as sequencias
 void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
+//Cria as sequencias para imprimir
+int criarSequencias(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
+
 //Gera as duplas sequencias
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 

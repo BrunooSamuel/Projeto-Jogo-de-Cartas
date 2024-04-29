@@ -90,11 +90,81 @@ void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wcha
     wprintf(L"Veio para gerar Sequencia\n");
 
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);  
-    int contagem=analisarMao (baralho, mao, numeroMaisAlta, tamMao);
 
+    for (int i = 0; i < tamMao; i++)
+    {
+        int numero= numeroCarta (baralho, mao[i]);
+        int contagem=0;
+        bool naoTem=false;
+        bool encontrou=false;
+        int k;
+        
+        for (k = 0; contagem <= tamAnterior && !naoTem && !encontrou; k++)
+        {
+            if (contagem == tamAnterior) encontrou=true;
+            else 
+            {
+                int quantidade=analisarMao (baralho, mao, numero+k, tamMao);
+                if (quantidade!=0) contagem++;
+                else naoTem=true;
+            }
+        }
+        if (encontrou && (numero+k-1)>=numeroMaisAlta) criarSequencias(baralho, mao, tamAnterior, tamMao, i);
+    }
+    
+}
 
+int criarSequencias(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao) {
+    wchar_t* sequenciaAtual = (wchar_t*)malloc (sizeof(wchar_t)*16);
+    if (sequenciaAtual == NULL) {
+        free (sequenciaAtual);
+        return -1;
+    }
 
-    wprintf(L"A mão tem %d cartas de número %d\n", contagem, numeroMaisAlta);
+    bool existe=false;
+    int posSequencia=1;
+    int posicaoAntiga=posicao;
+    sequenciaAtual[0]=mao[posicao];
+    int tamanho=tamAnterior;
+    int numero_de_passados=0;
+
+    for (int i = posicao; i < tamMao && tamanho>0; i++)
+    {
+        if (numeroCarta(baralho,mao[posicaoAntiga])==(numeroCarta(baralho,mao[i+1]))-1) 
+        {
+            posicaoAntiga=i+1;
+            sequenciaAtual[posSequencia]=mao[i+1];
+            posSequencia++;
+            tamanho--;
+        }
+        else numero_de_passados++;
+
+    }
+    if (tamanho==0) existe=true;
+
+    if (existe) 
+    {
+        for (int i = 0; i < tamAnterior; i++)
+        {
+            if (i==tamAnterior-1) wprintf(L"%lc\n", sequenciaAtual[i]);
+            else wprintf(L"%lc ", sequenciaAtual[i]);            
+        }
+    }
+    /*
+    while (numero_de_passados>0) 
+    {
+        for (int i = 0; i < tamAnterior; i++)
+        {
+            if (analisarMao())
+            if (i==tamAnterior-1) wprintf(L"%lc\n", sequenciaAtual[i]);
+            else wprintf(L"%lc ", sequenciaAtual[i]); 
+        }
+        numero_de_passados--;
+    }
+    */
+    free(sequenciaAtual);
+
+    return 0;
 }
 
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {

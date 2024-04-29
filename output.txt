@@ -6,7 +6,7 @@ Tamanho:8
 Veio para gerar Conjunto
 Imprimindo:
 🂪
-🃊 🃚 Imprimindo:
+Imprimindo:
 🂼
 Imprimindo:
 🃝
@@ -21,18 +21,25 @@ Tamanho:16
 Veio para gerar Conjunto
 Imprimindo:
 🂤 🂴 🃄
-🃔 Imprimindo:
+Imprimindo:
 🂥 🂵 🃅
-🃕 Imprimindo:
+Imprimindo:
 🂦 🂶 🃆
-🃖 
+
 Teste 3
 Jogada Anterior: 🃕🂤🂶
 Tamanho:3
 Mao Inicial: 🃄🂥🂵🂦🃆🃖🂧🂷🃘🂩🂺
 Tamanho:11
 Veio para gerar Sequencia
-A mão tem 3 cartas de número 6
+🃄 🂥 🂦
+🂥 🂦 🂧
+🂵 🂦 🂧
+🂦 🂧 🃘
+🃆 🂧 🃘
+🃖 🂧 🃘
+🂧 🃘 🂩
+🂷 🃘 🂩
 
 Teste 4
 Jogada Anterior: 🂣🂤🂳🂢🂴🂲
