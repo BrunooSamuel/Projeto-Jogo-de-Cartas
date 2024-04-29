@@ -153,8 +153,17 @@ int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
 //Gera os conjuntos
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
+//Cria conjuntos (parte 2 da funcao a cima)
+int criarConjuntos (carta baralho[], wchar_t mao[], int numero, int contagem, int tamAnterior, int tamMao, int valorCartaMaisAlta);
+
+//Imprime os conjuntos
+void imprimirConjuntos (wchar_t mao[], int tamAnterior);
+
 //Gera as sequencias
 void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
+
+//Cria as sequencias (parte 2 da funcao a cima)
+int criarSequencias(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
 
 //Gera as duplas sequencias
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
