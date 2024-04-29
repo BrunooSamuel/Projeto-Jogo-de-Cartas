@@ -30,6 +30,8 @@ Mao Inicial: 🃄🂥🂵🂦🃆🃖🂧🂷🃘🂩🂺
 Tamanho:11
 Veio para gerar Sequencia
 A mão tem 3 cartas de número 6
+Encontrada uma sequência superior na mão.
+Sequência maior encontrada: 🂷 🃘 🂩 
 
 Teste 4
 Jogada Anterior: 🂣🂤🂳🂢🂴🂲
