@@ -321,9 +321,24 @@ int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]) {
     else return 3; 
 }
 
-int valorDaCarta (carta baralho[], wchar_t mao[], int tamanho) {
+int valorDaCartaMaisAlta (carta baralho[], wchar_t mao[], int tamanho) {
     int r=0;
     int posicao=tamanho-1;
+    bool encontrado=false;
+    for (int k = 0; k < 56 && !encontrado; k++)
+    {
+        if(mao[posicao]==baralho[k].codigo)  
+        {
+            //wprintf(L"%d + %d\n", baralho[k].numero*4, (baralho[k].naipe-4));
+            r=baralho[k].numero*4+(baralho[k].naipe-4);
+            encontrado=true;
+        }
+    } 
+    return r;
+}
+
+int valorDaCarta(carta baralho[], wchar_t mao[], int posicao) {
+    int r=0;
     bool encontrado=false;
     for (int k = 0; k < 56 && !encontrado; k++)
     {

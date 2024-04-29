@@ -1,48 +1,49 @@
 Teste 1
 Jogada Anterior: 🂺
 Tamanho:1
-Carta mais alta da jogada anterior : 🂺	O valor dela é 38
-O Numero de reis é 0
-A jogada anterior era de combinação: 0
 Mao Inicial: 🂢🃇🂪🃊🃚🂼🃝🂮
 Tamanho:8
 Veio para gerar Conjunto
+Imprimindo:
+🂪
+Imprimindo:
+🂼
+Imprimindo:
+🃝
+Imprimindo:
+🂮
 
 Teste 2
 Jogada Anterior: 🂣🃓🃃
 Tamanho:3
-Carta mais alta da jogada anterior : 🃓	O valor dela é 12
-O Numero de reis é 0
-A jogada anterior era de combinação: 0
 Mao Inicial: 🂢🃂🃒🃓🂤🂴🃄🃔🂥🂵🃅🃕🂦🂶🃆🃖
 Tamanho:16
 Veio para gerar Conjunto
+Imprimindo:
+🂤 🂴 🃄
+Imprimindo:
+🂥 🂵 🃅
+Imprimindo:
+🂦 🂶 🃆
 
 Teste 3
 Jogada Anterior: 🃕🂤🂶
 Tamanho:3
-Carta mais alta da jogada anterior : 🂶	O valor dela é 22
-O Numero de reis é 0
-A jogada anterior era de combinação: 1
 Mao Inicial: 🃄🂥🂵🂦🃆🃖🂧🂷🃘🂩🂺
 Tamanho:11
 Veio para gerar Sequencia
+A mão tem 3 cartas de número 6
 
 Teste 4
 Jogada Anterior: 🂣🂤🂳🂢🂴🂲
 Tamanho:6
-Carta mais alta da jogada anterior : 🂴	O valor dela é 14
-O Numero de reis é 0
-A jogada anterior era de combinação: 2
 Mao Inicial: 🃄🃔🂥🂵🃅🃕🂦🂶🃖🂷🃇
 Tamanho:11
 Veio para gerar Dupla Sequencia
+A mão tem 2 cartas de número 4
 
 Teste 5
 Jogada Anterior: 🂺🃚🂪
 Tamanho:3
-Carta mais alta da jogada anterior : 🃚	O valor dela é 40
-O Numero de reis é 0
-A jogada anterior era de combinação: 0
 Mao Inicial: 🂢🂲🃂🂣🂳🃃🃓🂤🂴🃄🃔🃊🂬🂼Tamanho:14
 Veio para gerar Conjunto
