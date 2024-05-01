@@ -167,85 +167,97 @@ void imprimirConjuntos (wchar_t mao[], int tamAnterior) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
-    wprintf(L"Veio para gerar Sequencia\n");
-
+int gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);  
 
-    for (int i = 0; i < tamMao; i++)
+    for (int i = tamAnterior-1; i < tamMao; i++)
     {
-        int numero= numeroCarta (baralho, mao[i]);
-        int contagem=0;
-        bool naoTem=false;
-        bool encontrou=false;
-        int k;
-        
-        for (k = 0; contagem <= tamAnterior && !naoTem && !encontrou; k++)
+        int numero=numeroCarta (baralho, mao[i]);
+        //i passa para a posicao na mao da ultima carta igual (por exemplo, se tem varios 5, vai parar no ultimo)
+        for (int k = i+1; numeroCarta (baralho, mao[k])==numero; k++) i=k;
+
+        bool existeSequencia=verificarSequencia(baralho, mao, numero, tamAnterior, tamMao);
+
+        if (numero>=numeroMaisAlta && existeSequencia) 
         {
-            if (contagem == tamAnterior) encontrou=true;
-            else 
+            bool encontradoK=false;
+            int posicaoComeco;
+            //posicaoComeco é a posicao da menor carta que vai pertencer á sequencia
+            for (int k = 0; k < i && !encontradoK; k++)
             {
-                int quantidade=analisarMao (baralho, mao, numero+k, tamMao);
-                if (quantidade!=0) contagem++;
-                else naoTem=true;
+                if (numeroCarta (baralho, mao[k])==(numero-tamAnterior+1)) {encontradoK=true;posicaoComeco=k;}
             }
+            
+            int quantidade=i-posicaoComeco;
+            wchar_t* sequenciaTotal = (wchar_t*)malloc (sizeof(wchar_t)*quantidade);
+            if (sequenciaTotal == NULL) {
+                free (sequenciaTotal);
+                free (baralho);
+                free (mao);
+                return -1;
+            }
+            
+            //vai colocar no array sequenciaTotal, todas as cartas desse intervalo
+            int pos=0;
+            for (int j = posicaoComeco; j <= i; j++)
+            {
+                sequenciaTotal[pos]=mao[j];
+                pos++;
+            }
+            
+            continuacaoGerarSequencias(baralho, sequenciaTotal, tamAnterior, pos+1, valorCartaMaisAlta);
+
+            free(sequenciaTotal);              
         }
-        if (encontrou && (numero+k-1)>=numeroMaisAlta) continuacaoGererSequencias(baralho, mao, tamAnterior, tamMao, i);
     }
-    
+    return 0;
 }
 
-int continuacaoGererSequencias(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao) {
-    wchar_t* sequenciaAtual = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
-    if (sequenciaAtual == NULL) {
-        free (sequenciaAtual);
-        return -1;
+//verifica se pode existir sequencia nesse numero
+bool verificarSequencia(carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao) {
+    bool r=true;
+    int limiteNumero = numero-tamAnterior+1;
+
+    while (r && numero>=limiteNumero) {
+        if (analisarMao (baralho, mao, numero, tamMao)==0) r=false;
+        numero--;
     }
+    return r;
+}
 
-    bool existe=false;
-    int posSequencia=1;
-    int posicaoAntiga=posicao;
-    sequenciaAtual[0]=mao[posicao];
-    int tamanho=tamAnterior;
-    int numero_de_passados=0;
-
-    for (int i = posicao; i < tamMao && tamanho>0; i++)
+//Recebe já apenas as cartas para serem geradas as sequencias
+int continuacaoGerarSequencias(carta baralho[], wchar_t sequenciaTotal[], int tamAnterior, int tamanho, int valorCartaMaisAlta) {
+    if (tamanho==tamAnterior) imprimirSequencias (sequenciaTotal, tamAnterior);
+    else 
     {
-        if (numeroCarta(baralho,mao[posicaoAntiga])==(numeroCarta(baralho,mao[i+1]))-1) 
+        for (int i = 0; i < tamanho; i++)
         {
-            posicaoAntiga=i+1;
-            sequenciaAtual[posSequencia]=mao[i+1];
-            posSequencia++;
-            tamanho--;
-        }
-        else numero_de_passados++;
+            wchar_t* sequencia = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
+            if (sequencia == NULL) {
+                free (sequencia);
+                free (sequenciaTotal);
+                free (baralho);
+                return -1;
+            }
 
-    }
-    if (tamanho==0) existe=true;
+            int pos=0;
+            int n=numeroCarta(baralho,sequenciaTotal[i]);
+            if (analisarMao(baralho,sequenciaTotal,n,tamanho)==1) sequencia[pos]=sequenciaTotal[i];
 
-    if (existe) 
-    {
-        for (int i = 0; i < tamAnterior; i++)
-        {
-            if (i==tamAnterior-1) wprintf(L"%lc\n", sequenciaAtual[i]);
-            else wprintf(L"%lc ", sequenciaAtual[i]);            
+            free (sequencia);
         }
     }
-    /*
-    while (numero_de_passados>0) 
-    {
-        for (int i = 0; i < tamAnterior; i++)
-        {
-            if (analisarMao())
-            if (i==tamAnterior-1) wprintf(L"%lc\n", sequenciaAtual[i]);
-            else wprintf(L"%lc ", sequenciaAtual[i]); 
-        }
-        numero_de_passados--;
-    }
-    */
-    free(sequenciaAtual);
 
     return 0;
+}
+
+void imprimirSequencias (wchar_t mao[], int tamAnterior) {
+    int i;
+    for (i = 0; i < tamAnterior-1; i++)
+    {
+        wprintf(L"%lc ", mao[i]);
+    }
+    wprintf(L"%lc\n", mao[i]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

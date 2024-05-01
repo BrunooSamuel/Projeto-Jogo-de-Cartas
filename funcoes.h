@@ -172,10 +172,16 @@ void imprimirConjuntos (wchar_t mao[], int tamAnterior);
 
 
 //Gera as sequencias
-void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
+int gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
-//Cria as sequencias (parte 2 da funcao a cima)
-int continuacaoGererSequencias(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
+//Continuacao da funcao a cima
+int continuacaoGerarSequencias(carta baralho[], wchar_t sequenciaTotal[], int tamAnterior, int tamanho, int valorCartaMaisAlta);
+
+//Verifica se pode existir sequencias
+bool verificarSequencia(carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao);
+
+//Imprime as sequencias
+void imprimirSequencias (wchar_t mao[], int tamAnterior);
 
 
 //Gera as duplas sequencias
