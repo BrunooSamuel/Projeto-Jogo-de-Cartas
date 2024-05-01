@@ -1,27 +1,26 @@
 Teste 1
-Jogada Anterior: 🂺
-Tamanho:1
-Mao Inicial: 🂢🃇🂪🃊🃚🂼🃝🂮
-Tamanho:8
-variosConjuntos 🂪🃊🃚积
+🂪
+🃊
+🃚
 🂼
 🃝
 🂮
 
 Teste 2
-Jogada Anterior: 🂣🃓🃃
-Tamanho:3
-Mao Inicial: 🂢🃂🃒🃓🂤🂴🃄🃔🂥🂵🃅🃕🂦🂶🃆🃖
-Tamanho:16
-variosConjuntos 🂤🂴🃄🃔
-variosConjuntos 🂥🂵🃅🃕
-variosConjuntos 🂦🂶🃆🃖
+🂤 🂴 🃄
+🂤 🂴 🃔
+🂤 🃄 🃔
+🂴 🃄 🃔
+🂥 🂵 🃅
+🂥 🂵 🃕
+🂥 🃅 🃕
+🂵 🃅 🃕
+🂦 🂶 🃆
+🂦 🂶 🃖
+🂦 🃆 🃖
+🂶 🃆 🃖
 
 Teste 3
-Jogada Anterior: 🃕🂤🂶
-Tamanho:3
-Mao Inicial: 🃄🂥🂵🂦🃆🃖🂧🂷🃘🂩🂺
-Tamanho:11
 Veio para gerar Sequencia
 🃄 🂥 🂦
 🂥 🂦 🂧
@@ -33,14 +32,7 @@ Veio para gerar Sequencia
 🂷 🃘 🂩
 
 Teste 4
-Jogada Anterior: 🂣🂤🂳🂢🂴🂲
-Tamanho:6
-Mao Inicial: 🃄🃔🂥🂵🃅🃕🂦🂶🃖🂷🃇
-Tamanho:11
 Veio para gerar Dupla Sequencia
 A mão tem 2 cartas de número 4
 
 Teste 5
-Jogada Anterior: 🂺🃚🂪
-Tamanho:3
-Mao Inicial: 🂢🂲🃂🂣🂳🃃🃓🂤🂴🃄🃔🃊🂬🂼Tamanho:14
