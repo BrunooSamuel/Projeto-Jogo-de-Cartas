@@ -205,8 +205,7 @@ int gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar
                 sequenciaTotal[pos]=mao[j];
                 pos++;
             }
-            
-            continuacaoGerarSequencias(baralho, sequenciaTotal, tamAnterior, pos+1, valorCartaMaisAlta);
+            continuacaoGerarSequencias(baralho, sequenciaTotal, tamAnterior, pos, valorCartaMaisAlta);
 
             free(sequenciaTotal);        
         }
@@ -232,10 +231,10 @@ int continuacaoGerarSequencias(carta baralho[], wchar_t sequenciaTotal[], int ta
     
     else 
     {
+        imprimirSequencias(sequenciaTotal,tamanho);
         for (int i = 0; i < tamanho; i++)
         {
             
-            imprimirSequencias(sequenciaTotal,tamanho);
             /*
             wchar_t* sequencia = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
             if (sequencia == NULL) {
