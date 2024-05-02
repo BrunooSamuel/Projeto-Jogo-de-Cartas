@@ -62,6 +62,12 @@ int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]);
 //Devolve o valor da carta mais alta
 int valorDaCarta (carta baralho[], wchar_t mao[], int tamanho);
 
+//Devolve o numero da carta
+int numeroCarta (carta baralho[], wchar_t carta);
+
+//Esta função verifica a quantidade de cartas do mesmo numero
+int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
+
 // COMBINACOES.C
 
 //Funcao para ler que combinação é
@@ -150,6 +156,7 @@ void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wcha
 //Gera as duplas sequencias
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
 
+int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
 
 // Esta linha fecha a diretiva #ifndef
 #endif
