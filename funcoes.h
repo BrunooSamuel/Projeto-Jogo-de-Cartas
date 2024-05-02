@@ -60,7 +60,17 @@ void processarCodigo(int esteTeste, carta *baralhoDef);
 int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]);
 
 //Devolve o valor da carta mais alta
-int valorDaCarta (carta baralho[], wchar_t mao[], int tamanho);
+int valorDaCartaMaisAlta (carta baralho[], wchar_t mao[], int tamanho);
+
+//Devolve o valor de uma carta especifica
+int valorDaCarta(carta baralho[], wchar_t mao[], int posicao);
+
+//Devolve o numero da carta
+int numeroCarta (carta baralho[], wchar_t carta);
+
+//Esta função verifica a quantidade de cartas do mesmo numero
+int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
+
 
 // COMBINACOES.C
 
@@ -141,14 +151,41 @@ void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnte
 
 //GERAR.C
 
+
 //Gera os conjuntos
-void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
+
+//Continuacao (parte 2 da funcao a cima)
+int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao, int valorCartaMaisAlta);
+
+//Quando o conjunto é de tamanho 2 e existem 3 ou 4 cartas
+void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta);
+
+//Quando o conjunto é de tamanho 3 e existem 4 cartas
+void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta);
+
+//Caso de quando sao varios conjuntos
+int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, int tamAnterior, int tamMao, int valorCartaMaisAlta);
+
+//Imprime os conjuntos
+void imprimirConjuntos (wchar_t mao[], int tamAnterior);
+
 
 //Gera as sequencias
-void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+int gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
+
+//Continuacao da funcao a cima
+int continuacaoGerarSequencias(carta baralho[], wchar_t sequenciaTotal[], int tamAnterior, int tamanho, int valorCartaMaisAlta);
+
+//Verifica se pode existir sequencias
+bool verificarSequencia(carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao);
+
+//Imprime as sequencias
+void imprimirSequencias (wchar_t mao[], int tamAnterior);
+
 
 //Gera as duplas sequencias
-void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamanho);
+void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
 
 // Esta linha fecha a diretiva #ifndef
