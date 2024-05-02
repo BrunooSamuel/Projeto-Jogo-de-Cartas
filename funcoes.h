@@ -183,6 +183,11 @@ bool verificarSequencia(carta baralho[], wchar_t mao[], int numero, int tamAnter
 //Imprime as sequencias
 void imprimirSequencias (wchar_t mao[], int tamAnterior);
 
+//Cria os pares possiveis dos naipes
+int criarPares ();
+
+//Devolve o numero da posicao do par no array criarPares
+int qualPar (carta baralho[], wchar_t primeiro, wchar_t segundo);
 
 //Gera as duplas sequencias
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
