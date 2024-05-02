@@ -42,26 +42,26 @@ int main () {
 void processarCodigo(int esteTeste, carta *baralhoDef) {
 
     wprintf(L"Teste %d\n", esteTeste);
-
+    
         wchar_t *jogadaAnterior = alocarMao ();
         int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
-        wprintf(L"Jogada Anterior: %lsTamanho:%d\n", jogadaAnterior,tamJogadaAnterior);
+        //wprintf(L"Jogada Anterior: %lsTamanho:%d\n", jogadaAnterior,tamJogadaAnterior);
 
         ordenarMao (baralhoDef, jogadaAnterior, tamJogadaAnterior);
         wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];
-        int valorMaisAltaAnterior=valorDaCarta (baralhoDef, jogadaAnterior, tamJogadaAnterior);
+        int valorMaisAltaAnterior=valorDaCartaMaisAlta (baralhoDef, jogadaAnterior, tamJogadaAnterior);
         int numReisAnterior=contadorAuxiliar (baralhoDef, jogadaAnterior);
-        wprintf(L"Carta mais alta da jogada anterior : %lc\tO valor dela é %d\nO Numero de reis é %d\n", codigoMaisAltaAnterior,valorMaisAltaAnterior,numReisAnterior);
+        //wprintf(L"Carta mais alta da jogada anterior : %lc\tO valor dela é %d\nO Numero de reis é %d\n", codigoMaisAltaAnterior,valorMaisAltaAnterior,numReisAnterior);
 
 
         int combAnterior=devolveCombinacao (jogadaAnterior, tamJogadaAnterior, baralhoDef);
-        wprintf(L"A jogada anterior era de combinação: %d\n", combAnterior);
+        //wprintf(L"A jogada anterior era de combinação: %d\n", combAnterior);
 
         wchar_t *maoJogador = alocarMao ();
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
         ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
         wprintf(L"Mao Inicial: %lsTamanho:%d\n", maoJogador,tamMaoJogador);
-
+        
 
         if (numReisAnterior>0) 
         {
