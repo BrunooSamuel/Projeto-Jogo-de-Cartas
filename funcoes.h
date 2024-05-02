@@ -190,8 +190,17 @@ void aumentarNaipeCarta (carta baralho[],wchar_t *carta);
 //Quantas cartam tem em comum entre a jogada e a mao
 int numeroCartasEmComum ( wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao);
 
+//Verifica se a carta está na mao
+bool cartaExiste (carta baralho[], wchar_t carta);
+
+//Verifica se a sequencia existe na mao, sendo de naipe espadas
+int verificarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao);
+
+//Verifica se a sequencia na mao existe, passando ao proximo naipe
+void verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto);
+
 //Gera as sequencias
-int gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
+void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
 //Imprime as sequencias
 void imprimirSequencias (wchar_t mao[], int tamAnterior);

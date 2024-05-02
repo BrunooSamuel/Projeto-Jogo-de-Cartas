@@ -78,7 +78,7 @@ void aumentarNaipeCarta (carta baralho[],wchar_t *carta) {
     }
 }
 
-int numeroCartasEmComum ( wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao) {
+int numeroCartasEmComum (wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao) {
     int r=0;
     for (int k = 0; k < tamAnterior; k++)
     {
@@ -90,47 +90,75 @@ int numeroCartasEmComum ( wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int 
     return r;
 }
 
-int verificarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao) {
-    colocarNaipeEspadas (baralho, jogada);
-    int quantidadeCartas= numeroCartasEmComum (jogada, mao, tamAnterior, tamMao);
-    return quantidadeCartas;
+bool cartaExiste (carta baralho[], wchar_t carta) {
+    bool r=false;
+    for (int i = 0; i < 56 && !r; i++)
+    {
+        if (baralho[i].codigo==carta) r=true;
+    }
+    return r;
 }
 
-int verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao) {
+int verificarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao) {
     for (int i = 0; i < tamAnterior; i++)
     {
-        aumentarNaipeCarta(baralho, &jogada[i]);
+        colocarNaipeEspadas (baralho, &jogada[i]);
     }
-    
-    int quantidadeCartas= numeroCartasEmComum (jogada, mao, tamAnterior, tamMao);
 
+    int quantidadeCartas= numeroCartasEmComum (jogada, mao, tamAnterior, tamMao);
     return quantidadeCartas;
 }
 
-int gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
-    int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);  
-    int limite=numeroMaisAlta-14; //limite para o while la embaixo
-    wchar_t* seqArray = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
-    if (seqArray == NULL) {
-        free (seqArray);
-        return -1;
-    }
-
-    
-    while (limite>=0) {
-        int contagemCartas=0;
-        for (int i = 0; i < tamAnterior; i++)
+void verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto) {
+    int pos=0;
+    bool existe=false;
+    bool acabar=false;
+    int o=0;
+    while (o<15) 
+    {
+        wprintf(L"o -> %d\n", o);
+        while(pos<tamAnterior && !acabar)
         {
-            bool figuraExiste=existeFiguraNaMao (baralho, &seqArray[i], mao, tamMao);
-            if (figuraExiste) contagemCartas++;
+            wprintf(L"pos -> %d\n", pos);
+            for (int i = 0; i < 4 && !existe; i++)
+            {
+                aumentarNaipeCarta(baralho, &jogada[pos]);
+                if (cartaExiste(baralho,jogada[pos])) existe=true;
+            }
+            if (!existe) acabar=true;
+            else existe=false;
+            pos++;
         }
-        imprimirSequencias(seqArray,tamAnterior);
-        wprintf(L"%d contagem\n", contagemCartas);
+        if (!acabar) 
+        {
+            int quantidadeCartas=numeroCartasEmComum (jogada, mao, tamAnterior, tamMao);
+            if (quantidadeCartas==tamAnterior && valorDaCartaMaisAlta(baralho,jogada,tamAnterior)>valorMaisAlto) 
+            {
+                imprimirSequencias(jogada, tamAnterior);
+            }
+        }
+        o++;
     }
+}
 
-    free (seqArray);
+void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
+    int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);
 
-    return 0;
+    int limite=14-numeroMaisAlta; //limite para o while la embaixo
+    int quant;
+
+    quant=verificarSequenciaNaipeEspadas (baralho, jogadaAnterior, mao, tamAnterior, tamMao);
+    //imprimirSequencias(jogadaAnterior, tamAnterior);
+    if (quant==tamAnterior && valorDaCartaMaisAlta(baralho,jogadaAnterior,tamAnterior)>valorCartaMaisAlta) imprimirSequencias(jogadaAnterior, tamAnterior);
+    while (limite>=0) 
+    {   
+        wprintf(L"Limite -> %d\n", limite);
+        for (int n = 1; n <= 4; n++)
+        {
+            verificarSequenciaProximoNaipe (baralho, jogadaAnterior, mao, tamAnterior, tamMao, valorCartaMaisAlta);
+        }
+        limite--;
+    }
 }
 
 void imprimirSequencias (wchar_t mao[], int tamAnterior) {
