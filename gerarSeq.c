@@ -90,54 +90,68 @@ int numeroCartasEmComum (wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int t
     return r;
 }
 
-bool cartaExiste (carta baralho[], wchar_t carta) {
+bool cartaExiste (wchar_t mao[], wchar_t carta) {
     bool r=false;
     for (int i = 0; i < 56 && !r; i++)
     {
-        if (baralho[i].codigo==carta) r=true;
+        if (mao[i]==carta) r=true;
     }
     return r;
 }
 
-int verificarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao) {
+void colocarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, int tamAnterior) {
     for (int i = 0; i < tamAnterior; i++)
     {
         colocarNaipeEspadas (baralho, &jogada[i]);
     }
-
-    int quantidadeCartas= numeroCartasEmComum (jogada, mao, tamAnterior, tamMao);
-    return quantidadeCartas;
 }
 
-void verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto) {
-    int pos=0;
-    bool existe=false;
-    bool acabar=false;
-    int o=0;
-    while (o<15) 
+int verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto) {
+    bool parar=false;
+
+    wchar_t* seq = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
+    if (seq == NULL) {
+        free (seq);
+        return -1;
+    }
+    wcscpy(seq, jogada);
+    imprimirSequencias(seq, tamAnterior);
+    //altera a carta
+    for (int i = 0; i < tamAnterior; i++)
     {
-        wprintf(L"o -> %d\n", o);
-        while(pos<tamAnterior && !acabar)
-        {
-            wprintf(L"pos -> %d\n", pos);
-            for (int i = 0; i < 4 && !existe; i++)
-            {
-                aumentarNaipeCarta(baralho, &jogada[pos]);
-                if (cartaExiste(baralho,jogada[pos])) existe=true;
-            }
-            if (!existe) acabar=true;
-            else existe=false;
-            pos++;
+        aumentarNaipeCarta(baralho, &seq[i]);
+        if (cartaExiste(mao,seq[i])) {
+            parar=true;
+            jogada[i]=seq[i];
         }
-        if (!acabar) 
+    }
+
+    if (parar) 
+    {
+        imprimirSequencias(seq, tamAnterior);
+
+        int quantidadeCartas=numeroCartasEmComum (jogada, mao, tamAnterior, tamMao);
+        if (quantidadeCartas==tamAnterior && valorDaCartaMaisAlta(baralho,jogada,tamAnterior)>valorMaisAlto) 
         {
-            int quantidadeCartas=numeroCartasEmComum (jogada, mao, tamAnterior, tamMao);
-            if (quantidadeCartas==tamAnterior && valorDaCartaMaisAlta(baralho,jogada,tamAnterior)>valorMaisAlto) 
-            {
-                imprimirSequencias(jogada, tamAnterior);
-            }
+            imprimirSequencias(jogada, tamAnterior);
         }
-        o++;
+    }
+
+    free (seq);
+    return 0;
+}
+
+// Função para gerar todas as permutações possíveis de um array de caracteres
+void gerar_permutacoes(carta baralho[], wchar_t *jogada, int posicao, int fim) {
+    if (posicao == fim) {
+        wprintf(L"%ls\n", jogada); // Imprime a permutação atual
+        return;
+    }
+
+    for (int i = posicao; i <= fim; i++) {
+        aumentarNaipeCarta (baralho, &jogada[i]);
+        gerar_permutacoes(baralho, jogada, posicao, fim); // Chama recursivamente a função para a próxima posição
+        aumentarNaipeCarta (baralho, &jogada[i]);
     }
 }
 
@@ -145,18 +159,20 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);
 
     int limite=14-numeroMaisAlta; //limite para o while la embaixo
-    int quant;
 
-    quant=verificarSequenciaNaipeEspadas (baralho, jogadaAnterior, mao, tamAnterior, tamMao);
+    colocarSequenciaNaipeEspadas (baralho, jogadaAnterior, tamAnterior);
+    int quant=numeroCartasEmComum (jogadaAnterior, mao, tamAnterior, tamMao);
     //imprimirSequencias(jogadaAnterior, tamAnterior);
     if (quant==tamAnterior && valorDaCartaMaisAlta(baralho,jogadaAnterior,tamAnterior)>valorCartaMaisAlta) imprimirSequencias(jogadaAnterior, tamAnterior);
     while (limite>=0) 
     {   
         wprintf(L"Limite -> %d\n", limite);
-        for (int n = 1; n <= 4; n++)
-        {
-            verificarSequenciaProximoNaipe (baralho, jogadaAnterior, mao, tamAnterior, tamMao, valorCartaMaisAlta);
-        }
+
+        aumentarFigura (baralho, jogadaAnterior, tamAnterior);
+        //imprimirSequencias(jogadaAnterior, tamAnterior);
+
+        //gerar_permutacoes(baralho, jogadaAnterior, 0, tamAnterior);
+        //verificarSequenciaProximoNaipe (baralho, jogadaAnterior, mao, tamAnterior, tamMao, valorCartaMaisAlta);
         limite--;
     }
 }
@@ -169,5 +185,3 @@ void imprimirSequencias (wchar_t mao[], int tamAnterior) {
     }
     wprintf(L"%lc\n", mao[i]);
 }
-
-
