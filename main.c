@@ -45,7 +45,7 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
     
         wchar_t *jogadaAnterior = alocarMao ();
         int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
-        //wprintf(L"Jogada Anterior: %lsTamanho:%d\n", jogadaAnterior,tamJogadaAnterior);
+        wprintf(L"Jogada Anterior: %lsTamanho:%d\n", jogadaAnterior,tamJogadaAnterior);
 
         ordenarMao (baralhoDef, jogadaAnterior, tamJogadaAnterior);
         wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];

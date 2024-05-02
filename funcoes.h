@@ -187,6 +187,9 @@ void imprimirSequencias (wchar_t mao[], int tamAnterior);
 //Gera as duplas sequencias
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
+//Continuacao
+int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
+
 
 // Esta linha fecha a diretiva #ifndef
 #endif
