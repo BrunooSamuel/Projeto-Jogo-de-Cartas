@@ -155,6 +155,16 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
         }
     }
 }
+// Criei essa função para usar como teste na gerarSequencia
+void imprimirSequencia(wchar_t* sequencia, int tamanho) {
+    wprintf(L"Sequência maior encontrada: ");
+    for (int i = 0; i < tamanho; i++) {
+        wprintf(L"%lc ", sequencia[i]);
+    }
+    wprintf(L"\n");
+}
+void gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
+    wprintf(L"Veio para gerar Sequencia\n"); 
 
 void imprimirConjuntos (wchar_t mao[], int tamAnterior) {
     int i;
