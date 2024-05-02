@@ -45,7 +45,7 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
     
         wchar_t *jogadaAnterior = alocarMao ();
         int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
-        //wprintf(L"Jogada Anterior: %lsTamanho:%d\n", jogadaAnterior,tamJogadaAnterior);
+        wprintf(L"Jogada Anterior: %ls", jogadaAnterior);
 
         ordenarMao (baralhoDef, jogadaAnterior, tamJogadaAnterior);
         wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];
@@ -60,11 +60,11 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         wchar_t *maoJogador = alocarMao ();
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
         ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-        //wprintf(L"Mao Inicial: %lsTamanho:%d\n", maoJogador,tamMaoJogador);
+        wprintf(L"Mao Inicial: %ls\n", maoJogador);
         
   
         if (combAnterior==0) gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
-        else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+        else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
         else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
 
         if (numReisAnterior>0) 

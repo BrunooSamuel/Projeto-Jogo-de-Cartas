@@ -6,34 +6,6 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-// Função para verificar todas as cartas da combinacao na mão do jogador
-bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb) {
-    int contagem=0;
-
-    while (*comb != L'\0' && tamanho>0) {
-        bool encontrou=false;
-        wchar_t *posicao = NULL; // Buscar a carta na mão do jogador
-
-        for (wchar_t *ptr = mao; *ptr != L'\0' && !encontrou; ++ptr) 
-        {
-            if (*ptr == *comb) 
-            {
-                posicao = ptr;
-                encontrou=true;
-                contagem++;
-            }
-        } 
-        // Avançar para a próxima carta da jogada
-        comb++;
-    }
-
-    if (contagem==tamanhoComb) return true;
-    else return false;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
     bool existeConjunto=false;
     int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);
@@ -127,20 +99,21 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
         return -1;
     }
         
-    if (tamAnterior==1) {
-        for (int i = 0; i < quantidade; i++)
-        {
-            conjunto[0]=conjuntoTotal[i];
-            imprimirConjuntos (conjunto, tamAnterior);
-        }
-        
-    }
+    if (tamAnterior==1) conjuntosTamanho1 (conjuntoTotal, conjunto, quantidade, tamAnterior);
     else if (tamAnterior==2) conjuntosTamanho2 (baralho, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta);
     else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta);
 
     free(conjunto);
     free(conjuntoTotal);
     return 0;
+}
+
+void conjuntosTamanho1 (wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int tamAnterior) {
+    for (int i = 0; i < quantidade; i++)
+        {
+            conjunto[0]=conjuntoTotal[i];
+            imprimirConjuntos (conjunto, tamAnterior);
+        }
 }
 
 void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta) {
@@ -191,83 +164,3 @@ void imprimirConjuntos (wchar_t mao[], int tamAnterior) {
     }
     wprintf(L"%lc\n", mao[i]);
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-int gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
-    int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);  
-    
-    return 0;
-}
-
-//verifica se pode existir sequencia nesse numero
-bool verificarSequencia(carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao) {
-    bool r=true;
-    int limiteNumero = numero-tamAnterior+1;
-
-    while (r && numero>=limiteNumero) {
-        if (analisarMao (baralho, mao, numero, tamMao)==0) r=false;
-        numero--;
-    }
-    return r;
-}
-
-//Recebe já apenas as cartas para serem geradas as sequencias
-int continuacaoGerarSequencias(carta baralho[], wchar_t sequenciaTotal[], int tamAnterior, int tamanho, int valorCartaMaisAlta) {
-
-    
-    return 0;
-}
-
-void imprimirSequencias (wchar_t mao[], int tamAnterior) {
-    int i;
-    for (i = 0; i < tamAnterior-1; i++)
-    {
-        wprintf(L"%lc ", mao[i]);
-    }
-    wprintf(L"%lc\n", mao[i]);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int* criarPares () {
-    int array[12]={1,2,1,3,2,3,1,4,2,4,3,4};
-    return array;
-}
-
-int qualPar (carta baralho[], wchar_t primeiro, wchar_t segundo) {
-    int pos; //posicao do primeiro numero do par no array do criarPares
-    // ja recebe ordenado as cartas
-    int p;
-    int s;
-
-    for(int i;i<56;i++) {
-        if (baralho[i].codigo==primeiro) primeiro=baralho[i].numero;
-        else if (baralho[i].codigo==segundo) segundo=baralho[i].numero;
-    }
-
-    if (p==1) {
-        if (s==2) pos=0;
-        else if (s==3) pos=2;
-        else pos=6;
-    } else if (p==2) {
-        if (s==3) pos=4;
-        else pos=8;
-    } else pos=10;
-
-    return pos;
-}
-
-void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
-    int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta); 
-
-
-}
-
-
-int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao) {
-    
-
-    return 0;
-}
-
-

@@ -24,7 +24,7 @@ int lerUmaMao(wchar_t *mao, carta baralho[]);
 void ordena(int mao[], int tamanho);
 
 //Função que dá free
-void libertar (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores,wchar_t *maoJogador, wchar_t *jogadaJogador);
+void libertar (carta *baralho,wchar_t *mao, wchar_t *conjuntoTotal);
 
 //Função que aloca memoria para arrays de Int
 int* alocarArrayInt (int linhas);
@@ -149,16 +149,16 @@ void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnte
 
 
 
-//GERAR.C
-
-// Função para verificar todas as cartas da combinacao na mão do jogador
-bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb); 
+//GERARCONJ.C
 
 //Gera os conjuntos
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
 //Continuacao (parte 2 da funcao a cima)
 int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao, int valorCartaMaisAlta);
+
+//Quando o conjunto é apenas de 1 carta
+void conjuntosTamanho1 (wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int tamAnterior);
 
 //Quando o conjunto é de tamanho 2 e existem 3 ou 4 cartas
 void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta);
@@ -173,17 +173,31 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
 void imprimirConjuntos (wchar_t mao[], int tamAnterior);
 
 
+//GERARSEQ.C
+
+// Função para verificar todas as cartas da combinacao na mão do jogador
+bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb); 
+
+//Aumenta a figura de um array inteiro e muda o naipe para espadas
+void aumentarFigura (carta baralho[], wchar_t jogada[], int tamanho);
+
+//Coloca uma carta no naipe espadas
+void colocarNaipeEspadas (carta baralho[],wchar_t *carta);
+
+//Aumenta o naipe de uma carta
+void aumentarNaipeCarta (carta baralho[],wchar_t *carta);
+
+//Quantas cartam tem em comum entre a jogada e a mao
+int numeroCartasEmComum ( wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao);
+
 //Gera as sequencias
-int gerarSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
-
-//Continuacao da funcao a cima
-int continuacaoGerarSequencias(carta baralho[], wchar_t sequenciaTotal[], int tamAnterior, int tamanho, int valorCartaMaisAlta);
-
-//Verifica se pode existir sequencias
-bool verificarSequencia(carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao);
+int gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
 
 //Imprime as sequencias
 void imprimirSequencias (wchar_t mao[], int tamAnterior);
+
+
+//GERARDUPSEQ.C
 
 //Cria os pares possiveis dos naipes
 int* criarPares ();
@@ -193,9 +207,6 @@ int qualPar (carta baralho[], wchar_t primeiro, wchar_t segundo);
 
 //Gera as duplas sequencias
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
-
-//Continuacao
-int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
 
 
 // Esta linha fecha a diretiva #ifndef
