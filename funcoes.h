@@ -24,7 +24,7 @@ int lerUmaMao(wchar_t *mao, carta baralho[]);
 void ordena(int mao[], int tamanho);
 
 //Função que dá free
-void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores,wchar_t *maoJogador, wchar_t *jogadaJogador);
+void libertar (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores,wchar_t *maoJogador, wchar_t *jogadaJogador);
 
 //Função que aloca memoria para arrays de Int
 int* alocarArrayInt (int linhas);
@@ -151,6 +151,8 @@ void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnte
 
 //GERAR.C
 
+// Função para verificar todas as cartas da combinacao na mão do jogador
+bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb); 
 
 //Gera os conjuntos
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao);
@@ -184,7 +186,7 @@ bool verificarSequencia(carta baralho[], wchar_t mao[], int numero, int tamAnter
 void imprimirSequencias (wchar_t mao[], int tamAnterior);
 
 //Cria os pares possiveis dos naipes
-int criarPares ();
+int* criarPares ();
 
 //Devolve o numero da posicao do par no array criarPares
 int qualPar (carta baralho[], wchar_t primeiro, wchar_t segundo);

@@ -6,6 +6,32 @@
 #include "funcoes.h"
 #include "cartas.h"
 
+// Função para verificar todas as cartas da combinacao na mão do jogador
+bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb) {
+    int contagem=0;
+
+    while (*comb != L'\0' && tamanho>0) {
+        bool encontrou=false;
+        wchar_t *posicao = NULL; // Buscar a carta na mão do jogador
+
+        for (wchar_t *ptr = mao; *ptr != L'\0' && !encontrou; ++ptr) 
+        {
+            if (*ptr == *comb) 
+            {
+                posicao = ptr;
+                encontrou=true;
+                contagem++;
+            }
+        } 
+        // Avançar para a próxima carta da jogada
+        comb++;
+    }
+
+    if (contagem==tamanhoComb) return true;
+    else return false;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
@@ -73,9 +99,7 @@ int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int ta
 int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, int tamAnterior, int tamMao, int valorCartaMaisAlta) {
     wchar_t* conjuntoTotal = (wchar_t*)malloc (sizeof(wchar_t)*quantidade);
     if (conjuntoTotal == NULL) {
-        free (conjuntoTotal);
-        free (baralho);
-        free (mao);
+        libertar (baralho, mao, conjuntoTotal);
         return -1;
     }
     bool encontrou=false;
@@ -99,9 +123,7 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
     wchar_t* conjunto = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
     if (conjunto == NULL) {
         free (conjunto);
-        free (conjuntoTotal);
-        free (baralho);
-        free (mao);
+        libertar (baralho, mao, conjuntoTotal);
         return -1;
     }
         
@@ -117,7 +139,6 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
     else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta);
 
     free(conjunto);
-
     free(conjuntoTotal);
     return 0;
 }
@@ -208,7 +229,7 @@ void imprimirSequencias (wchar_t mao[], int tamAnterior) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int criarPares () {
+int* criarPares () {
     int array[12]={1,2,1,3,2,3,1,4,2,4,3,4};
     return array;
 }

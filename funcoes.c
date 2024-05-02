@@ -142,12 +142,10 @@ void ordena(int mao[], int tamanho) {
 }   
 
 
-void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores,wchar_t *maoJogador, wchar_t *jogadaJogador) {
-    free(arrayTamanhos);
-    free(arrayComb);
-    free(jogadasAnteriores);
-    free(maoJogador);
-    free(jogadaJogador);
+void libertar (carta *baralho,wchar_t *mao, wchar_t *conjuntoTotal) {
+    free (conjuntoTotal);
+    free (baralho);
+    free (mao);
 }
 
 
@@ -353,7 +351,7 @@ int valorDaCarta(carta baralho[], wchar_t mao[], int posicao) {
 }
 
 int numeroCarta (carta baralho[], wchar_t carta) {
-    int r;
+    int r=0;
     bool encontrado=false;
     for (int k = 0; k < 56 && !encontrado; k++)
     {
