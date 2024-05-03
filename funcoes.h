@@ -200,7 +200,7 @@ void colocarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, int tamAnte
 int verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto);
 
 
-void gerar_permutacoes(carta baralho[], wchar_t *jogada, int posicao, int fim);
+void gerar_permutacoes(carta baralho[], wchar_t *jogada, int numero, int posicao, int tamanho);
 
 //Gera as diferentes sequencias com as mesmas figuras
 void gerarComMesmasFiguras (carta baralho[], wchar_t *jogada, wchar_t mao[], int tamAnterior);
