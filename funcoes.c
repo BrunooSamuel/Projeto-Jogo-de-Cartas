@@ -6,22 +6,6 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-void imprimir(int t, carta baralho[]) {
-    wprintf(L"Começa a imprimir as cartas com numero: %d\n", t);
-
-    for (int i = 0; i < 56; i++) {
-        if (baralho[i].numero == t) {
-
-            wchar_t c = baralho[i].codigo;
-    	    wprintf(L"%lc\n", c);
-        }
-    } 
-
-    wprintf(L"Acabou de Imprimir\n");  
-}
-
-
-
 int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *posMaos, int *arrayTamanhos) {
 
     //32 porque houve testes de dupla sequencia onde o input foi de 28 cartas, +4 de margem
@@ -142,12 +126,10 @@ void ordena(int mao[], int tamanho) {
 }   
 
 
-void libertarTodas (int *arrayTamanhos, int *arrayComb,wchar_t *jogadasAnteriores,wchar_t *maoJogador, wchar_t *jogadaJogador) {
-    free(arrayTamanhos);
-    free(arrayComb);
-    free(jogadasAnteriores);
-    free(maoJogador);
-    free(jogadaJogador);
+void libertar (carta *baralho,wchar_t *mao, wchar_t *conjuntoTotal) {
+    free (conjuntoTotal);
+    free (baralho);
+    free (mao);
 }
 
 
@@ -353,13 +335,28 @@ int valorDaCarta(carta baralho[], wchar_t mao[], int posicao) {
 }
 
 int numeroCarta (carta baralho[], wchar_t carta) {
-    int r;
+    int r=0;
     bool encontrado=false;
     for (int k = 0; k < 56 && !encontrado; k++)
     {
         if(carta==baralho[k].codigo)  
         {
             r=baralho[k].numero;
+            encontrado=true;
+            //wprintf(L"O numero é %d\n", r);
+        }
+    } 
+    return r;
+}
+
+int naipeCarta (carta baralho[], wchar_t carta) {
+    int r=0;
+    bool encontrado=false;
+    for (int k = 0; k < 56 && !encontrado; k++)
+    {
+        if(carta==baralho[k].codigo)  
+        {
+            r=baralho[k].naipe;
             encontrado=true;
             //wprintf(L"O numero é %d\n", r);
         }
@@ -379,6 +376,27 @@ int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
         t=numeroCarta(baralho, mao[pos]);
         if (t<numero) pos++;
         else if (t==numero) {contagem++; pos++;}
+        else if(t>numero) {passou=true;}
+    }
+    //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
+    return contagem;
+}
+
+//Esta função verifica a quantidade de cartas da mesma figura, apenas nos proximos naipes
+int analisarProximosNaipes (carta baralho[], wchar_t mao[], int numero, int valor, int tamanho) {
+    bool passou=false;
+    int pos=0;
+    int t;
+    int contagem=0;
+
+    while ((pos < tamanho) && !passou)
+    {
+        t=numeroCarta(baralho, mao[pos]);
+        if (t<numero) pos++;
+        else if (t==numero) 
+        {
+            if (valorDaCarta(baralho, mao, pos)>valor) {contagem++;} pos++;
+        }
         else if(t>numero) {passou=true;}
     }
     //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
