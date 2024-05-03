@@ -199,8 +199,9 @@ void colocarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, int tamAnte
 //Verifica se a sequencia na mao existe, passando ao proximo naipe
 int verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto);
 
+void gerarPermutacoesPrimeiroCaso(carta baralho[], wchar_t *jogada, int numero, int posicao, int tamanho);
 
-void gerar_permutacoes(carta baralho[], wchar_t *jogada, int numero, int posicao, int tamanho);
+void gerarPermutacoes(carta baralho[], wchar_t *jogada, int numero, int posicao, int tamanho);
 
 //Gera as diferentes sequencias com as mesmas figuras
 void gerarComMesmasFiguras (carta baralho[], wchar_t *jogada, wchar_t mao[], int tamAnterior);
