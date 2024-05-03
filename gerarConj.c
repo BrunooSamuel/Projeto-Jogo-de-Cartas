@@ -24,17 +24,16 @@ int cartaIsolada (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int ta
         }
     }
 
-    if (pos==0 && (numReis==0 || numReis==4)) wprintf(L"PASSO");
+    if (pos==0 && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
     else if (pos!=0)
     {
         (*jaImprimiu)=true;
 
         int i;
-        for (i = 0; i < pos-1; i++)
+        for (i = 0; i < pos; i++)
         {
             wprintf(L"%lc\n",conjunto[i]);
         }
-        wprintf(L"%lc",conjunto[i]);
     }
 
     free (conjunto);
@@ -64,7 +63,7 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int 
     }
     
     
-    if (!(*jaImprimiu) && !existeConjunto && (numReis==0 || numReis==4)) wprintf(L"PASSO");
+    if (!(*jaImprimiu) && !existeConjunto && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
 }
 
 //Caso so haja uma hipotese de impressao
