@@ -98,7 +98,7 @@ int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int ta
     //wprintf(L"Conjunto atual -> %ls\nvalores %d e %d\n", conjuntoAtual, valorConjuntoAtual,valorCartaMaisAlta);
     if (posicao == tamAnterior && valorConjuntoAtual > valorCartaMaisAlta)
     {
-        imprimirConjuntos (conjuntoAtual, tamAnterior, mao[tamMao-1]);
+        imprimirConjuntos (conjuntoAtual, tamAnterior);
     }
 
     free (conjuntoAtual);
@@ -135,15 +135,15 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
         return -1;
     }
         
-    if (tamAnterior==2) conjuntosTamanho2 (baralho, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta, mao[tamMao-1]);
-    else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta, mao[tamMao-1]);
+    if (tamAnterior==2) conjuntosTamanho2 (baralho, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta);
+    else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta);
 
     free(conjunto);
     free(conjuntoTotal);
     return 0;
 }
 
-void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, wchar_t ultimaCarta) {
+void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta) {
     //quantidade de cartas pode ser 3 ou 4
     int p; //primeira carta
     int s; // segunda carta
@@ -155,12 +155,12 @@ void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjun
         for (s = p + 1; s <= posicaoSfinal; s++) 
         {
             conjunto[1]=conjuntoTotal[s];
-            if (valorDaCartaMaisAlta(baralho,conjunto,2)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 2, ultimaCarta);}
+            if (valorDaCartaMaisAlta(baralho,conjunto,2)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 2);}
         }
     }
 }
 
-void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, wchar_t ultimaCarta) {
+void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta) {
     //quantidade de cartas é sempre 4
     int p; //primeira carta
     int s; // segunda carta
@@ -177,19 +177,18 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
             for (t = s + 1; t <= posicaoTfinal; t++)
             {
                 conjunto[2]=conjuntoTotal[t];
-                if (valorDaCartaMaisAlta(baralho,conjunto,3)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 3, ultimaCarta);}
+                if (valorDaCartaMaisAlta(baralho,conjunto,3)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 3);}
             }
         }
     }
 }
 
-void imprimirConjuntos (wchar_t mao[], int tamAnterior, wchar_t ultimaCarta) {
+void imprimirConjuntos (wchar_t mao[], int tamAnterior) {
     int i;
 
     for (i = 0; i < tamAnterior-1; i++)
     {
         wprintf(L"%lc ", mao[i]);
     }
-    if (mao[i]!=ultimaCarta) wprintf(L"%lc\n", mao[i]);
-    else wprintf(L"%lc", mao[i]);
+    wprintf(L"%lc\n", mao[i]);
 }

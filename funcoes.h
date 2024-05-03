@@ -162,16 +162,16 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int 
 int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao, int valorCartaMaisAlta);
 
 //Quando o conjunto é de tamanho 2 e existem 3 ou 4 cartas
-void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, wchar_t ultimaCarta);
+void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta);
 
 //Quando o conjunto é de tamanho 3 e existem 4 cartas
-void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, wchar_t ultimaCarta);
+void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta);
 
 //Caso de quando sao varios conjuntos
 int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, int tamAnterior, int tamMao, int valorCartaMaisAlta);
 
 //Imprime os conjuntos
-void imprimirConjuntos (wchar_t mao[], int tamAnterior, wchar_t ultimaCarta);
+void imprimirConjuntos (wchar_t mao[], int tamAnterior);
 
 
 //GERARSEQ.C
