@@ -6,15 +6,52 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int numeroMaisAlta, int tamAnterior, int tamMao, int numReis) {
+int cartaIsolada (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int tamMao, int numReis, bool *jaImprimiu) {
+    wchar_t* conjunto = (wchar_t*)malloc (sizeof(wchar_t)*tamMao);
+    if (conjunto == NULL) {
+        free (conjunto);
+        free (baralho);
+        free (mao);
+        return -1;
+    }
+    int pos=0;
+    for (int i = 0; i < tamMao; i++)
+    {
+        if (valorDaCarta(baralho,mao,i)>valorCartaMaisAlta) 
+        {
+            conjunto[pos]=mao[i];
+            pos++;
+        }
+    }
+
+    if (pos==0 && (numReis==0 || numReis==4)) wprintf(L"PASSO");
+    else if (pos!=0)
+    {
+        (*jaImprimiu)=true;
+
+        int i;
+        for (i = 0; i < pos-1; i++)
+        {
+            wprintf(L"%lc\n",conjunto[i]);
+        }
+        wprintf(L"%lc",conjunto[i]);
+    }
+
+    free (conjunto);
+    return 0;
+}
+
+
+void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int numeroMaisAlta, int tamAnterior, int tamMao, int numReis, bool *jaImprimiu) {
     bool existeConjunto=false;
+
     for (int i = numeroMaisAlta; i <= 14; i++)
     {
         int contagem=analisarMao (baralho, mao, i, tamMao);
         //wprintf(L"A mão tem %d cartas de número %d\n", contagem, i);
 
         if (contagem==tamAnterior) 
-        {
+            {
             //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", i, contagem);
             existeConjunto=true;
             ContinuacaoGerarConjunto (baralho, mao, i, tamAnterior, tamMao, valorCartaMaisAlta);
@@ -25,7 +62,9 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int 
             variosConjuntos(baralho, mao, i, contagem, tamAnterior, tamMao, valorCartaMaisAlta);
         }
     }
-    if (!existeConjunto && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
+    
+    
+    if (!(*jaImprimiu) && !existeConjunto && (numReis==0 || numReis==4)) wprintf(L"PASSO");
 }
 
 //Caso so haja uma hipotese de impressao
@@ -40,7 +79,6 @@ int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int ta
         free (mao);
         return -1;
     }
-
     for (int i = 0; i < tamMao && posicao<tamAnterior; i++)
     {
         for (int k = (numero*4)-4; k <= (numero*4)-1 && !encontrou; k++)
@@ -60,7 +98,7 @@ int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int ta
     //wprintf(L"Conjunto atual -> %ls\nvalores %d e %d\n", conjuntoAtual, valorConjuntoAtual,valorCartaMaisAlta);
     if (posicao == tamAnterior && valorConjuntoAtual > valorCartaMaisAlta)
     {
-        imprimirConjuntos (conjuntoAtual, tamAnterior);
+        imprimirConjuntos (conjuntoAtual, tamAnterior, mao[tamMao-1]);
     }
 
     free (conjuntoAtual);
@@ -75,7 +113,7 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
     }
     bool encontrou=false;
     int posicao=0;
-
+   
     //coloca todas as cartas no array para serem usadas nos varios conjuntos
     for (int i = 0; i < tamMao && posicao<quantidade; i++)
     {
@@ -90,7 +128,6 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
         }
         encontrou=false;
     }
-
     wchar_t* conjunto = (wchar_t*)malloc (sizeof(wchar_t)*tamAnterior);
     if (conjunto == NULL) {
         free (conjunto);
@@ -98,24 +135,15 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
         return -1;
     }
         
-    if (tamAnterior==1) conjuntosTamanho1 (baralho, conjuntoTotal, conjunto, quantidade, valorCartaMaisAlta);
-    else if (tamAnterior==2) conjuntosTamanho2 (baralho, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta);
-    else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta);
+    if (tamAnterior==2) conjuntosTamanho2 (baralho, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta, mao[tamMao-1]);
+    else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta, mao[tamMao-1]);
 
     free(conjunto);
     free(conjuntoTotal);
     return 0;
 }
 
-void conjuntosTamanho1 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta) {
-    for (int i = 0; i < quantidade; i++)
-        {
-            conjunto[0]=conjuntoTotal[i];
-            if (valorDaCartaMaisAlta(baralho,conjunto,1)>valorCartaMaisAlta) imprimirConjuntos (conjunto, 1);
-        }
-}
-
-void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta) {
+void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, wchar_t ultimaCarta) {
     //quantidade de cartas pode ser 3 ou 4
     int p; //primeira carta
     int s; // segunda carta
@@ -127,12 +155,12 @@ void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjun
         for (s = p + 1; s <= posicaoSfinal; s++) 
         {
             conjunto[1]=conjuntoTotal[s];
-            if (valorDaCartaMaisAlta(baralho,conjunto,2)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 2);}
+            if (valorDaCartaMaisAlta(baralho,conjunto,2)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 2, ultimaCarta);}
         }
     }
 }
 
-void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta) {
+void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, wchar_t ultimaCarta) {
     //quantidade de cartas é sempre 4
     int p; //primeira carta
     int s; // segunda carta
@@ -149,17 +177,19 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
             for (t = s + 1; t <= posicaoTfinal; t++)
             {
                 conjunto[2]=conjuntoTotal[t];
-                if (valorDaCartaMaisAlta(baralho,conjunto,3)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 3);}
+                if (valorDaCartaMaisAlta(baralho,conjunto,3)>valorCartaMaisAlta) {imprimirConjuntos (conjunto, 3, ultimaCarta);}
             }
         }
     }
 }
 
-void imprimirConjuntos (wchar_t mao[], int tamAnterior) {
+void imprimirConjuntos (wchar_t mao[], int tamAnterior, wchar_t ultimaCarta) {
     int i;
+
     for (i = 0; i < tamAnterior-1; i++)
     {
         wprintf(L"%lc ", mao[i]);
     }
-    wprintf(L"%lc\n", mao[i]);
+    if (mao[i]!=ultimaCarta) wprintf(L"%lc\n", mao[i]);
+    else wprintf(L"%lc", mao[i]);
 }

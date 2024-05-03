@@ -7,10 +7,6 @@
 
 // FUNCOES.C
 
-
-//Funcao teste para imprimir
-void imprimir (int t, carta baralho[]);
-
 //Funcao de limpeza da entrada
 void limpar();
 
@@ -68,9 +64,14 @@ int valorDaCarta(carta baralho[], wchar_t mao[], int posicao);
 //Devolve o numero da carta
 int numeroCarta (carta baralho[], wchar_t carta);
 
+//Devolve o naipe da carta
+int naipeCarta (carta baralho[], wchar_t carta);
+
 //Esta função verifica a quantidade de cartas do mesmo numero
 int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
 
+//Esta função verifica a quantidade de cartas da mesma figura, apenas nos proximos naipes
+int analisarProximosNaipes (carta baralho[], wchar_t mao[], int numero, int valor, int tamanho); 
 
 // COMBINACOES.C
 
@@ -151,26 +152,26 @@ void imprimeMaosOrdenadas (int linhas, int arrayTamanhos[], wchar_t *jogadasAnte
 
 //GERARCONJ.C
 
+//Gera cartas isoladas
+int cartaIsolada (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int tamMao, int numReis, bool *jaImprimiu);
+
 //Gera os conjuntos
-void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int numeroMaisAlta, int tamAnterior, int tamMao, int numReis);
+void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int numeroMaisAlta, int tamAnterior, int tamMao, int numReis, bool *jaImprimiu);
 
 //Continuacao (parte 2 da funcao a cima)
 int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao, int valorCartaMaisAlta);
 
-//Quando o conjunto é apenas de 1 carta
-void conjuntosTamanho1 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta);
-
 //Quando o conjunto é de tamanho 2 e existem 3 ou 4 cartas
-void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta);
+void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, wchar_t ultimaCarta);
 
 //Quando o conjunto é de tamanho 3 e existem 4 cartas
-void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta);
+void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, wchar_t ultimaCarta);
 
 //Caso de quando sao varios conjuntos
 int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, int tamAnterior, int tamMao, int valorCartaMaisAlta);
 
 //Imprime os conjuntos
-void imprimirConjuntos (wchar_t mao[], int tamAnterior);
+void imprimirConjuntos (wchar_t mao[], int tamAnterior, wchar_t ultimaCarta);
 
 
 //GERARSEQ.C

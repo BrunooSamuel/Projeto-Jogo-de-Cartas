@@ -61,9 +61,13 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
         ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
         //wprintf(L"Mao Inicial: %ls\n", maoJogador);
-        
+        bool jaImprimiu=false;
         int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
-        if (combAnterior==0) gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, numeroMaisAlta, tamJogadaAnterior, tamMaoJogador, numReisAnterior);
+        if (combAnterior==0) 
+        {
+            if (tamJogadaAnterior==1) cartaIsolada (baralhoDef, maoJogador, valorMaisAltaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
+            else gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, numeroMaisAlta, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
+        }
         else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
         //else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
 
@@ -72,7 +76,8 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
             //wprintf(L"%d REIS!\n", numReisAnterior);
             if (numReisAnterior==1) 
             {
-                gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, numReisAnterior);
+                //vem com 0 reis para poder escrever passo se necessário
+                gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, 0, &jaImprimiu);
                 //dupla sequencia tamanho 3
             }
             else if (numReisAnterior==2) {}//dupla sequencia tamanho 4
@@ -83,21 +88,3 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         free(jogadaAnterior);
         free(maoJogador);
 }
-
-
-/* COISAS DO GUIAO ANTERIOR
-
-// se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
-        int numReis = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
-        //wprintf(L"Numero de reis %d\n", numReis);
-        // se numReis for maior que 0, vai realizar a verificarJogadaComReis, se não, verificarJogada
-        bool valida = numReis > 0 ? verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador) : verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
-        
-        ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
-        
-        if(valida) verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
-        else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
-
-        if (tamMaoJogador>=0) imprimirUmaMao (maoJogador);
-
-*/
