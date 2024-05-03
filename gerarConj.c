@@ -6,9 +6,8 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
+void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int numeroMaisAlta, int tamAnterior, int tamMao, int numReis) {
     bool existeConjunto=false;
-    int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);
     for (int i = numeroMaisAlta; i <= 14; i++)
     {
         int contagem=analisarMao (baralho, mao, i, tamMao);
@@ -26,7 +25,7 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar
             variosConjuntos(baralho, mao, i, contagem, tamAnterior, tamMao, valorCartaMaisAlta);
         }
     }
-    if (!existeConjunto) wprintf(L"PASSO\n");
+    if (!existeConjunto && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
 }
 
 //Caso so haja uma hipotese de impressao
@@ -99,7 +98,7 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
         return -1;
     }
         
-    if (tamAnterior==1) conjuntosTamanho1 (conjuntoTotal, conjunto, quantidade, tamAnterior);
+    if (tamAnterior==1) conjuntosTamanho1 (baralho, conjuntoTotal, conjunto, quantidade, valorCartaMaisAlta);
     else if (tamAnterior==2) conjuntosTamanho2 (baralho, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta);
     else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta);
 
@@ -108,11 +107,11 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
     return 0;
 }
 
-void conjuntosTamanho1 (wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int tamAnterior) {
+void conjuntosTamanho1 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta) {
     for (int i = 0; i < quantidade; i++)
         {
             conjunto[0]=conjuntoTotal[i];
-            imprimirConjuntos (conjunto, tamAnterior);
+            if (valorDaCartaMaisAlta(baralho,conjunto,1)>valorCartaMaisAlta) imprimirConjuntos (conjunto, 1);
         }
 }
 

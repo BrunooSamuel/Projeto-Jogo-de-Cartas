@@ -6,29 +6,6 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-// Função para verificar todas as cartas da combinacao na mão do jogador
-bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb) {
-    int contagem=0;
-
-    while (*comb != L'\0' && tamanhoMao>0) {
-        bool encontrou=false;
-
-        for (wchar_t *ptr = mao; *ptr != L'\0' && !encontrou; ++ptr) 
-        {
-            if (*ptr == *comb) 
-            {
-                encontrou=true;
-                contagem++;
-            }
-        } 
-        // Avançar para a próxima carta da jogada
-        comb++;
-    }
-
-    if (contagem==tamanhoComb) return true;
-    else return false;
-}
-
 //AUMENTA A FIGURA DE UM ARRAY INTEIRO MAS COLOCA NO NAIPE ESPADAS
 void aumentarFigura (carta baralho[], wchar_t jogada[], int tamanho) {
     bool encontrado=false;
@@ -106,54 +83,61 @@ void colocarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, int tamAnte
     }
 }
 
-int verificarSequenciaProximoNaipe (carta baralho[], wchar_t *jogada, wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto) {
+bool verificarSequenciaProximoNaipe (carta baralho[], wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto) {
+    int contagem=0;
+    bool r=false;
+    bool existe=false;
 
-    return 0;
+    for (int i = 0; i < tamAnterior; i++)
+    {
+        for (int j = 0; j < tamMao && !existe; j++)
+        {
+            if (jogada[i]==mao[j]) 
+            {
+                contagem++;
+                existe=true;
+            }
+        }
+        existe=false;
+    }
+    
+    if (contagem==tamAnterior) 
+    {
+        int valorJogada=valorDaCartaMaisAlta (baralho, jogada, tamAnterior);
+        if (valorJogada>valorMaisAlto) r=true;
+    }
+
+    return r;
 }
 
-void gerarPermutacoes(carta baralho[], wchar_t *jogada, int numero, int posicao, int tamanho) {
+void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto) {
     //wprintf(L"posicao %d e tamanho %d\n", posicao, tamanho);
     //se chegar no fim, imprime
     if (posicao == tamanho) {
-        imprimirSequencias(jogada, tamanho);
+        bool imprimir=verificarSequenciaProximoNaipe (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
+        if (imprimir) imprimirSequencias(jogada, tamanho);
         return;
     }
 
     for (int i = 0; i < 4; i++) {
         jogada[posicao] = baralho[numero * 4 + i].codigo; 
-        gerar_permutacoes(baralho, jogada, numero + 1, posicao+1, tamanho); 
+        gerarPermutacoes(baralho, mao, jogada, numero+1, posicao+1, tamanho, tamanhoMao, valorMaisAlto); 
     }
 }
 
-void gerarPermutacoesPrimeiroCaso(carta baralho[], wchar_t *jogada, int numero, int posicao, int tamanho) {
-    //wprintf(L"posicao %d e tamanho %d\n", posicao, tamanho);
-    //se chegar no fim, imprime
-    if (posicao == tamanho) {
-        imprimirSequencias(jogada, tamanho);
-        return;
-    }
-
-    for (int i = 0; i < 4; i++) {
-        jogada[posicao] = baralho[numero * 4 + i].codigo; 
-        gerar_permutacoes(baralho, jogada, numero + 1, posicao+1, tamanho); 
-    }
-}
-
-void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
-    int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta);
+void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao) {
+    
     int limite=11-numeroCarta (baralho, jogadaAnterior[tamMao-1]); //limite para o while la embaixo
     colocarSequenciaNaipeEspadas (baralho, jogadaAnterior, tamAnterior);
-    //int quant=numeroCartasEmComum (jogadaAnterior, mao, tamAnterior, tamMao);
-    imprimirSequencias(jogadaAnterior, tamAnterior);
-    //if (quant==tamAnterior && valorDaCartaMaisAlta(baralho,jogadaAnterior,tamAnterior)>valorCartaMaisAlta) imprimirSequencias(jogadaAnterior, tamAnterior);
+
+    int numero=numeroCarta(baralho, jogadaAnterior[0]);
+    gerarPermutacoes(baralho, mao, jogadaAnterior, numero-1, 0, tamAnterior, tamMao, valorCartaMaisAlta);
 
     while (limite>=0) 
     {   
-        wprintf(L"Limite -> %d\n", limite);
-        int numero=numeroCarta(baralho, jogadaAnterior[0]);
-        gerarPermutacoes(baralho, jogadaAnterior, numero, 0, tamAnterior);
-        //aumentarFigura (baralho, jogadaAnterior, tamAnterior);
-        //verificarSequenciaProximoNaipe (baralho, jogadaAnterior, mao, tamAnterior, tamMao, valorCartaMaisAlta);
+        //wprintf(L"Limite -> %d\n", limite);
+        numero=numeroCarta(baralho, jogadaAnterior[0]);
+        gerarPermutacoes(baralho, mao, jogadaAnterior, numero, 0, tamAnterior, tamMao, valorCartaMaisAlta);
         limite--;
     }
 }

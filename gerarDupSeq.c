@@ -6,10 +6,33 @@
 #include "funcoes.h"
 #include "cartas.h"
 
+// Função para verificar todas as cartas da combinacao na mão do jogador
+bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb) {
+    int contagem=0;
+
+    while (*comb != L'\0' && tamanhoMao>0) {
+        bool encontrou=false;
+
+        for (wchar_t *ptr = mao; *ptr != L'\0' && !encontrou; ++ptr) 
+        {
+            if (*ptr == *comb) 
+            {
+                encontrou=true;
+                contagem++;
+            }
+        } 
+        // Avançar para a próxima carta da jogada
+        comb++;
+    }
+    if (contagem==tamanhoComb) return true;
+    else return false;
+}
+/*
 int* criarPares () {
     int array[12]={1,2,1,3,2,3,1,4,2,4,3,4};
     return array;
 }
+
 
 int qualPar (carta baralho[], wchar_t primeiro, wchar_t segundo) {
     int pos; //posicao do primeiro numero do par no array do criarPares
@@ -39,3 +62,4 @@ void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta
 
 
 }
+*/

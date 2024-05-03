@@ -45,7 +45,7 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
     
         wchar_t *jogadaAnterior = alocarMao ();
         int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
-        wprintf(L"Jogada Anterior: %ls", jogadaAnterior);
+        //wprintf(L"Jogada Anterior: %ls", jogadaAnterior);
 
         ordenarMao (baralhoDef, jogadaAnterior, tamJogadaAnterior);
         wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];
@@ -60,17 +60,24 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         wchar_t *maoJogador = alocarMao ();
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
         ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-        wprintf(L"Mao Inicial: %ls\n", maoJogador);
+        //wprintf(L"Mao Inicial: %ls\n", maoJogador);
         
-  
-        if (combAnterior==0) gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
-        else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
-        else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+        int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
+        if (combAnterior==0) gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, numeroMaisAlta, tamJogadaAnterior, tamMaoJogador, numReisAnterior);
+        else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+        //else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
 
         if (numReisAnterior>0) 
         {
-            wprintf(L"Casos Especiais Reis!!!!!!\n");
-            // resto do codigo
+            //wprintf(L"%d REIS!\n", numReisAnterior);
+            if (numReisAnterior==1) 
+            {
+                gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, numReisAnterior);
+                //dupla sequencia tamanho 3
+            }
+            else if (numReisAnterior==2) {}//dupla sequencia tamanho 4
+            else if (numReisAnterior==3) {}//dupla sequencia tamanho 6
+            
         }
 
         free(jogadaAnterior);
