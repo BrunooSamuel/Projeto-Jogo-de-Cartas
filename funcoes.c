@@ -265,6 +265,7 @@ int contadorAuxiliar (carta baralho[], wchar_t *jogadas) {
     for (int k = 0; k<=56 && !naoCarta; k++) {
         if (k==56) naoCarta=true;
         else if (jogadas[i] == baralho[k].codigo) 
+
         {
             comp++;
             i++;
@@ -357,6 +358,7 @@ int naipeCarta (carta baralho[], wchar_t carta) {
         if(carta==baralho[k].codigo)  
         {
             r=baralho[k].naipe;
+
             encontrado=true;
             //wprintf(L"O numero é %d\n", r);
         }

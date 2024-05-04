@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 SRCS = main.c combinacoes.c cartas.c funcoes.c comparacoes.c pares.c gerarConj.c gerarDupSeq.c gerarSeq.c
+
 HDRS = funcoes.h cartas.h
 ZIP_DIR = ./
 
