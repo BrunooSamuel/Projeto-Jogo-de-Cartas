@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
-SRCS = main.c combinacoes.c cartas.c funcoes.c comparacoes.c pares.c gerar.c
+SRCS = main.c combinacoes.c cartas.c funcoes.c comparacoes.c pares.c gerarConj.c gerarDupSeq.c gerarSeq.c
+
 HDRS = funcoes.h cartas.h
 ZIP_DIR = ./
 
@@ -17,7 +18,7 @@ run: jogoCartas
 
 clean:
 	rm -f jogoCartas *.o
-	rm -f $(ZIP_DIR)CC207_GUIAO3.zip
+	rm -f $(ZIP_DIR)CC207_GUIAO4.zip
 	@echo "🧹 Limpeza concluída 🧹"
 
 debug:
