@@ -211,6 +211,17 @@ void imprimirSequencias (wchar_t mao[], int tamAnterior);
 
 // Função para verificar todas as cartas da combinacao na mão do jogador
 bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb); 
+
+// Função para verificar se existe uma dupla sequencia
+bool verificaDuplaSequencia(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb);
+
+// Função que gera duplas sequencias
+void gerarDuplaSequencia(wchar_t *mao, wchar_t*duplaSeq, wchar_t *comb, int tamanho, int tamanhoComb, int posicao, int tamanhoMao);
+
+// Função que imprime duplas sequencias
+void imprimirDuplaSequencia(wchar_t *duplaSeq, int tamanhoComb);
+
+
 /*
 //Cria os pares possiveis dos naipes
 int* criarPares ();
