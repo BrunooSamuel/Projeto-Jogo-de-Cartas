@@ -6,60 +6,109 @@
 #include "funcoes.h"
 #include "cartas.h"
 
-// Função para verificar todas as cartas da combinacao na mão do jogador
-bool verificarExisteNaMao(wchar_t *mao, wchar_t *comb, int tamanhoMao, int tamanhoComb) {
-    int contagem=0;
-
-    while (*comb != L'\0' && tamanhoMao>0) {
-        bool encontrou=false;
-
-        for (wchar_t *ptr = mao; *ptr != L'\0' && !encontrou; ++ptr) 
+void colocarNaipeCopas (carta baralho[],wchar_t *carta) {
+    bool encontrado=false;
+    int naipe;
+    int difCopas;
+    for (int k = 0; k < 56 && !encontrado; k++)
+    {
+        if (*carta==baralho[k].codigo) 
         {
-            if (*ptr == *comb) 
+            naipe=baralho[k].naipe;
+            difCopas=2-naipe;
+            *carta=baralho[k+difCopas].codigo;
+            encontrado=true;
+        }
+    }
+}
+
+
+void colocarDupSeqEspadasCopas (carta baralho[], wchar_t *jogada, int tamAnterior) {
+    for (int i = 0; i < tamAnterior; i+=2)
+    {
+        colocarNaipeEspadas (baralho, &jogada[i]);
+        colocarNaipeCopas (baralho, &jogada[i+1]);
+    }
+}
+
+bool verificarDuplaSequencia (carta baralho[], wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto) {
+    int contagem=0;
+    bool r=false;
+    bool existe=false;
+    
+    for (int i = 0; i < tamAnterior-1; i++)
+    {
+        if (jogada[i]==jogada[i+1]) return false;
+        else if (numeroCarta(baralho, jogada[i])==numeroCarta(baralho, jogada[i+2])) return false;
+        else if (valorDaCarta(baralho, jogada[i])>valorDaCarta(baralho, jogada[i+1])) return false;
+    }
+    
+    for (int i = 0; i < tamAnterior; i++)
+    {
+        for (int j = 0; j < tamMao && !existe; j++)
+        {
+            if (jogada[i]==mao[j]) 
             {
-                encontrou=true;
                 contagem++;
+                existe=true;
             }
-        } 
-        // Avançar para a próxima carta da jogada
-        comb++;
+        }
+        existe=false;
     }
-    if (contagem==tamanhoComb) return true;
-    else return false;
-}
-/*
-int* criarPares () {
-    int array[12]={1,2,1,3,2,3,1,4,2,4,3,4};
-    return array;
-}
-
-
-int qualPar (carta baralho[], wchar_t primeiro, wchar_t segundo) {
-    int pos; //posicao do primeiro numero do par no array do criarPares
-    // ja recebe ordenado as cartas
-    int p;
-    int s;
-
-    for(int i;i<56;i++) {
-        if (baralho[i].codigo==primeiro) p=baralho[i].numero;
-        else if (baralho[i].codigo==segundo) s=baralho[i].numero;
+    
+    if (contagem==tamAnterior) 
+    {
+        int valorJogada=valorDaCartaMaisAlta (baralho, jogada, tamAnterior);
+        if (valorJogada>valorMaisAlto) r=true;
     }
 
-    if (p==1) {
-        if (s==2) pos=0;
-        else if (s==3) pos=2;
-        else pos=6;
-    } else if (p==2) {
-        if (s==3) pos=4;
-        else pos=8;
-    } else pos=10;
-
-    return pos;
+    return r;
 }
 
-void gerarDuplaSequencia (carta baralho[], wchar_t mao[], int valorCartaMaisAlta,wchar_t codigoCartaMaisAlta, int tamAnterior, int tamMao) {
-    int numeroMaisAlta=numeroCarta(baralho, codigoCartaMaisAlta); 
+void gerarPermutacoesDupSeq(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto,  bool *jaImprimiu) {
+    //wprintf(L"posicao %d e tamanho %d\n", posicao, tamanho);
+    //se chegar no fim, imprime
+    if (posicao == tamanho) {
+        bool imprimir=verificarDuplaSequencia (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
+        if (imprimir) {(*jaImprimiu)=true;funcaoImprimir(jogada, tamanho);}
+        return;
+    }
 
+    if (posicao % 2 == 0) {
+        // Aumenta a primeira carta do par
+        for (int i = 0; i < 3; i++) { // Aumenta apenas três vezes
+            jogada[posicao] = baralho[numero * 4 + i].codigo;
+            gerarPermutacoesDupSeq(baralho, mao, jogada, numero, posicao + 1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu);
+        }
+    } else { // Caso contrário, estamos na segunda carta do par
+        // Aumenta a segunda carta do par
+        for (int i = 1; i < 4; i++) { // Começa de copas e vai até paus
+            if (baralho[numero * 4 + i].codigo!=jogada[posicao-1]) 
+            {
+                jogada[posicao] = baralho[numero * 4 + i].codigo;
+                gerarPermutacoesDupSeq(baralho, mao, jogada, numero + 1, posicao + 1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu);
+            }
 
+        }
+    }
+    
 }
-*/
+
+void gerarDuplaSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao, int numReis, bool *jaImprimiu) {
+    int limite=13-numeroCarta (baralho, jogadaAnterior[tamAnterior-1]); //limite para o while la embaixo
+
+    colocarDupSeqEspadasCopas (baralho, jogadaAnterior, tamAnterior);
+    int numero=numeroCarta(baralho, jogadaAnterior[0]);
+    gerarPermutacoesDupSeq(baralho, mao, jogadaAnterior, numero-1, 0, tamAnterior, tamMao, valorCartaMaisAlta, jaImprimiu);
+
+    while (limite>=0) 
+    {   
+        //wprintf(L"Limite -> %d\n", limite);
+        numero=numeroCarta(baralho, jogadaAnterior[0]);
+        gerarPermutacoesDupSeq(baralho, mao, jogadaAnterior, numero, 0, tamAnterior, tamMao, valorCartaMaisAlta, jaImprimiu);
+        limite--;
+    }
+
+    if (!(*jaImprimiu) && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
+}
+

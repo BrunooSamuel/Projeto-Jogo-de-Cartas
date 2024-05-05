@@ -320,12 +320,12 @@ int valorDaCartaMaisAlta (carta baralho[], wchar_t mao[], int tamanho) {
     return r;
 }
 
-int valorDaCarta(carta baralho[], wchar_t mao[], int posicao) {
+int valorDaCarta(carta baralho[], wchar_t carta) {
     int r=0;
     bool encontrado=false;
     for (int k = 0; k < 56 && !encontrado; k++)
     {
-        if(mao[posicao]==baralho[k].codigo)  
+        if(carta==baralho[k].codigo)  
         {
             //wprintf(L"%d + %d\n", baralho[k].numero*4, (baralho[k].naipe-4));
             r=baralho[k].numero*4+(baralho[k].naipe-4);
@@ -377,7 +377,11 @@ int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
     {
         t=numeroCarta(baralho, mao[pos]);
         if (t<numero) pos++;
-        else if (t==numero) {contagem++; pos++;}
+        else if (t==numero) 
+        {
+            contagem++; 
+            pos++;
+        }
         else if(t>numero) {passou=true;}
     }
     //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
@@ -397,10 +401,19 @@ int analisarProximosNaipes (carta baralho[], wchar_t mao[], int numero, int valo
         if (t<numero) pos++;
         else if (t==numero) 
         {
-            if (valorDaCarta(baralho, mao, pos)>valor) {contagem++;} pos++;
+            if (valorDaCarta(baralho, mao[pos])>valor) {contagem++;} pos++;
         }
         else if(t>numero) {passou=true;}
     }
     //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
     return contagem;
+}
+
+void funcaoImprimir (wchar_t mao[], int tamAnterior) {
+    int i;
+    for (i = 0; i < tamAnterior-1; i++)
+    {
+        wprintf(L"%lc ", mao[i]);
+    }
+    wprintf(L"%lc\n", mao[i]);
 }

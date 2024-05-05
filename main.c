@@ -58,30 +58,30 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
 
         //wprintf(L"Mao Inicial: %ls\n", maoJogador);
+
         bool jaImprimiu=false;
+
         int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
+
         if (combAnterior==0) 
         {
             if (tamJogadaAnterior==1) cartaIsolada (baralhoDef, maoJogador, valorMaisAltaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
             else gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, numeroMaisAlta, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
         }
-        else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
-        //else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+        else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior);
+        else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
 
-        if (numReisAnterior>0) 
+        //wprintf(L"%d REIS!\n", numReisAnterior);
+        if (numReisAnterior==1) 
         {
-            //wprintf(L"%d REIS!\n", numReisAnterior);
-            if (numReisAnterior==1) 
-            {
-                //vem com 0 reis para poder escrever passo se necessário
-                gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, 0, &jaImprimiu);
-                //dupla sequencia tamanho 3
-            }
-            else if (numReisAnterior==2) {}//dupla sequencia tamanho 4
-            else if (numReisAnterior==3) {}//dupla sequencia tamanho 6
-            
+            gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, numReisAnterior, &jaImprimiu);
+            gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 6, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 3
         }
+        else if (numReisAnterior==2) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 8, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 4
+        else if (numReisAnterior==3) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 10, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 6
 
         free(jogadaAnterior);
         free(maoJogador);
+    
 }
+
