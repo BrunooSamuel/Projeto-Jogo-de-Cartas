@@ -6,9 +6,9 @@
 #include <stdbool.h>
 #include "funcoes.h"
 #include "cartas.h"
-
+#include <time.h>
 int main () {
-
+    
     //Baralho de cartas, usado malloc para alocar a memória necessária para o baralho
     carta *baralho = alocarArrayCartas();
 
