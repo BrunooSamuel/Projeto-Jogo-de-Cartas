@@ -56,6 +56,7 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         wchar_t *maoJogador = alocarMao ();
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
         ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
+
         //wprintf(L"Mao Inicial: %ls\n", maoJogador);
 
         bool jaImprimiu=false;
@@ -83,3 +84,4 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         free(maoJogador);
     
 }
+

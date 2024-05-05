@@ -22,6 +22,7 @@ void colocarNaipeCopas (carta baralho[],wchar_t *carta) {
     }
 }
 
+
 void colocarDupSeqEspadasCopas (carta baralho[], wchar_t *jogada, int tamAnterior) {
     for (int i = 0; i < tamAnterior; i+=2)
     {
@@ -105,3 +106,4 @@ void gerarDuplaSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior
 
     if ((!jaImprimiu) && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
 }
+
