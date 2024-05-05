@@ -206,6 +206,7 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
 
 //GERARDUPSEQ.C
 
+
 //Coloca a figura com o naipe copas
 void colocarNaipeCopas (carta baralho[],wchar_t *carta);
 
@@ -224,6 +225,7 @@ void gerarDuplaSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior
 
 //Gera um array so de ases
 void gerarAses (wchar_t array[], int tamAnterior); 
+
 
 //Para os casos especiais
 int gerarDuplaSeqEspeciaisReis (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
