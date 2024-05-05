@@ -195,7 +195,7 @@ bool cartaExiste (wchar_t mao[], wchar_t carta);
 void colocarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, int tamAnterior);
 
 //Verifica se a sequencia existe na mao, se existir verifica se é maior que jogada anterior
-bool verificarSequenciaProximoNaipe (carta baralho[], wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto);
+bool verificarSequencia (carta baralho[], wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto);
 
 //Continuacao das permutacoes
 void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto, bool *jaImprimiu);
