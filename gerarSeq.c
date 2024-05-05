@@ -110,44 +110,38 @@ bool verificarSequenciaProximoNaipe (carta baralho[], wchar_t jogada[], wchar_t 
     return r;
 }
 
-void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto) {
+void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto, bool *jaImprimiu) {
     //wprintf(L"posicao %d e tamanho %d\n", posicao, tamanho);
     //se chegar no fim, imprime
     if (posicao == tamanho) {
         bool imprimir=verificarSequenciaProximoNaipe (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
-        if (imprimir) imprimirSequencias(jogada, tamanho);
+        if (imprimir) {(*jaImprimiu)=true; funcaoImprimir(jogada, tamanho);}
         return;
     }
 
     for (int i = 0; i < 4; i++) {
         jogada[posicao] = baralho[numero * 4 + i].codigo; 
-        gerarPermutacoes(baralho, mao, jogada, numero+1, posicao+1, tamanho, tamanhoMao, valorMaisAlto); 
+        gerarPermutacoes(baralho, mao, jogada, numero+1, posicao+1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu); 
     }
     
 }
 
-void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao) {
-    
-    int limite=11-numeroCarta (baralho, jogadaAnterior[tamMao-1]); //limite para o while la embaixo
+void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao, int numReis) {
+    bool jaImprimiu=false;
+
+    int limite=11-numeroCarta (baralho, jogadaAnterior[tamAnterior-1]); //limite para o while la embaixo
     colocarSequenciaNaipeEspadas (baralho, jogadaAnterior, tamAnterior);
 
     int numero=numeroCarta(baralho, jogadaAnterior[0]);
-    gerarPermutacoes(baralho, mao, jogadaAnterior, numero-1, 0, tamAnterior, tamMao, valorCartaMaisAlta);
+    gerarPermutacoes(baralho, mao, jogadaAnterior, numero-1, 0, tamAnterior, tamMao, valorCartaMaisAlta, &jaImprimiu);
 
     while (limite>=0) 
     {   
         //wprintf(L"Limite -> %d\n", limite);
         numero=numeroCarta(baralho, jogadaAnterior[0]);
-        gerarPermutacoes(baralho, mao, jogadaAnterior, numero, 0, tamAnterior, tamMao, valorCartaMaisAlta);
+        gerarPermutacoes(baralho, mao, jogadaAnterior, numero, 0, tamAnterior, tamMao, valorCartaMaisAlta, &jaImprimiu);
         limite--;
     }
-}
 
-void imprimirSequencias (wchar_t mao[], int tamAnterior) {
-    int i;
-    for (i = 0; i < tamAnterior-1; i++)
-    {
-        wprintf(L"%lc ", mao[i]);
-    }
-    wprintf(L"%lc\n", mao[i]);
+    if ((!jaImprimiu) && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
 }
