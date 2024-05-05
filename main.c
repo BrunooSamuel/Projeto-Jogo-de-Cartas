@@ -56,6 +56,7 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
         wchar_t *maoJogador = alocarMao ();
         int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
         ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
+
         //wprintf(L"Mao Inicial: %ls\n", maoJogador);
         bool jaImprimiu=false;
         int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
@@ -65,7 +66,7 @@ void processarCodigo(int esteTeste, carta *baralhoDef) {
             else gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, numeroMaisAlta, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
         }
         else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
-        //else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+        else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
 
         if (numReisAnterior>0) 
         {
