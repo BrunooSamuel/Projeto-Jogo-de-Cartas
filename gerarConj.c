@@ -43,7 +43,26 @@ int cartaIsolada (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int ta
 
 void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int numeroMaisAlta, int tamAnterior, int tamMao, int numReis, bool *jaImprimiu) {
     bool existeConjunto=false;
-    for (int i = numeroMaisAlta; i <= 14; i++)
+
+    //para a figura original
+    if ((valorCartaMaisAlta/numeroMaisAlta)!=4) {
+        int contagem=analisarMao (baralho, mao, numeroMaisAlta, tamMao);
+        //wprintf(L"A mão tem %d cartas de número %d\n", contagem, i);
+
+        if (contagem==tamAnterior) 
+            {
+            //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", i, contagem);
+            existeConjunto=true;
+            ContinuacaoGerarConjunto (baralho, mao, numeroMaisAlta, tamAnterior, tamMao, valorCartaMaisAlta, jaImprimiu);
+        }
+        else if (contagem>tamAnterior) 
+        {
+            existeConjunto=true;
+            variosConjuntos(baralho, mao, numeroMaisAlta, contagem, tamAnterior, tamMao, valorCartaMaisAlta, jaImprimiu);
+        }
+    } 
+
+    for (int i = numeroMaisAlta+1; i <= 14; i++)
     {
         int contagem=analisarMao (baralho, mao, i, tamMao);
         //wprintf(L"A mão tem %d cartas de número %d\n", contagem, i);

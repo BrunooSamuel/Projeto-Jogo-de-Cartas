@@ -129,7 +129,7 @@ void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numer
 void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao, int numReis) {
     bool jaImprimiu=false;
 
-    int limite=11-numeroCarta (baralho, jogadaAnterior[tamAnterior-1]); //limite para o while la embaixo
+    int limite=14-numeroCarta (baralho, jogadaAnterior[tamAnterior-1]); //limite para o while la embaixo
     colocarSequenciaNaipeEspadas (baralho, jogadaAnterior, tamAnterior);
 
     int numero=numeroCarta(baralho, jogadaAnterior[0]);

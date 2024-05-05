@@ -377,7 +377,7 @@ int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
         if (t<numero) pos++;
         else if (t==numero) 
         {
-            if (naipeCarta(baralho, mao[pos])!=4)  contagem++; 
+            contagem++; 
             pos++;
         }
         else if(t>numero) {passou=true;}

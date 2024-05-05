@@ -69,6 +69,7 @@ void gerarPermutacoesDupSeq(carta baralho[], wchar_t mao[], wchar_t *jogada, int
     //se chegar no fim, imprime
     if (posicao == tamanho) {
         bool imprimir=verificarDuplaSequenciaProximoNaipe (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
+        imprimir=true;
         if (imprimir) {(*jaImprimiu)=true;funcaoImprimir(jogada, tamanho);}
         return;
     }
@@ -89,7 +90,7 @@ void gerarPermutacoesDupSeq(carta baralho[], wchar_t mao[], wchar_t *jogada, int
 }
 
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao, int numReis, bool *jaImprimiu) {
-    int limite=11-numeroCarta (baralho, jogadaAnterior[tamAnterior-1]); //limite para o while la embaixo
+    int limite=13-numeroCarta (baralho, jogadaAnterior[tamAnterior-1]); //limite para o while la embaixo
 
     colocarDupSeqEspadasCopas (baralho, jogadaAnterior, tamAnterior);
     int numero=numeroCarta(baralho, jogadaAnterior[0]);
