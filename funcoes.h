@@ -245,6 +245,9 @@ void gerarAses (wchar_t array[], int tamAnterior);
 //Para os casos especiais
 int gerarDuplaSeqEspeciaisReis (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
 
+//Continuacao
+int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
+
 
 // Esta linha fecha a diretiva #ifndef
 #endif

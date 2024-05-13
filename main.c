@@ -51,6 +51,7 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
     int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
     int *arrayComb=alocarArrayInt(NumJogAnteriores);
     
+<<<<<<< main
     wchar_t *jogadasAnteriores=alocarArrayWchar (arrayTamanhos, arrayComb, NumJogAnteriores);
 
     int e2=0;
@@ -72,6 +73,42 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
     {
         continuarCodigo(baralhoDef, ultimaJogadaValida, tamJogadaAnterior, maoJogador, tamMaoJogador, numReisAnterior);
     }
+=======
+        wchar_t *jogadaAnterior = alocarMao ();
+        int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
+        wprintf(L"Jogada Anterior: %lsTamanho:%d\n", jogadaAnterior,tamJogadaAnterior);
+
+        ordenarMao (baralhoDef, jogadaAnterior, tamJogadaAnterior);
+        wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];
+        int valorMaisAltaAnterior=valorDaCartaMaisAlta (baralhoDef, jogadaAnterior, tamJogadaAnterior);
+        int numReisAnterior=contadorAuxiliar (baralhoDef, jogadaAnterior);
+        //wprintf(L"Carta mais alta da jogada anterior : %lc\tO valor dela é %d\nO Numero de reis é %d\n", codigoMaisAltaAnterior,valorMaisAltaAnterior,numReisAnterior);
+
+
+        int combAnterior=devolveCombinacao (jogadaAnterior, tamJogadaAnterior, baralhoDef);
+        //wprintf(L"A jogada anterior era de combinação: %d\n", combAnterior);
+
+        wchar_t *maoJogador = alocarMao ();
+        int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
+        ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
+        wprintf(L"Mao Inicial: %lsTamanho:%d\n", maoJogador,tamMaoJogador);
+        
+
+        if (numReisAnterior>0) 
+        {
+            wprintf(L"Casos Especiais Reis!!!!!!\n");
+            // resto do codigo
+        }
+        else 
+        {   
+            if (combAnterior==0) gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+            else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+            else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, valorMaisAltaAnterior, codigoMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador);
+        }
+
+        free(jogadaAnterior);
+        free(maoJogador);
+>>>>>>> Rita-2
 }
 
 void continuarCodigo(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior) {
