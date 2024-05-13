@@ -18,12 +18,12 @@ run: jogoCartas
 
 clean:
 	rm -f jogoCartas *.o
-	rm -f $(ZIP_DIR)CC207_GUIAO4.zip
+	rm -f $(ZIP_DIR)CC207_TORNEIO.zip
 	@echo "🧹 Limpeza concluída 🧹"
 
 debug:
 	gdb ./jogoCartas
 
 zip:
-	zip $(ZIP_DIR)CC207_GUIAO4.zip $(SRCS) $(HDRS) makefile
+	zip $(ZIP_DIR)CC207_TORNEIO.zip $(SRCS) $(HDRS) makefile
 	@echo "📦 ZIP criado com sucesso 📦"
