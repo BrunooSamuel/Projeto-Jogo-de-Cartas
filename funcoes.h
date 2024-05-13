@@ -50,7 +50,7 @@ int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo);
 int contadorAuxiliar (carta baralho[], wchar_t *jogada);
 
 //Processa a parte de dentro do loop, para a main não ficar demasiado grande
-void processarCodigo(int esteTeste, carta *baralhoDef);
+void processarCodigo(carta *baralhoDef);
 
 //Apenas devolve o numero da combinacao
 int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]);

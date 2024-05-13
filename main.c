@@ -22,12 +22,9 @@ int main () {
 
     setlocale(LC_CTYPE, "C.UTF-8");
 
-    int numtestes=scanInt();
     limpar();
-    for (int e1=1; e1<=numtestes;e1++) 
-    {
-        processarCodigo(e1, baralhoDef);
-    }
+
+    processarCodigo(baralhoDef);
     
     // Liberta o espaço na memória alocada para o baralho
     free(baralho);
@@ -35,10 +32,10 @@ int main () {
     return 0;
 }
 
-void processarCodigo(int esteTeste, carta *baralhoDef) {
-
-    wprintf(L"Teste %d\n", esteTeste);
+void processarCodigo(carta *baralhoDef) {
     
+    int numLinhas=scanInt();
+
         wchar_t *jogadaAnterior = alocarMao ();
         int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
         //wprintf(L"Jogada Anterior: %ls", jogadaAnterior);
