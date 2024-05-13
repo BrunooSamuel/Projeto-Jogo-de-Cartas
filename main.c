@@ -45,7 +45,7 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
     wchar_t *maoJogador = alocarMao ();
     int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
     ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-    wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+    //wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
 
 
     int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
