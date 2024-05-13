@@ -30,17 +30,6 @@ int lerMao(carta baralho[], int *arrayComb, wchar_t *jogadasAnteriores, int *pos
     //copia o mao para o array jogadasAnteriores
     wcsncpy(&jogadasAnteriores[*posMaos * 32], maoTemp, tamanho);
     
-    /*
-    wprintf(L"tamanho %d\n", tamanho);
-    int pos;
-    wprintf(L"Está na mao: %ls\n", maoTemp);
-
-    for (pos = 0; maoTemp[pos+1]!='\0'; pos++)
-    {
-        wprintf(L"Os símbolos são: %lc\t", maoTemp[pos]);
-    }
-    wprintf(L"\n");
-    */
     (*posMaos)++;
 
     verificarCombinacao (maoTemp, tamanho, baralho, arrayComb);
@@ -65,19 +54,6 @@ int lerUmaMao(wchar_t *mao, carta baralho[]) {
         comprimento++;
     }
     return comprimento;
-
-    /*
-    int pos;
-    wprintf(L"Está na mao: %ls\n", mao);
-
-    for (pos = 0; mao[pos+1]!='\0'; pos++)
-    {
-        wprintf(L"Os símbolos são: %x\t", mao[pos]);
-    }
-    wprintf(L"\n");
-    */
-
-    //verificarCombinacao (mao, tamanho, baralho, arrayComb);
 }
 
 
@@ -112,16 +88,6 @@ void ordena(int mao[], int tamanho) {
     {
         mao[i]=aux[i];
     }
-
-
-    /*
-    FUNÇÃO TESTE QUE IMPRIME OS NUMEROS PARA VERIFICAR SE ESTÁ ORGANIZADO
-    for (int i = 0; i < tamanho; i++)
-    {
-        wprintf(L"%d\t",aux[i]);
-    }
-    wprintf(L"\n");
-    */
     
 }   
 
