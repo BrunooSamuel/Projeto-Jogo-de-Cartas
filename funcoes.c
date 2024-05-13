@@ -132,6 +132,13 @@ void libertar (carta *baralho,wchar_t *mao, wchar_t *conjuntoTotal) {
     free (mao);
 }
 
+void libertarFim (wchar_t *ultimaJogadaValida, wchar_t *maoJogador, int *arrayTamanhos, int *arrayComb, wchar_t *jogadasAnteriores) {
+    free(ultimaJogadaValida);
+    free(maoJogador);
+    free(arrayTamanhos);
+    free(arrayComb);
+    free(jogadasAnteriores);
+}
 
 int* alocarArrayInt (int linhas) {
     int *array=malloc((linhas)*sizeof(int)); //aloca memoria para o array
@@ -171,14 +178,6 @@ carta* alocarArrayCartas () {
         return NULL;
     }
     else return array;
-}
-
-int scanInt () {
-    int numero;
-    if (wscanf(L"%d", &numero)==EOF) {
-        return 1;
-    }
-    else return numero;
 }
 
 // Função para verificar e remover cartas da mão do jogador
@@ -409,6 +408,26 @@ int analisarProximosNaipes (carta baralho[], wchar_t mao[], int numero, int valo
     return contagem;
 }
 
+bool colocarUltimaJogadaValida(wchar_t *ultimaJogadaValida, wchar_t *jogadasAnteriores, int ultimo, int arrayTamanhos[], int *tamanho) {
+    int passos=0;
+    int pos=ultimo;
+    bool encontrouCartas=false;
+
+    for(; pos > (ultimo-3) && passos < 3 && pos>=0 && !encontrouCartas; pos--) {
+        //wprintf(L"Jogada atual: %ls\n", &jogadasAnteriores[pos * 32]);
+        if (jogadasAnteriores[pos * 32] == L'P') {
+            passos++;
+        }
+        else encontrouCartas=true;
+    }
+    if (!encontrouCartas) return false;
+    pos++;
+    *tamanho=arrayTamanhos[pos];
+    wcsncpy(ultimaJogadaValida, &jogadasAnteriores[pos * 32], *tamanho);
+    //wprintf(L"Deu %d passos\n", passos);
+    return true;
+}
+
 void funcaoImprimir (wchar_t mao[], int tamAnterior) {
     int i;
     for (i = 0; i < tamAnterior-1; i++)
@@ -417,3 +436,4 @@ void funcaoImprimir (wchar_t mao[], int tamAnterior) {
     }
     wprintf(L"%lc\n", mao[i]);
 }
+

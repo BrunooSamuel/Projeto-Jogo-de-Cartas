@@ -118,12 +118,13 @@ void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numer
         if (imprimir) {(*jaImprimiu)=true; funcaoImprimir(jogada, tamanho);}
         return;
     }
-
-    for (int i = 0; i < 4; i++) {
+    if (!(*jaImprimiu)) 
+    {   
+        for (int i = 0; i < 4; i++) {
         jogada[posicao] = baralho[numero * 4 + i].codigo; 
         gerarPermutacoes(baralho, mao, jogada, numero+1, posicao+1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu); 
-    }
-    
+        }
+    }   
 }
 
 void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao, int numReis) {
@@ -143,5 +144,5 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
         limite--;
     }
 
-    if ((!jaImprimiu) && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
+    if ((!jaImprimiu) && (numReis==0 || numReis==4)) {jaImprimiu=true; wprintf(L"PASSO\n");}
 }

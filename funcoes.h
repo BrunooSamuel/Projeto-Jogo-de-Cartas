@@ -5,6 +5,18 @@
 #include "cartas.h"
 #include <stdbool.h>
 
+//MAIN.C
+
+//Processa a parte de dentro do loop, para a main não ficar demasiado grande
+void processarCodigo(carta *baralhoDef, int NumJogAnteriores);
+
+//Continua o processamento
+void continuarCodigo(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior);
+
+//Caso sejam 3 passos
+void continuarCodigoPasso(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior);
+
+
 // FUNCOES.C
 
 //Funcao de limpeza da entrada
@@ -22,6 +34,9 @@ void ordena(int mao[], int tamanho);
 //Função que dá free
 void libertar (carta *baralho,wchar_t *mao, wchar_t *conjuntoTotal);
 
+//Usada no fim para libertar os restantes
+void libertarFim (wchar_t *ultimaJogadaValida, wchar_t *maoJogador, int *arrayTamanhos, int *arrayComb, wchar_t *jogadasAnteriores);
+
 //Função que aloca memoria para arrays de Int
 int* alocarArrayInt (int linhas);
 
@@ -30,9 +45,6 @@ wchar_t* alocarArrayWchar (int *arrayTamanhos,int *arrayComb, int linhas);
 
 //Função que aloca array de cartas
 carta* alocarArrayCartas ();
-
-//Função que dá scan a um int
-int scanInt ();
 
 //Função que aloca memoria para a mao
 wchar_t* alocarMao ();
@@ -48,9 +60,6 @@ int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo);
 
 //Auxiliar a função a cima
 int contadorAuxiliar (carta baralho[], wchar_t *jogada);
-
-//Processa a parte de dentro do loop, para a main não ficar demasiado grande
-void processarCodigo(int esteTeste, carta *baralhoDef);
 
 //Apenas devolve o numero da combinacao
 int devolveCombinacao (wchar_t mao[], int quantidade, carta baralho[]);
@@ -73,8 +82,14 @@ int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho);
 //Esta função verifica a quantidade de cartas da mesma figura, apenas nos proximos naipes
 int analisarProximosNaipes (carta baralho[], wchar_t mao[], int numero, int valor, int tamanho); 
 
+//Usada para saltar os passos, caso sejam 3, vai para o caso especial para jogar livremente
+bool colocarUltimaJogadaValida(wchar_t *ultimaJogadaValida, wchar_t *jogadasAnteriores, int ultimo, int arrayTamanhos[], int *tamanho);
+
 //Imprime a mao final
 void funcaoImprimir (wchar_t mao[], int tamAnterior);
+
+
+
 
 // COMBINACOES.C
 
