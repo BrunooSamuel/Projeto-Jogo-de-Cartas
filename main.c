@@ -22,9 +22,16 @@ int main () {
 
     setlocale(LC_CTYPE, "C.UTF-8");
 
+    int NumJogAnteriores;
+    if (wscanf(L"%d", &NumJogAnteriores)==EOF) {
+        return 1;
+    }
+    
+    //wprintf(L"Numero de jogadas anteriores: %d\n", NumJogAnteriores);
+
     limpar();
 
-    processarCodigo(baralhoDef);
+    processarCodigo(baralhoDef, NumJogAnteriores);
     
     // Liberta o espaço na memória alocada para o baralho
     free(baralho);
@@ -32,15 +39,13 @@ int main () {
     return 0;
 }
 
-void processarCodigo(carta *baralhoDef) {
-    
-    int NumJogAnteriores=scanInt();
-    //wprintf(L"Numero de jogadas anteriores: %d\n", NumJogAnteriores);
-        
+
+void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
+
     wchar_t *maoJogador = alocarMao ();
     int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
     ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-    //wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
+    wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
 
 
     int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
@@ -57,14 +62,31 @@ void processarCodigo(carta *baralhoDef) {
     // se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
     int numReisAnterior = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
 
-    
+    wchar_t *ultimaJogadaValida = alocarMao ();
+    int tamJogadaAnterior=0;
+    if (!colocarUltimaJogadaValida(ultimaJogadaValida, jogadasAnteriores, e2-1, arrayTamanhos, &tamJogadaAnterior))
+    {
+        continuarCodigoPasso(baralhoDef, ultimaJogadaValida, tamJogadaAnterior, maoJogador, tamMaoJogador, numReisAnterior);
+    }
+    else 
+    {
+        continuarCodigo(baralhoDef, ultimaJogadaValida, tamJogadaAnterior, maoJogador, tamMaoJogador, numReisAnterior);
+    }
+}
 
-    wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];
-    int valorMaisAltaAnterior=valorDaCartaMaisAlta (baralhoDef, jogadaAnterior, tamJogadaAnterior);
+void continuarCodigo(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior) {
+    /*
+    wprintf(L"Jogada Anterior: ");
+    funcaoImprimir(ultimaJogadaValida,tamJogadaAnterior);
+    */
+    ordenarMao (baralhoDef, ultimaJogadaValida, tamJogadaAnterior);
+
+    wchar_t codigoMaisAltaAnterior=ultimaJogadaValida[tamJogadaAnterior-1];
+    int valorMaisAltaAnterior=valorDaCartaMaisAlta (baralhoDef, ultimaJogadaValida, tamJogadaAnterior);
     //wprintf(L"Carta mais alta da jogada anterior : %lc\tO valor dela é %d\nO Numero de reis é %d\n", codigoMaisAltaAnterior,valorMaisAltaAnterior,numReisAnterior);
 
 
-    int combAnterior=devolveCombinacao (jogadaAnterior, tamJogadaAnterior, baralhoDef);
+    int combAnterior=devolveCombinacao (ultimaJogadaValida, tamJogadaAnterior, baralhoDef);
     //wprintf(L"A jogada anterior era de combinação: %d\n", combAnterior);
 
     bool jaImprimiu=false;
@@ -72,39 +94,80 @@ void processarCodigo(carta *baralhoDef) {
     int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
 
 
-        if (combAnterior==0) 
-        {
-            if (tamJogadaAnterior==1) cartaIsolada (baralhoDef, maoJogador, valorMaisAltaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
-            else gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, numeroMaisAlta, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
-        }
-        else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior);
-        else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, jogadaAnterior, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
+    if (combAnterior==0) 
+    {
+        if (tamJogadaAnterior==1) cartaIsolada (baralhoDef, maoJogador, valorMaisAltaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
+        else gerarConjunto(baralhoDef, maoJogador, valorMaisAltaAnterior, numeroMaisAlta, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
+    }
+    else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, ultimaJogadaValida, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior);
+    else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, ultimaJogadaValida, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
 
-        //wprintf(L"%d REIS!\n", numReisAnterior);
-        if (numReisAnterior==1) 
-        {
-            gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, numReisAnterior, &jaImprimiu);
-            gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 6, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 3
-        }
-        else if (numReisAnterior==2) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 8, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 4
-        else if (numReisAnterior==3) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 10, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 6
-
-        free(jogadaAnterior);
-        free(maoJogador);
-    
+    //wprintf(L"%d REIS!\n", numReisAnterior);
+    if (numReisAnterior==1) 
+    {
+        gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, numReisAnterior, &jaImprimiu);
+        gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 6, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 3
+    }
+    else if (numReisAnterior==2) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 8, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 4
+    else if (numReisAnterior==3) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 10, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 6
 }
 
- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
-        int numReis = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
-        // se numReis for maior que 0, vai realizar a verificarJogadaComReis, se não, verificarJogada
-        bool valida = numReis > 0 ? verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador) : verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
-        
-        ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
-        
-        if(valida) verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
-        else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
-
-        if (tamMaoJogador>=0) imprimirUmaMao (maoJogador);
+void continuarCodigoPasso(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior) {
     
-        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
+    //caso exista um as de espadas na mao, ele vai ser jogado
+    if (maoJogador[0]==baralhoDef[0].codigo) 
+    {
+        wprintf(L"%lc\n", ultimaJogadaValida[0]);
+        return;
+    }
+
+    bool jaImprimiu=false;
+    cartaIsolada (baralhoDef, maoJogador, 0, tamMaoJogador, numReisAnterior, &jaImprimiu);
+    if (jaImprimiu) return;
+    
+    //vai tentar imprimir todos os tamanhos de conjuntos
+    gerarConjunto(baralhoDef, maoJogador, 0, 1, 1, tamMaoJogador, numReisAnterior, &jaImprimiu);
+    if (jaImprimiu) return;
+    gerarConjunto(baralhoDef, maoJogador, 0, 1, 2, tamMaoJogador, numReisAnterior, &jaImprimiu);
+    if (jaImprimiu) return;
+    gerarConjunto(baralhoDef, maoJogador, 0, 1, 3, tamMaoJogador, numReisAnterior, &jaImprimiu);
+    if (jaImprimiu) return;
+    gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, numReisAnterior, &jaImprimiu);
+    if (jaImprimiu) return;
+
+    //sequencias:
+    //sequencia tamanho 2
+    tamJogadaAnterior=2;
+    ultimaJogadaValida[0]=0x1F0A1; //as de espadas
+    ultimaJogadaValida[0]=0x1F0B1; //as de copas
+    if (maoJogador[0]==baralhoDef[0].codigo && maoJogador[1]==baralhoDef[1].codigo) 
+    {
+        //caso exista na mao o as de espadas e o de copas
+        wprintf(L"%lc %lc\n", maoJogador[0], maoJogador[1]);
+        return;
+    }
+    gerarSequencia(baralhoDef, maoJogador, ultimaJogadaValida, 1, tamJogadaAnterior, tamMaoJogador, numReisAnterior);
+    if (jaImprimiu) return;
+
+
+    wchar_t codigoMaisAltaAnterior=ultimaJogadaValida[tamJogadaAnterior-1];
+    int valorMaisAltaAnterior=valorDaCartaMaisAlta (baralhoDef, ultimaJogadaValida, tamJogadaAnterior);
+    //wprintf(L"Carta mais alta da jogada anterior : %lc\tO valor dela é %d\nO Numero de reis é %d\n", codigoMaisAltaAnterior,valorMaisAltaAnterior,numReisAnterior);
+
+    int combAnterior=devolveCombinacao (ultimaJogadaValida, tamJogadaAnterior, baralhoDef);
+    //wprintf(L"A jogada anterior era de combinação: %d\n", combAnterior);
+
+    int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
+
+    else if (combAnterior==1) gerarSequencia(baralhoDef, maoJogador, ultimaJogadaValida, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior);
+    else if (combAnterior==2) gerarDuplaSequencia(baralhoDef, maoJogador, ultimaJogadaValida, valorMaisAltaAnterior, tamJogadaAnterior, tamMaoJogador, numReisAnterior, &jaImprimiu);
+
+    //wprintf(L"%d REIS!\n", numReisAnterior);
+    if (numReisAnterior==1) 
+    {
+        gerarConjunto(baralhoDef, maoJogador, 0, 1, 4, tamMaoJogador, numReisAnterior, &jaImprimiu);
+        gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 6, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 3
+    }
+    else if (numReisAnterior==2) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 8, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 4
+    else if (numReisAnterior==3) gerarDuplaSeqEspeciaisReis (baralhoDef, maoJogador, 10, tamMaoJogador, &jaImprimiu);//dupla sequencia tamanho 6
+}

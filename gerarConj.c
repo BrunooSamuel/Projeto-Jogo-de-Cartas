@@ -7,36 +7,16 @@
 #include "cartas.h"
 
 int cartaIsolada (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int tamMao, int numReis, bool *jaImprimiu) {
-    wchar_t* conjunto = (wchar_t*)malloc (sizeof(wchar_t)*tamMao);
-    if (conjunto == NULL) {
-        free (conjunto);
-        free (baralho);
-        free (mao);
-        return -1;
-    }
-    int pos=0;
     for (int i = 0; i < tamMao; i++)
     {
-        if (valorDaCarta(baralho,mao[i])>valorCartaMaisAlta) 
+        if (valorDaCarta(baralho,mao[i])>valorCartaMaisAlta && !(*jaImprimiu)) 
         {
-            conjunto[pos]=mao[i];
-            pos++;
+            wprintf(L"%lc\n",mao[i]);
+            (*jaImprimiu)=true;
         }
     }
-    if (pos==0 && (numReis==0 || numReis==4)) wprintf(L"PASSO\n");
+    if (!(*jaImprimiu) && (numReis==0 || numReis==4)) { wprintf(L"PASSO\n"); (*jaImprimiu)=true;}
 
-    else if (pos!=0)
-    {
-        (*jaImprimiu)=true;
-        
-        int i;
-        for (i = 0; i < pos; i++)
-        {
-            wprintf(L"%lc\n",conjunto[i]);
-        }
-    }
-
-    free (conjunto);
     return 0;
 }
 
@@ -164,7 +144,7 @@ void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjun
     int p; //primeira carta
     int s; // segunda carta
     int posicaoPfinal=quantidade-2; //ultima posicao da primeira carta
-    for (p=0; p <= posicaoPfinal;p++) 
+    for (p=0; p <= posicaoPfinal && !(*jaImprimiu);p++) 
     {            
         int posicaoSfinal=quantidade-1;
         conjunto[0]=conjuntoTotal[p];         
@@ -182,7 +162,7 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
     int s; // segunda carta
     int t; //terceira carta
     int posicaoPfinal=1; //ultima posicao da primeira carta
-    for (p=0;p <= posicaoPfinal;p++) 
+    for (p=0;p <= posicaoPfinal && !(*jaImprimiu);p++) 
     {            
         int posicaoSfinal=2;
         int posicaoTfinal=3;
