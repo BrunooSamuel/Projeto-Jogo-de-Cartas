@@ -13,9 +13,6 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores);
 //Continua o processamento
 void continuarCodigo(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior);
 
-//Caso sejam 3 passos
-void continuarCodigoPasso(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior);
-
 
 // FUNCOES.C
 
@@ -209,9 +206,6 @@ bool cartaExiste (wchar_t mao[], wchar_t carta);
 //Verifica se a sequencia existe na mao, sendo de naipe espadas
 void colocarSequenciaNaipeEspadas (carta baralho[], wchar_t *jogada, int tamAnterior);
 
-//Verifica se a sequencia existe na mao, se existir verifica se é maior que jogada anterior
-bool verificarSequencia (carta baralho[], wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto);
-
 //Continuacao das permutacoes
 void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto, bool *jaImprimiu);
 
@@ -221,15 +215,11 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
 
 //GERARDUPSEQ.C
 
-
 //Coloca a figura com o naipe copas
 void colocarNaipeCopas (carta baralho[],wchar_t *carta);
 
 //Coloca numa dupla sequencia a primeira figura a espadas e a proxima a copas
 void colocarDupSeqEspadasCopas (carta baralho[], wchar_t *jogada, int tamAnterior);
-
-//Verifica se existe na mao
-bool verificarDuplaSequenciaProximoNaipe (carta baralho[], wchar_t jogada[], wchar_t mao[] ,int tamAnterior, int tamMao, int valorMaisAlto);
 
 //Cria as varias duplas sequencias
 void gerarPermutacoesDupSeq(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto,  bool *jaImprimiu);
@@ -237,10 +227,8 @@ void gerarPermutacoesDupSeq(carta baralho[], wchar_t mao[], wchar_t *jogada, int
 //Funcao principal
 void gerarDuplaSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMaom, int numReis, bool *jaImprimiu);
 
-
 //Gera um array so de ases
 void gerarAses (wchar_t array[], int tamAnterior); 
-
 
 //Para os casos especiais
 int gerarDuplaSeqEspeciaisReis (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
