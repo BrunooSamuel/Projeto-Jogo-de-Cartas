@@ -34,31 +34,43 @@ int main () {
 
 void processarCodigo(carta *baralhoDef) {
     
-    int numLinhas=scanInt();
-
-        wchar_t *jogadaAnterior = alocarMao ();
-        int tamJogadaAnterior = lerUmaMao(jogadaAnterior, baralhoDef);
-        //wprintf(L"Jogada Anterior: %ls", jogadaAnterior);
-
-        ordenarMao (baralhoDef, jogadaAnterior, tamJogadaAnterior);
-        wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];
-        int valorMaisAltaAnterior=valorDaCartaMaisAlta (baralhoDef, jogadaAnterior, tamJogadaAnterior);
-        int numReisAnterior=contadorAuxiliar (baralhoDef, jogadaAnterior);
-        //wprintf(L"Carta mais alta da jogada anterior : %lc\tO valor dela é %d\nO Numero de reis é %d\n", codigoMaisAltaAnterior,valorMaisAltaAnterior,numReisAnterior);
+    int NumJogAnteriores=scanInt();
+    //wprintf(L"Numero de jogadas anteriores: %d\n", NumJogAnteriores);
+        
+    wchar_t *maoJogador = alocarMao ();
+    int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
+    ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
+    //wprintf(L"Mao Inicial:\n%ls", maoJogador); //teste
 
 
-        int combAnterior=devolveCombinacao (jogadaAnterior, tamJogadaAnterior, baralhoDef);
-        //wprintf(L"A jogada anterior era de combinação: %d\n", combAnterior);
+    int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
+    int *arrayComb=alocarArrayInt(NumJogAnteriores);
+    
+    wchar_t *jogadasAnteriores=alocarArrayWchar (arrayTamanhos, arrayComb, NumJogAnteriores);
 
-        wchar_t *maoJogador = alocarMao ();
-        int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
-        ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
+    int e2=0;
+    while (e2<NumJogAnteriores)   
+    {
+        arrayTamanhos[e2]=lerMao(baralhoDef, arrayComb, jogadasAnteriores, &e2, arrayTamanhos);
+    }
 
-        //wprintf(L"Mao Inicial: %ls\n", maoJogador);
+    // se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
+    int numReisAnterior = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
 
-        bool jaImprimiu=false;
+    
 
-        int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
+    wchar_t codigoMaisAltaAnterior=jogadaAnterior[tamJogadaAnterior-1];
+    int valorMaisAltaAnterior=valorDaCartaMaisAlta (baralhoDef, jogadaAnterior, tamJogadaAnterior);
+    //wprintf(L"Carta mais alta da jogada anterior : %lc\tO valor dela é %d\nO Numero de reis é %d\n", codigoMaisAltaAnterior,valorMaisAltaAnterior,numReisAnterior);
+
+
+    int combAnterior=devolveCombinacao (jogadaAnterior, tamJogadaAnterior, baralhoDef);
+    //wprintf(L"A jogada anterior era de combinação: %d\n", combAnterior);
+
+    bool jaImprimiu=false;
+
+    int numeroMaisAlta=numeroCarta(baralhoDef, codigoMaisAltaAnterior);
+
 
         if (combAnterior==0) 
         {
@@ -82,3 +94,17 @@ void processarCodigo(carta *baralhoDef) {
     
 }
 
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // se e2 for diferente de 0, vai realizar a contadorReis, caso contrario, fica 0
+        int numReis = e2 != 0 ? contadorReis(baralhoDef, jogadasAnteriores, e2 - 1) : 0;
+        // se numReis for maior que 0, vai realizar a verificarJogadaComReis, se não, verificarJogada
+        bool valida = numReis > 0 ? verificarJogadacomReis(baralhoDef, jogadaJogador, numReis, tamJogadaJogador) : verificarJogada(baralhoDef, jogadaJogador, jogadasAnteriores, arrayTamanhos, tamJogadaJogador, NumJogAnteriores);
+        
+        ordenarMao (baralhoDef,maoJogador,tamMaoJogador);
+        
+        if(valida) verificarCartasMao(maoJogador, jogadaJogador, &tamMaoJogador);
+        else tamMaoJogador--; //porque quando nao é alterada, imprime com um \n a mais
+
+        if (tamMaoJogador>=0) imprimirUmaMao (maoJogador);
+    
+        libertarTodas (arrayTamanhos,arrayComb,jogadasAnteriores,maoJogador,jogadaJogador);
