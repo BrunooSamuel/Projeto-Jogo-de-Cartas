@@ -184,6 +184,8 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
 //Caso de quando sao varios conjuntos
 int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, int tamAnterior, int tamMao, int valorCartaMaisAlta, bool *jaImprimiu);
 
+//Gerar conjunto no caso de 3 passos ou 0 jogadas anteriores
+void conjuntoLivre (carta baralho[], wchar_t mao[], int numero, int tamMao, bool *jaImprimiu);
 
 
 //GERARSEQ.C
