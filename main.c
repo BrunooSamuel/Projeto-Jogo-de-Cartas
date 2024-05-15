@@ -68,9 +68,10 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
     {
         //caso tenha 3 passos, vai jogar a menor carta isolada
         //wprintf(L"%lc\n", maoJogador[0]);
-        int numeroMenor = numeroCarta(baralhoDef, maoJogador[0]);
         bool jaImprimiu = false;
-        conjuntoLivre (baralhoDef, maoJogador, numeroMenor, tamMaoJogador, &jaImprimiu);
+        int numeroMenor = numeroCarta(baralhoDef, maoJogador[0]);
+        int contagem = analisarMao(baralhoDef, maoJogador, numeroMenor, tamMaoJogador);
+        ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
     }
     else 
     {

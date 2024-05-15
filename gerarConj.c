@@ -178,15 +178,3 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
         }
     }
 }
-
-
-void conjuntoLivre (carta baralho[], wchar_t mao[], int numero, int tamMao, bool *jaImprimiu) {
-
-    int contagem=analisarMao (baralho, mao, numero, tamMao);
-    //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
-
-    if (contagem != 0) {
-        //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", numero, contagem);
-        ContinuacaoGerarConjunto (baralho, mao, numero, contagem, tamMao, 0, jaImprimiu);
-    }
-}
