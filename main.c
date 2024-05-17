@@ -75,18 +75,21 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
         //se o numero menor tiver mais que uma carta, gera em primeiro duplas sequências
        if (contagem > 1) {
             int tamanho = 14;
-            bool existe = false;
+            bool existeDSeq = false;
             while (tamanho >= 6) {
                 if (gerarDSeqSemAnterior(baralhoDef, maoJogador, tamanho, tamMaoJogador, &jaImprimiu) == -1) {
                 tamanho -= 2;
                 } else {
-                existe = true;
+                existeDSeq = true;
                 return;
                 }
             }
 
-            if (!existe) {
-            ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+            if (!existeDSeq) {
+                if (gerarSequenciaSemAnterior (baralhoDef, maoJogador, tamMaoJogador, 1) == -1){
+                    ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+                }
+
             }
 
         //se tiver apenas uma carta com o numero menor gera em primeiro sequências

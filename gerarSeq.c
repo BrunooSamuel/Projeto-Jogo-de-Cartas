@@ -178,28 +178,25 @@ int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int va
     wchar_t jogada[15];
     wchar_t melhorJogada[15];
     int melhorTamanho = 0;
+    int numeroInicial = numeroCarta(baralho, mao[0]);
+    int limite = 14 - numeroInicial + 1;
 
-    for (int i = 0; i < tamMao; i++) {
-        int numeroInicial = numeroCarta(baralho, mao[i]);
-        int limite = 14 - numeroInicial + 1;
-
-        for (int tamSequencia = limite; tamSequencia > 0; tamSequencia--) {
-            jogada[0] = mao[i];
-            if (preencherSequencia(baralho, jogada, mao, numeroInicial, tamSequencia, tamMao)) {
-                bool imprimir = verificarSequenciaProximoNaipe(baralho, jogada, mao, tamSequencia, tamMao, valorMaisAlto);
-                if (imprimir && tamSequencia > melhorTamanho) {
-                    melhorTamanho = tamSequencia;
-                    atualizarMelhorSequencia(jogada, melhorJogada, tamSequencia);
-                    if (melhorTamanho == 14) {
-                        funcaoImprimir(melhorJogada, melhorTamanho);
-                        return 0;
-                    }
+    for (int tamSequencia = limite; tamSequencia > 0; tamSequencia--) {
+        jogada[0] = mao[0];
+        if (preencherSequencia(baralho, jogada, mao, numeroInicial, tamSequencia, tamMao)) {
+            bool imprimir = verificarSequenciaProximoNaipe(baralho, jogada, mao, tamSequencia, tamMao, valorMaisAlto);
+            if (imprimir && tamSequencia > melhorTamanho) {
+                melhorTamanho = tamSequencia;
+                atualizarMelhorSequencia(jogada, melhorJogada, tamSequencia);
+                if (melhorTamanho == 14) {
+                    funcaoImprimir(melhorJogada, melhorTamanho);
+                    return 0;
                 }
             }
         }
     }
 
-    if (melhorTamanho > 0) {
+    if (melhorTamanho >= 3) {
         funcaoImprimir(melhorJogada, melhorTamanho);
         return 0;
     }
