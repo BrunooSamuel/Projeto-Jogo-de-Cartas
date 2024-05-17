@@ -91,7 +91,14 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
 
         //se tiver apenas uma carta com o numero menor gera em primeiro sequências
         } else {
-            ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+            bool existe = false;
+            if (gerarSequenciaSemAnterior (baralhoDef, maoJogador, tamMaoJogador, 1) == 0) {
+                existe = true;
+            }
+
+            if(!existe) {
+                ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+            }
         }
 
     } else {

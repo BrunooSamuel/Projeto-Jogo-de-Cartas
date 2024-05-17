@@ -150,3 +150,60 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
     if ((!jaImprimiu) && (numReis==0 || numReis==4)) {jaImprimiu=true; wprintf(L"PASSO\n");}
 }
 
+
+bool preencherSequencia(carta baralho[], wchar_t jogada[], wchar_t mao[], int numeroInicial, int tamSequencia, int tamMao) {
+    for (int j = 1; j < tamSequencia; j++) {
+        bool cartaEncontrada = false;
+        for (int k = 0; k < tamMao; k++) {
+            if (numeroCarta(baralho, mao[k]) == numeroInicial + j) {
+                jogada[j] = mao[k];
+                cartaEncontrada = true;
+                break;
+            }
+        }
+        if (!cartaEncontrada) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void atualizarMelhorSequencia(wchar_t jogada[], wchar_t melhorJogada[], int tamSequencia) {
+    for (int k = 0; k < tamSequencia; k++) {
+        melhorJogada[k] = jogada[k];
+    }
+}
+
+int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int valorMaisAlto) {
+    wchar_t jogada[15];
+    wchar_t melhorJogada[15];
+    int melhorTamanho = 0;
+
+    for (int i = 0; i < tamMao; i++) {
+        int numeroInicial = numeroCarta(baralho, mao[i]);
+        int limite = 14 - numeroInicial + 1;
+
+        for (int tamSequencia = limite; tamSequencia > 0; tamSequencia--) {
+            jogada[0] = mao[i];
+            if (preencherSequencia(baralho, jogada, mao, numeroInicial, tamSequencia, tamMao)) {
+                bool imprimir = verificarSequenciaProximoNaipe(baralho, jogada, mao, tamSequencia, tamMao, valorMaisAlto);
+                if (imprimir && tamSequencia > melhorTamanho) {
+                    melhorTamanho = tamSequencia;
+                    atualizarMelhorSequencia(jogada, melhorJogada, tamSequencia);
+                    if (melhorTamanho == 14) {
+                        funcaoImprimir(melhorJogada, melhorTamanho);
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+
+    if (melhorTamanho > 0) {
+        funcaoImprimir(melhorJogada, melhorTamanho);
+        return 0;
+    }
+
+    return -1;
+}
+

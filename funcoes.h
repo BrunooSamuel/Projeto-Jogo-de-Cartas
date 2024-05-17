@@ -211,6 +211,15 @@ void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numer
 //Gera as sequencias
 void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao, int numReis);
 
+//Preenche a sequência de cartas após a primeira carta já definida
+bool preencherSequencia(carta baralho[], wchar_t jogada[], wchar_t mao[], int numeroInicial, int tamSequencia, int tamMao);
+
+//Copia a sequência atual para a melhor sequência já encontrada
+void atualizarMelhorSequencia(wchar_t jogada[], wchar_t melhorJogada[], int tamSequencia);
+
+//Gera sequência quando não tem jogadas anteriores ou 3 passos
+int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int valorMaisAlto);
+
 
 //GERARDUPSEQ.C
 
@@ -235,7 +244,7 @@ int gerarDuplaSeqEspeciaisReis (carta baralho[], wchar_t mao[], int tamAnterior,
 //Continuacao
 int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
 
-//Gerar dupla sequência quando não tem jogadas anteriores ou 3 passos
+//Gera dupla sequência quando não tem jogadas anteriores ou 3 passos
 int gerarDSeqSemAnterior (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
 
 
