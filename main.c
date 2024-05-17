@@ -72,25 +72,33 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
         int numeroMenor = numeroCarta(baralhoDef, maoJogador[0]);
         int contagem = analisarMao(baralhoDef, maoJogador, numeroMenor, tamMaoJogador);
 
-        if(contagem > 1) {
-            for (int tamanho=14; tamanho>=6; tamanho -= 2) {
-                wprintf (L"tamanho %d\n", tamanho);
-                gerarDSeqSemAnterior(baralhoDef, maoJogador, tamanho, tamMaoJogador, &jaImprimiu);
-
+        //se o numero menor tiver mais que uma carta, gera em primeiro duplas sequências
+       if (contagem > 1) {
+            int tamanho = 14;
+            bool existe = false;
+            while (tamanho >= 6) {
                 if (gerarDSeqSemAnterior(baralhoDef, maoJogador, tamanho, tamMaoJogador, &jaImprimiu) == -1) {
-                    ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
-                }  
+                tamanho -= 2;
+                } else {
+                existe = true;
+                return;
+                }
             }
-           
-        } else {           
-            ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);  
+
+            if (!existe) {
+            ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+            }
+
+        //se tiver apenas uma carta com o numero menor gera em primeiro sequências
+        } else {
+            ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
         }
-    }
-    else 
-    {
+
+    } else {
         continuarCodigo(baralhoDef, ultimaJogadaValida, tamJogadaAnterior, maoJogador, tamMaoJogador, numReisAnterior);
     }
 }
+
 
 void continuarCodigo(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior) {
     /*
