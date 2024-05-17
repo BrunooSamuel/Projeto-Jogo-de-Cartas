@@ -236,5 +236,14 @@ int gerarDuplaSeqEspeciaisReis (carta baralho[], wchar_t mao[], int tamAnterior,
 int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
 
 
+//GERARESPECIALSEMANTERIOR.C
+
+//Gerar dupla sequência quando não tem jogadas anteriores ou 3 passos
+int gerarDSeqSemAnterior (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
+
+//Gerar sequência quando não tem jogadas anteriores ou 3 passos
+int gerarSeqSemAnterior (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
+
+
 // Esta linha fecha a diretiva #ifndef
 #endif

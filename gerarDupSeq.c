@@ -83,16 +83,18 @@ void gerarPermutacoesDupSeq(carta baralho[], wchar_t mao[], wchar_t *jogada, int
                 jogada[posicao] = baralho[numero * 4 + i].codigo;
                 gerarPermutacoesDupSeq(baralho, mao, jogada, numero, posicao + 1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu);
             }
-            } else { // Caso contrário, estamos na segunda carta do par
-                // Aumenta a segunda carta do par
-                for (int i = 1; i < 4; i++) { // Começa de copas e vai até paus
-                    if (baralho[numero * 4 + i].codigo!=jogada[posicao-1] && cartaExiste(mao, baralho[numero * 4 + i].codigo)) 
-                    {
-                        jogada[posicao] = baralho[numero * 4 + i].codigo;
-                        gerarPermutacoesDupSeq(baralho, mao, jogada, numero + 1, posicao + 1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu);
-                    }
+        } else { // Caso contrário, estamos na segunda carta do par
+            // Aumenta a segunda carta do par
+            for (int i = 1; i < 4; i++) { // Começa de copas e vai até paus
+                if (baralho[numero * 4 + i].codigo!=jogada[posicao-1] && cartaExiste(mao, baralho[numero * 4 + i].codigo)) 
+                {
+                    jogada[posicao] = baralho[numero * 4 + i].codigo;
+                    gerarPermutacoesDupSeq(baralho, mao, jogada, numero + 1, posicao + 1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu);
                 }
-        }
+                //se encontrar uma combinação possível para de gerar
+                if (*jaImprimiu) return;
+            }
+        }   
     }
     
 }
@@ -114,4 +116,3 @@ void gerarDuplaSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior
 
     if (!(*jaImprimiu) && (numReis==0 || numReis==4)) {(*jaImprimiu)=false; wprintf(L"PASSO\n");}
 }
-

@@ -71,7 +71,27 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
         bool jaImprimiu = false;
         int numeroMenor = numeroCarta(baralhoDef, maoJogador[0]);
         int contagem = analisarMao(baralhoDef, maoJogador, numeroMenor, tamMaoJogador);
-        ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+
+        if(contagem > 1) {
+            for (int tamanho=14; tamanho>=6; tamanho -= 2) {
+                //wprintf (L"tamanho %d\n", tamanho);
+                gerarDSeqSemAnterior(baralhoDef, maoJogador, tamanho, tamMaoJogador, &jaImprimiu);
+
+                if (gerarDSeqSemAnterior(baralhoDef, maoJogador, tamanho, tamMaoJogador, &jaImprimiu) == -1) {
+                    ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+                }  
+            }
+           
+        } else {
+            for (int tamanho=14; tamanho>=3; tamanho--) {
+                wprintf (L"tamanho %d\n", tamanho);
+                gerarSeqSemAnterior (baralhoDef, maoJogador, tamanho, tamMaoJogador, &jaImprimiu);
+
+                if (gerarSeqSemAnterior (baralhoDef, maoJogador, tamanho, tamMaoJogador, &jaImprimiu) == -1) {
+                    ContinuacaoGerarConjunto(baralhoDef, maoJogador, numeroMenor, contagem, tamMaoJogador, 0, &jaImprimiu);
+                }
+            }   
+        }
     }
     else 
     {
