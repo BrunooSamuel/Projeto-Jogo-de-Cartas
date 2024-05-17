@@ -111,7 +111,6 @@ bool verificarSequenciaProximoNaipe (carta baralho[], wchar_t jogada[], wchar_t 
 }
 
 void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto, bool *jaImprimiu) {
-    //wprintf(L"posicao %d e tamanho %d\n", posicao, tamanho);
     //se chegar no fim, imprime
     if (posicao == tamanho) {
         bool imprimir=verificarSequenciaProximoNaipe (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
@@ -141,7 +140,6 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
 
     while (limite>=0) 
     {   
-        //wprintf(L"Limite -> %d\n", limite);
         numero=numeroCarta(baralho, jogadaAnterior[0]);
         gerarPermutacoes(baralho, mao, jogadaAnterior, numero, 0, tamAnterior, tamMao, valorCartaMaisAlta, &jaImprimiu);
         limite--;

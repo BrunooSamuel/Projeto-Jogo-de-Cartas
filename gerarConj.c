@@ -27,11 +27,9 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int 
     //para a figura original
     if ((valorCartaMaisAlta/numeroMaisAlta)!=4) {
         int contagem=analisarMao (baralho, mao, numeroMaisAlta, tamMao);
-        //wprintf(L"A mão tem %d cartas de número %d\n", contagem, i);
 
         if (contagem==tamAnterior) 
             {
-            //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", i, contagem);
             existeConjunto=true;
             ContinuacaoGerarConjunto (baralho, mao, numeroMaisAlta, tamAnterior, tamMao, valorCartaMaisAlta, jaImprimiu);
         }
@@ -45,11 +43,9 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int 
     for (int i = numeroMaisAlta+1; i <= 14; i++)
     {
         int contagem=analisarMao (baralho, mao, i, tamMao);
-        //wprintf(L"A mão tem %d cartas de número %d\n", contagem, i);
 
         if (contagem==tamAnterior) 
             {
-            //wprintf(L"Pode haver conjunto no numero %d, pq tem %d cartas\n", i, contagem);
             existeConjunto=true;
             ContinuacaoGerarConjunto (baralho, mao, i, tamAnterior, tamMao, valorCartaMaisAlta, jaImprimiu);
         }
@@ -78,7 +74,6 @@ int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int ta
     {
         for (int k = (numero*4)-4; k <= (numero*4)-1 && !encontrou; k++)
         {
-            //wprintf(L"Comparando %lc e %lc\n", mao[i],baralho[k].codigo);
             if (mao[i]==baralho[k].codigo) 
             {
                 (*imprimiu)=true;
@@ -91,7 +86,6 @@ int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int ta
     }
 
     int valorConjuntoAtual=valorDaCartaMaisAlta (baralho, conjuntoAtual, tamAnterior);
-    //wprintf(L"Conjunto atual -> %ls\nvalores %d e %d\n", conjuntoAtual, valorConjuntoAtual,valorCartaMaisAlta);
     if (posicao == tamAnterior && valorConjuntoAtual > valorCartaMaisAlta)
     {
         funcaoImprimir (conjuntoAtual, tamAnterior);

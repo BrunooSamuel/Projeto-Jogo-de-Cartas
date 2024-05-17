@@ -13,6 +13,8 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores);
 //Continua o processamento
 void continuarCodigo(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior);
 
+//Gera as jogadas quando nao existe jogadas anteriores
+void gerarJogadaSemAnterior (carta *baralhoDef, wchar_t *maoJogador, int tamMaoJogador);
 
 // FUNCOES.C
 

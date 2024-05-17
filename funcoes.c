@@ -48,7 +48,6 @@ int lerUmaMao(wchar_t *mao, carta baralho[]) {
     }
     
     int comprimento = 0;
-    //wprintf(L"Está na mao: %ls\n", mao);
     // Percorre a sequência até encontrar '\n' ou '\0'
     while (mao[comprimento] != L'\n' && mao[comprimento] != L'\0') {
         comprimento++;
@@ -209,7 +208,6 @@ int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo) {
     int pos;
     bool encontrouCartas=false;
     for(pos = ultimo; pos > (ultimo-3) && passos < 3 && pos>=0 && !encontrouCartas; pos--) {
-        //wprintf(L"Jogada atual: %ls\n", &jogadas[pos * 32]);
         if (jogadas[pos * 32] == L'P') {
             passos++;
         }
@@ -217,7 +215,6 @@ int contadorReis (carta baralho[], wchar_t *jogadas, int ultimo) {
     }
     pos++;
     
-    //wprintf(L"Deu %d passos na funcao contadorReis\n", passos);
     if (passos==3) return 0;
     else return contadorAuxiliar(baralho, &jogadas[pos*32]);
 
@@ -277,7 +274,6 @@ int valorDaCartaMaisAlta (carta baralho[], wchar_t mao[], int tamanho) {
     {
         if(mao[posicao]==baralho[k].codigo)  
         {
-            //wprintf(L"%d + %d\n", baralho[k].numero*4, (baralho[k].naipe-4));
             r=baralho[k].numero*4+(baralho[k].naipe-4);
             encontrado=true;
         }
@@ -292,7 +288,6 @@ int valorDaCarta(carta baralho[], wchar_t carta) {
     {
         if(carta==baralho[k].codigo)  
         {
-            //wprintf(L"%d + %d\n", baralho[k].numero*4, (baralho[k].naipe-4));
             r=baralho[k].numero*4+(baralho[k].naipe-4);
             encontrado=true;
         }
@@ -309,7 +304,6 @@ int numeroCarta (carta baralho[], wchar_t carta) {
         {
             r=baralho[k].numero;
             encontrado=true;
-            //wprintf(L"O numero é %d\n", r);
         }
     } 
     return r;
@@ -325,7 +319,6 @@ int naipeCarta (carta baralho[], wchar_t carta) {
             r=baralho[k].naipe;
 
             encontrado=true;
-            //wprintf(L"O numero é %d\n", r);
         }
     } 
     return r;
@@ -349,7 +342,6 @@ int analisarMao (carta baralho[], wchar_t mao[], int numero, int tamanho) {
         }
         else if(t>numero) {passou=true;}
     }
-    //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
     return contagem;
 }
 
@@ -370,7 +362,6 @@ int analisarProximosNaipes (carta baralho[], wchar_t mao[], int numero, int valo
         }
         else if(t>numero) {passou=true;}
     }
-    //wprintf(L"A mão tem %d cartas de número %d\n", contagem, numero);
     return contagem;
 }
 
@@ -380,7 +371,6 @@ bool colocarUltimaJogadaValida(wchar_t *ultimaJogadaValida, wchar_t *jogadasAnte
     bool encontrouCartas=false;
 
     for(; pos > (ultimo-3) && passos < 3 && pos>=0 && !encontrouCartas; pos--) {
-        //wprintf(L"Jogada atual: %ls\n", &jogadasAnteriores[pos * 32]);
         if (jogadasAnteriores[pos * 32] == L'P') {
             passos++;
         }
@@ -390,7 +380,6 @@ bool colocarUltimaJogadaValida(wchar_t *ultimaJogadaValida, wchar_t *jogadasAnte
     pos++;
     *tamanho=arrayTamanhos[pos];
     wcsncpy(ultimaJogadaValida, &jogadasAnteriores[pos * 32], *tamanho);
-    //wprintf(L"Deu %d passos\n", passos);
     return true;
 }
 
