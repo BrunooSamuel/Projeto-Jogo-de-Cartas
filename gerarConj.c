@@ -71,7 +71,8 @@ int ContinuacaoGerarConjunto(carta baralho[], wchar_t mao[], int numero, int tam
     }
 
     for (int i = 0; i < tamMao && posicao < tamAnterior; i++) {
-        for (int k = (numero * 4) - 4; k <= (numero * 4) - 1 && !encontrou; k++) {
+        for (int k = (numero * 4) - 4; k <= (numero * 4) - 1 && !encontrou; k++) 
+        {
             if (mao[i] == baralho[k].codigo) {
                 *imprimiu = true;
                 conjuntoAtual[posicao] = mao[i];
@@ -85,6 +86,7 @@ int ContinuacaoGerarConjunto(carta baralho[], wchar_t mao[], int numero, int tam
     int valorConjuntoAtual = valorDaCartaMaisAlta(baralho, conjuntoAtual, tamAnterior);
     if (posicao == tamAnterior && valorConjuntoAtual > valorCartaMaisAlta) {
         funcaoImprimir(conjuntoAtual, tamAnterior);
+        verificarCartasMao(mao, conjuntoAtual, &tamMao); 
         free(conjuntoAtual); // Liberar a memória após a impressão do conjunto válido
         return 0; // Retorna 0 indicando sucesso
     }
@@ -123,15 +125,15 @@ int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, 
         return -1;
     }
         
-    if (tamAnterior==2) conjuntosTamanho2 (baralho, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta, jaImprimiu);
-    else conjuntosTamanho3 (baralho, conjuntoTotal, conjunto, valorCartaMaisAlta, jaImprimiu);
+    if (tamAnterior==2) conjuntosTamanho2 (baralho, mao, tamMao, conjuntoTotal, conjunto, posicao, valorCartaMaisAlta, jaImprimiu);
+    else conjuntosTamanho3 (baralho, mao, tamMao, conjuntoTotal, conjunto, valorCartaMaisAlta, jaImprimiu);
 
     free(conjunto);
     free(conjuntoTotal);
     return 0;
 }
 
-void conjuntosTamanho2(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, bool *jaImprimiu) {
+void conjuntosTamanho2(carta baralho[], wchar_t mao[], int tamMao, wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, bool *jaImprimiu) {
     // quantidade de cartas pode ser 3 ou 4
     int p; // primeira carta
     int s; // segunda carta
@@ -151,13 +153,14 @@ void conjuntosTamanho2(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
             if (valorDaCartaMaisAlta(baralho, conjunto, 2) > valorCartaMaisAlta) {
                 *jaImprimiu = true;
                 funcaoImprimir(conjunto, 2);
+                verificarCartasMao(mao, conjunto, &tamMao); 
                 return; // Saia imediatamente após imprimir o primeiro conjunto válido
             }
         }
     }
 }
 
-void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, bool *jaImprimiu) {
+void conjuntosTamanho3(carta baralho[], wchar_t mao[], int tamMao, wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, bool *jaImprimiu) {
     // quantidade de cartas é sempre 4
     int p; // primeira carta
     int s; // segunda carta
@@ -185,6 +188,7 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
                 if (valorDaCartaMaisAlta(baralho, conjunto, 3) > valorCartaMaisAlta) {
                     *jaImprimiu = true;
                     funcaoImprimir(conjunto, 3);
+                    verificarCartasMao(mao, conjunto, &tamMao);
                     return; // Saia da função após imprimir o primeiro conjunto válido
                 }
             }

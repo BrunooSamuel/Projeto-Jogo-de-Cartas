@@ -70,7 +70,12 @@ void gerarPermutacoesDupSeq(carta baralho[], wchar_t mao[], wchar_t *jogada, int
     //se chegar no fim, imprime
     if (posicao == tamanho) {
         bool imprimir=verificarDuplaSequencia (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
-        if (imprimir) {(*jaImprimiu)=true;funcaoImprimir(jogada, tamanho);}
+        if (imprimir) 
+        {
+            (*jaImprimiu)=true;
+            funcaoImprimir(jogada, tamanho);
+            verificarCartasMao(mao, jogada, &tamanhoMao); 
+        }
         return;
     }
 
