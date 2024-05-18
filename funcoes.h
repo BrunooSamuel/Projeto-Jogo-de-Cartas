@@ -5,6 +5,7 @@
 #include "cartas.h"
 #include <stdbool.h>
 
+
 //MAIN.C
 
 //Processa a parte de dentro do loop, para a main não ficar demasiado grande

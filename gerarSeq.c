@@ -201,4 +201,3 @@ int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int va
 
     return -1;
 }
-
