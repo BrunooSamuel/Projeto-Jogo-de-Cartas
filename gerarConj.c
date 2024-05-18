@@ -12,7 +12,10 @@ int cartaIsolada (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int ta
         if (valorDaCarta(baralho,mao[i])>valorCartaMaisAlta && !(*jaImprimiu)) 
         {
             wprintf(L"%lc\n",mao[i]);
+            wchar_t conjuntoAtual[1];
+            conjuntoAtual[0]=mao[i];
             (*jaImprimiu)=true;
+            verificarCartasMao(mao, conjuntoAtual, &tamMao); 
         }
     }
     if (!(*jaImprimiu) && (numReis==0 || numReis==4)) { wprintf(L"PASSO\n"); (*jaImprimiu)=true;}
