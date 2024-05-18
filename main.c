@@ -69,6 +69,8 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
     {
         continuarCodigo(baralhoDef, ultimaJogadaValida, tamJogadaAnterior, maoJogador, tamMaoJogador, numReisAnterior);
     }
+
+    funcaoImprimir (maoJogador, tamMaoJogador);
 }
 
 void gerarJogadaSemAnterior (carta *baralhoDef, wchar_t *maoJogador, int tamMaoJogador) {
