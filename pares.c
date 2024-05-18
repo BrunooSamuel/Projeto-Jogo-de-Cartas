@@ -65,15 +65,6 @@ void ordenarMao (carta baralho[], wchar_t *mao, int comprimento) {
     arranjaPar(baralho, mao, comprimento, numeros, naipes);
     ordenaPares(comprimento, numeros, naipes);
     parParaCarta (baralho, mao, comprimento, numeros, naipes);
-    /*
-    int i;
-    wprintf(L"Mao do Jogador Ordenada\n");
-    for (i = 0; i < comprimento-1; i++) 
-    {
-        wprintf(L"%lc ", mao[i]);
-    }
-    wprintf(L"%lc\n", mao[i]);
-    */
 }
 
 void ordenarTudo (carta baralho[], wchar_t *jogadasAnteriores, int comprimento, int linhas) {

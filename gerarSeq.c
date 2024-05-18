@@ -111,7 +111,6 @@ bool verificarSequenciaProximoNaipe (carta baralho[], wchar_t jogada[], wchar_t 
 }
 
 void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numero, int posicao, int tamanho, int tamanhoMao, int valorMaisAlto, bool *jaImprimiu) {
-    //wprintf(L"posicao %d e tamanho %d\n", posicao, tamanho);
     //se chegar no fim, imprime
     if (posicao == tamanho) {
         bool imprimir=verificarSequenciaProximoNaipe (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
@@ -123,6 +122,9 @@ void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numer
         for (int i = 0; i < 4; i++) {
         jogada[posicao] = baralho[numero * 4 + i].codigo; 
         gerarPermutacoes(baralho, mao, jogada, numero+1, posicao+1, tamanho, tamanhoMao, valorMaisAlto, jaImprimiu); 
+        
+        //se encontrar uma combinação possível para de gerar
+        if (*jaImprimiu) return;
         }
     }   
 }
@@ -138,7 +140,6 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
 
     while (limite>=0) 
     {   
-        //wprintf(L"Limite -> %d\n", limite);
         numero=numeroCarta(baralho, jogadaAnterior[0]);
         gerarPermutacoes(baralho, mao, jogadaAnterior, numero, 0, tamAnterior, tamMao, valorCartaMaisAlta, &jaImprimiu);
         limite--;
@@ -146,3 +147,58 @@ void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], i
 
     if ((!jaImprimiu) && (numReis==0 || numReis==4)) {jaImprimiu=true; wprintf(L"PASSO\n");}
 }
+
+
+bool preencherSequencia(carta baralho[], wchar_t jogada[], wchar_t mao[], int numeroInicial, int tamSequencia, int tamMao) {
+    for (int j = 1; j < tamSequencia; j++) {
+        bool cartaEncontrada = false;
+        for (int k = 0; k < tamMao; k++) {
+            if (numeroCarta(baralho, mao[k]) == numeroInicial + j) {
+                jogada[j] = mao[k];
+                cartaEncontrada = true;
+                break;
+            }
+        }
+        if (!cartaEncontrada) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void atualizarMelhorSequencia(wchar_t jogada[], wchar_t melhorJogada[], int tamSequencia) {
+    for (int k = 0; k < tamSequencia; k++) {
+        melhorJogada[k] = jogada[k];
+    }
+}
+
+int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int valorMaisAlto) {
+    wchar_t jogada[15];
+    wchar_t melhorJogada[15];
+    int melhorTamanho = 0;
+    int numeroInicial = numeroCarta(baralho, mao[0]);
+    int limite = 14 - numeroInicial + 1;
+
+    for (int tamSequencia = limite; tamSequencia > 0; tamSequencia--) {
+        jogada[0] = mao[0];
+        if (preencherSequencia(baralho, jogada, mao, numeroInicial, tamSequencia, tamMao)) {
+            bool imprimir = verificarSequenciaProximoNaipe(baralho, jogada, mao, tamSequencia, tamMao, valorMaisAlto);
+            if (imprimir && tamSequencia > melhorTamanho) {
+                melhorTamanho = tamSequencia;
+                atualizarMelhorSequencia(jogada, melhorJogada, tamSequencia);
+                if (melhorTamanho == 14) {
+                    funcaoImprimir(melhorJogada, melhorTamanho);
+                    return 0;
+                }
+            }
+        }
+    }
+
+    if (melhorTamanho >= 3) {
+        funcaoImprimir(melhorJogada, melhorTamanho);
+        return 0;
+    }
+
+    return -1;
+}
+

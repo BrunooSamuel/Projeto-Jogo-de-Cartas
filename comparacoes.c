@@ -6,16 +6,7 @@
 #include "cartas.h"
 
 bool compararTamanhos(int array[], int total) {
-
-    // so imprime para ver se está a guardar corretamente
-    /*
-    for (int i = 0; i < total; i++)
-    {
-        wprintf(L"%d ", array[i]);
-    }
-    wprintf(L"\n");
-    */
-
+    
     int r=true;
     //compara
     for (int i = 0; i < (total-1) && r; i++)
@@ -100,8 +91,6 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
             else {parar=true; i++;}
         }
 
-        //wprintf(L"Numero de passos %d\n", passosEncontrados);
-
         if(passosEncontrados == 3)
         {
             verificarCombinacao(jogadaJogador, tamJogadaJogador, baralho, comb);
@@ -109,7 +98,6 @@ bool verificarJogada(carta baralho[], wchar_t *jogadaJogador, wchar_t *jogadasAn
         }
         else // caso nao tenha 3 passos
         {
-            //wprintf(L"%d e %d\n", arrayTamanhos[i],tamJogadaJogador);
             
             return verificarAux (baralho, jogadaJogador, jogadasAnte, arrayTamanhos, tamJogadaJogador, i, comb);
             

@@ -13,6 +13,8 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores);
 //Continua o processamento
 void continuarCodigo(carta *baralhoDef, wchar_t *ultimaJogadaValida, int tamJogadaAnterior, wchar_t *maoJogador, int tamMaoJogador, int numReisAnterior);
 
+//Gera as jogadas quando nao existe jogadas anteriores
+void gerarJogadaSemAnterior (carta *baralhoDef, wchar_t *maoJogador, int tamMaoJogador);
 
 // FUNCOES.C
 
@@ -185,7 +187,6 @@ void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunt
 int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, int tamAnterior, int tamMao, int valorCartaMaisAlta, bool *jaImprimiu);
 
 
-
 //GERARSEQ.C
 
 //Aumenta a figura de um array inteiro e muda o naipe para espadas
@@ -212,6 +213,15 @@ void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numer
 //Gera as sequencias
 void gerarSequencia (carta baralho[], wchar_t mao[], wchar_t jogadaAnterior[], int valorCartaMaisAlta, int tamAnterior, int tamMao, int numReis);
 
+//Preenche a sequência de cartas após a primeira carta já definida
+bool preencherSequencia(carta baralho[], wchar_t jogada[], wchar_t mao[], int numeroInicial, int tamSequencia, int tamMao);
+
+//Copia a sequência atual para a melhor sequência já encontrada
+void atualizarMelhorSequencia(wchar_t jogada[], wchar_t melhorJogada[], int tamSequencia);
+
+//Gera sequência quando não tem jogadas anteriores ou 3 passos
+int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int valorMaisAlto);
+
 
 //GERARDUPSEQ.C
 
@@ -235,6 +245,9 @@ int gerarDuplaSeqEspeciaisReis (carta baralho[], wchar_t mao[], int tamAnterior,
 
 //Continuacao
 int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
+
+//Gera dupla sequência quando não tem jogadas anteriores ou 3 passos
+int gerarDSeqSemAnterior (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
 
 
 // Esta linha fecha a diretiva #ifndef
