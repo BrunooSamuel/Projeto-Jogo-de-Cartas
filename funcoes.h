@@ -5,6 +5,7 @@
 #include "cartas.h"
 #include <stdbool.h>
 
+
 //MAIN.C
 
 //Processa a parte de dentro do loop, para a main não ficar demasiado grande
@@ -178,10 +179,10 @@ void gerarConjunto (carta baralho[], wchar_t mao[], int valorCartaMaisAlta, int 
 int ContinuacaoGerarConjunto (carta baralho[], wchar_t mao[], int numero, int tamAnterior, int tamMao, int valorCartaMaisAlta, bool *jaImprimiu);
 
 //Quando o conjunto é de tamanho 2 e existem 3 ou 4 cartas
-void conjuntosTamanho2 (carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, bool *jaImprimiu);
+void conjuntosTamanho2 (carta baralho[], wchar_t mao[], int tamMao, wchar_t conjuntoTotal[], wchar_t conjunto[], int quantidade, int valorCartaMaisAlta, bool *jaImprimiu);
 
 //Quando o conjunto é de tamanho 3 e existem 4 cartas
-void conjuntosTamanho3(carta baralho[], wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, bool *jaImprimiu);
+void conjuntosTamanho3(carta baralho[], wchar_t mao[], int tamMao, wchar_t conjuntoTotal[], wchar_t conjunto[], int valorCartaMaisAlta, bool *jaImprimiu);
 
 //Caso de quando sao varios conjuntos
 int variosConjuntos(carta baralho[], wchar_t mao[], int numero, int quantidade, int tamAnterior, int tamMao, int valorCartaMaisAlta, bool *jaImprimiu);
@@ -242,9 +243,6 @@ void gerarAses (wchar_t array[], int tamAnterior);
 
 //Para os casos especiais
 int gerarDuplaSeqEspeciaisReis (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);
-
-//Continuacao
-int continuacaogerarDupSeq(carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, int posicao);
 
 //Gera dupla sequência quando não tem jogadas anteriores ou 3 passos
 int gerarDSeqSemAnterior (carta baralho[], wchar_t mao[], int tamAnterior, int tamMao, bool *jaImprimiu);

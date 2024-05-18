@@ -39,11 +39,9 @@ int main () {
 
 
 void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
-
     wchar_t *maoJogador = alocarMao ();
     int tamMaoJogador = lerUmaMao(maoJogador, baralhoDef);
     ordenarMao (baralhoDef, maoJogador, tamMaoJogador);
-
 
     int *arrayTamanhos=alocarArrayInt(NumJogAnteriores);
     int *arrayComb=alocarArrayInt(NumJogAnteriores);
@@ -69,6 +67,14 @@ void processarCodigo(carta *baralhoDef, int NumJogAnteriores) {
     {
         continuarCodigo(baralhoDef, ultimaJogadaValida, tamJogadaAnterior, maoJogador, tamMaoJogador, numReisAnterior);
     }
+
+    //atualiza o tamanho da mao
+    int comprimento = 0;
+    // Percorre a sequência até encontrar '\n' ou '\0'
+    while (maoJogador[comprimento] != L'\n' && maoJogador[comprimento] != L'\0') {
+        comprimento++;
+    }
+    tamMaoJogador=comprimento;
 }
 
 void gerarJogadaSemAnterior (carta *baralhoDef, wchar_t *maoJogador, int tamMaoJogador) {

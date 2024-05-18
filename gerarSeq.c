@@ -114,7 +114,12 @@ void gerarPermutacoes(carta baralho[], wchar_t mao[], wchar_t *jogada, int numer
     //se chegar no fim, imprime
     if (posicao == tamanho) {
         bool imprimir=verificarSequenciaProximoNaipe (baralho, jogada, mao, tamanho, tamanhoMao, valorMaisAlto);
-        if (imprimir) {(*jaImprimiu)=true; funcaoImprimir(jogada, tamanho);}
+        if (imprimir) 
+        {
+            (*jaImprimiu)=true; 
+            funcaoImprimir(jogada, tamanho);
+            verificarCartasMao(mao, jogada, &tamanhoMao); 
+        }
         return;
     }
     if (!(*jaImprimiu)) 
@@ -188,6 +193,7 @@ int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int va
                 atualizarMelhorSequencia(jogada, melhorJogada, tamSequencia);
                 if (melhorTamanho == 14) {
                     funcaoImprimir(melhorJogada, melhorTamanho);
+                    verificarCartasMao(mao, jogada, &tamMao); 
                     return 0;
                 }
             }
@@ -196,9 +202,9 @@ int gerarSequenciaSemAnterior(carta baralho[], wchar_t mao[], int tamMao, int va
 
     if (melhorTamanho >= 3) {
         funcaoImprimir(melhorJogada, melhorTamanho);
+        verificarCartasMao(mao, jogada, &tamMao); 
         return 0;
     }
 
     return -1;
 }
-
